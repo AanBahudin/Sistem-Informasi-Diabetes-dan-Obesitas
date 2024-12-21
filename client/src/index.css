@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'PoppinsRegular';
+    src: url('/src/assets/fonts/PoppinsRegular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PoppinsSemibold';
+    src: url('/src/assets/fonts/PoppinsSemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PoppinsMedium';
+    src: url('/src/assets/fonts/NetflixSansBold.otf') format('opentype');
+}
+
+* {
+    font-family: 'poppins';
+    scroll-behavior: smooth;
+}
