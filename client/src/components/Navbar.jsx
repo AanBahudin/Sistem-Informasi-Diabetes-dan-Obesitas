@@ -31,7 +31,7 @@ import { useState, useEffect } from 'react';
             <a href='#contacts' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out'>Contacts</a>
             <a href='#services' className='text-grey text-sm cursor-default'>Services</a>
             <a href='#article' className='text-grey text-sm cursor-default'>Articles</a>
-            <button className='bg-blue px-8 py-2 text-sm rounded-md'> Login </button>
+            {/* <button className='bg-blue px-8 py-2 text-sm rounded-md'> Login </button> */}
             {/* <span className='flex items-center gap-x-2 ml-7 m-auto'>
                 <User className='m-auto' size={20} />
                 <ul className='text-grey cursor-default'>Login</ul>
