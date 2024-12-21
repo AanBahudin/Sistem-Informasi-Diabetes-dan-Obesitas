@@ -1,13 +1,15 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Footer } from '../components'
+import { Navbar } from '../components'
 
 const HomeLayout = () => {
   return (
-    <>
+    <div>
+      <section className='m-auto flex flex-col items-center my-auto relative'>
+        <Navbar />
+      </section>
       <Outlet />
-      <Footer />
-    </>
+    </div>
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import { User } from 'lucide-react'
 import { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
  
  const Navbar = () => {
 
@@ -28,14 +28,12 @@ import { useState, useEffect } from 'react';
         <h1 className='text-2xl font-semibold font-poppins cursor-default'>E-Health</h1>
 
         <section className='flex flex-row gap-x-7 items-center'>
-            <a href='#contacts' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out'>Contacts</a>
-            <a href='#services' className='text-grey text-sm cursor-default'>Services</a>
-            <a href='#article' className='text-grey text-sm cursor-default'>Articles</a>
-            {/* <button className='bg-blue px-8 py-2 text-sm rounded-md'> Login </button> */}
-            {/* <span className='flex items-center gap-x-2 ml-7 m-auto'>
-                <User className='m-auto' size={20} />
-                <ul className='text-grey cursor-default'>Login</ul>
-            </span> */}
+            <a href='/#contacts' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out'>Contacts</a>
+            <a href='/#services' className='text-grey text-sm cursor-default'>Services</a>
+            <a href='/#article' className='text-grey text-sm cursor-default'>Articles</a>
+            <NavLink to='/login' className={({isActive}) => `${isActive ? 'hidden' : 'visible'} bg-blue px-8 py-2 text-sm rounded-md`} end>
+                Login
+            </NavLink>
         </section>
     </div>
    )
