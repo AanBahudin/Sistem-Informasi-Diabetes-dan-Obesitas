@@ -1,8 +1,8 @@
 import { sehatPhoto } from "../assets/images"
 
-const ArticelCards = ({ photo = '', title, caption, published, type }) => {
+const ArticelCards = ({ photo = '', title, caption, published, type, isBgWhite }) => {
   return (
-    <article className="bg-lightGrey rounded-md max-w-[300px] p-4">
+    <article className={`${ isBgWhite === true ? 'bg-white' : 'bg-lightGrey' } rounded-md max-w-[300px] p-4`}>
         <img className='w-full rounded-sm' src={sehatPhoto} alt="" />
         <h5 className='text-[14px] my-2 font-semibold'>{title}</h5>
         <p className='text-[12px]'>{caption}</p>

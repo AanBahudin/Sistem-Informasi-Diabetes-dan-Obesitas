@@ -10,7 +10,7 @@ const Article = () => {
       {/* CARDS CONTAINER */}
       <div className="w-[80%] mt-6 grid grid-cols-3 gap-4 mx-auto items-center justify-center flex-wrap">
         {articleData.slice(0, 6).map((item, index) => {
-          return <ArticleCards key={index} {...item} />
+          return <ArticleCards key={index} {...item} isBgWhite={false}/>
         })}
       </div>
     </div>
