@@ -1,11 +1,11 @@
 import React from 'react'
 
-const FormInput = ({ name, labelText, placeholder }) => {
+const FormInput = ({ name, labelText, placeholder, inputType, isFirstItem }) => {
   return (
-    <div>
-        <label className='text-sm font-semibold' htmlFor="firstname">{labelText}</label>
-        <input className='block w-full px-4 py-[10px] ring-1 ring-grey rounded-md mt-2 text-sm placeholder:italic' type="text" name={name} placeholder={placeholder} />
-    </div>
+    <article className='w-full flex flex-col gap-y-2'>
+      <label className='text-sm font-medium' htmlFor={name}>{labelText}</label>
+      <input className='py-3  border-[2px] focus:border-grey rounded-md px-4 bg-lightGrey text-sm placeholder:text-sm mb-4 outline-none'  type={inputType} name={name} id={name} placeholder={placeholder} autoFocus={isFirstItem} autoComplete='off' required />
+    </article>
   )
 }
 

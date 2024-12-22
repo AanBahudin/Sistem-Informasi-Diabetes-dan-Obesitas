@@ -13,6 +13,7 @@ export { default as kemenkesPhoto } from './kemenkes.png'
 export { default as methodPhoto } from './method.png'
 export { default as pmiPhoto } from './pmi.png'
 export { default as userPhoto } from './user.png'
+export { default as registerPhoto } from './register.png'
 export { default as whoPhoto } from './who.png'
 export { default as yayasanJantung } from './jantung.png'
 

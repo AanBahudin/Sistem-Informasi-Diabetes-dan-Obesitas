@@ -29,8 +29,8 @@ import { NavLink } from 'react-router-dom';
 
         <section className='flex flex-row gap-x-7 items-center'>
             <a href='/#contacts' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out'>Contacts</a>
-            <a href='/#services' className='text-grey text-sm cursor-default'>Services</a>
-            <a href='/#article' className='text-grey text-sm cursor-default'>Articles</a>
+            <a href='/#services' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out'>Services</a>
+            <a href='/#article' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out'>Articles</a>
             <NavLink to='/login' className={({isActive}) => `${isActive ? 'hidden' : 'visible'} bg-blue px-8 py-2 text-sm rounded-md`} end>
                 Login
             </NavLink>
