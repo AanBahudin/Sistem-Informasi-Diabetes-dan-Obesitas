@@ -10,7 +10,6 @@ import { NavLink } from 'react-router-dom';
         const handleScroll = () => {
         const scrollTop = window.scrollY;
         const heroHeight = window.innerHeight;
-        console.log(innerHeight);
         
         
         const opacity = Math.min(scrollTop / heroHeight, 1);
