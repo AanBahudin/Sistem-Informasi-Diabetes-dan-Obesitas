@@ -44,7 +44,7 @@ const Register = () => {
                     inputType="email"
                     name="email"
                     placeholder="enter your email"
-                    isFirstItem={true} />
+                    isFirstItem={false} />
                 </div>
 
                 

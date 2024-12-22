@@ -1,15 +1,24 @@
-import React from 'react'
+import { NavLink } from 'react-router-dom';
+import { sidebarLink } from '../utils/constants'
+import { LogOut } from 'lucide-react';
 
 const Sidebar = () => {
   return (
-    <div className='w-full h-full flex flex-col justify-between py-10'>
-        <h1>Title</h1>
+    <div className='w-full h-full flex flex-col justify-between items-center py-10 bg-white'>
+        <h1 className='text-center font-medium select-none'>E-Health</h1>
 
-        <div className='bg-green-500 flex flex-col items-center justify-center'>
-          <h1>navigation</h1>
+        <div className='w-20 h-12 mx-auto flex flex-col gap-y-4 items-stretch justify-center'>
+          {sidebarLink.map((item) => {
+            return (
+              <NavLink to={item.path} className={({ isActive }) => `rounded-lg px-3 py-4 duration-300 ease-in-out flex-col items-center justify-center text-center ${isActive ? 'bg-lightGrey stroke-blue shadow-lg text-grey gap-y-2' : 'text-transparent gap-y-0'}`} end>
+                {item.icon}
+                <p className='text-[10px] mt-2'>{item.name}</p>
+              </NavLink>
+            )
+          })}
         </div>
-
-        <h1>Logout</h1>
+        
+        <LogOut size={25} className='stroke-[1.5px] mx-auto stroke-gray-600'/>
     </div>
   )
 }

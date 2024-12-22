@@ -1,4 +1,15 @@
-import { HomeLayout, Landing, Error, Login, Register, DashboardLayout, NewsPage, SingleNewsPage, ProfilePage } from './pages';
+import { 
+  HomeLayout, 
+  Landing, 
+  Error, 
+  Login, 
+  Register, 
+  DashboardLayout, 
+  NewsPage, 
+  SingleNewsPage,
+  ProfilePage,
+  BookmarkPage,
+  FavoritePage } from './pages';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 function App() {
@@ -39,6 +50,14 @@ function App() {
           path: 'profile',
           element: <ProfilePage />
         },
+        {
+          path: 'bookmark',
+          element: <BookmarkPage />
+        },
+        {
+          path: 'favorite',
+          element: <FavoritePage />
+        }
         
       ]
     }

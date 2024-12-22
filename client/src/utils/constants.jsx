@@ -1,4 +1,17 @@
-import { Lightbulb, CircleMinus, RefreshCw, TrendingUp, Headset, Mail, AtSign } from 'lucide-react'
+import { 
+    Lightbulb, 
+    CircleMinus,
+    RefreshCw, 
+    TrendingUp,
+    Headset,
+    Mail, 
+    AtSign,
+    LayoutDashboard,
+    SquareUser,
+    BookMarked,
+    Heart } from 'lucide-react'
+
+
 import { 
     firstPhoto,
     secondPhoto,
@@ -13,21 +26,31 @@ import {
  } from '../assets/images'
 
 
-export const links = [
+export const sidebarLink = [
     {
-        title: 'Contacts',
-        path: '#contacts'
+        icon: <LayoutDashboard size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
+        path: '/dashboard',
+        name: 'Artikel'
     },
     {
-        title: 'Services',
-        path: '#services'
+        icon: <SquareUser size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
+        path: 'profile',
+        name: 'Profile'
     },
     {
-        title: 'Article',
-        path: '#article'
+        icon: <BookMarked size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
+        path: 'bookmark',
+        name: 'Bookmark'
     },
+    {
+        icon: <Heart size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
+        path: 'favorite',
+        name: 'Favorite'
+    }
     
 ]
+
+
 
 export const testimonial = [
     {
