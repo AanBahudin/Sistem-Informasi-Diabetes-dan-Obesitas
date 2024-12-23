@@ -8,9 +8,9 @@ const Sidebar = () => {
         <h1 className='text-center font-medium select-none'>E-Health</h1>
 
         <div className='w-20 h-12 mx-auto flex flex-col gap-y-4 items-stretch justify-center'>
-          {sidebarLink.map((item) => {
+          {sidebarLink.map((item, index) => {
             return (
-              <NavLink to={item.path} className={({ isActive }) => `rounded-lg px-3 py-4 duration-300 ease-in-out flex-col items-center justify-center text-center ${isActive ? 'bg-lightGrey stroke-blue shadow-lg text-grey gap-y-2' : 'text-transparent gap-y-0'}`} end>
+              <NavLink key={index} to={item.path} className={({ isActive }) => `rounded-lg px-3 py-4 duration-300 ease-in-out flex-col items-center justify-center text-center ${isActive ? 'bg-lightGrey stroke-blue shadow-lg text-grey gap-y-2' : 'text-transparent gap-y-0'}`} end>
                 {item.icon}
                 <p className='text-[10px] mt-2'>{item.name}</p>
               </NavLink>
