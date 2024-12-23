@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
         IBM: Number,
         IBMStatus: String,
         kadarGula: Number,
-        targetKesehatan: String,
+        targetKesehatan: String, // menurunkan, mempertahankan, menaikan bb
         jenisDiet: String,
     },
     photo: String,

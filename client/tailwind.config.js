@@ -14,6 +14,12 @@ export default {
         'blue': "#51A2FE ",
         'lightGrey': "#E8EAEE"
       },
+      fontSize: {
+        'small': '12px',
+        'medium': '14px',
+        'big': '16px',
+        'large': '18px'
+      },
       width: {
         'fullScreen': '100vw',
         'halfScreen': '500vw'

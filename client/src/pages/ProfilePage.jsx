@@ -1,11 +1,42 @@
+import { Edit, X } from 'lucide-react'
 import { firstDoctor } from '../assets/images'
-import { FormInput } from '../components'
+import { ProfileInput } from '../components'
+import { NavLink, useLocation } from 'react-router-dom'
+
+export const actionProfilePage = async({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  return null;
+}
+
+export const loaderProfilePage = async({ request }) => {
+  return null;
+}
 
 const ProfilePage = () => {
-  return (
-    <div className='p-10 bg-lightGrey h-full overflow-y-auto grid grid-cols-12 gap-x-6'>
 
-      <section className='bg-white col-span-8 rounded-3xl px-10 py-8'>
+  const queryParams = new URLSearchParams(useLocation().search).get('edit');
+  const isEditData = queryParams === 'true';  
+
+  return (
+    <div className='p-10 h-full overflow-y-auto grid grid-cols-12 gap-x-6 text-grey'>
+
+      <section className='bg-white h-fit col-span-8 rounded-xl px-10 py-8 '>
+        <div className='w-full flex justify-end items-end'>
+          {isEditData ? (
+            <NavLink to='/dashboard/profile' className='flex items-center justify-center gap-x-2 text-medium'>
+              <X size={15} className='stroke-red-500'/>
+              cancel
+            </NavLink>
+          ) : (
+            <NavLink to='/dashboard/profile?edit=true' className='flex items-center justify-center gap-x-2 text-medium'>
+              <Edit className='stroke-blue' size={15} />
+              edit
+            </NavLink>
+          )}
+          
+        </div>
+
        
         {/* avatar container */}
         <div className='flex gap-x-10'>
@@ -24,74 +55,54 @@ const ProfilePage = () => {
         </div>
 
         {/* personal info */}
-        <div className='w-full mt-20 bg-lightGrey p-4 rounded-xl'>
-          <h1 className='font-medium mb-6'>Personal info</h1>
+        <div className='w-full h-[65%] mt-14 bg-lightGrey p-4 rounded-xl flex flex-col items-start'>
 
-          <div className='w-full grid grid-cols-3 gap-x-6'>
-            <FormInput 
-              defaultValue="Zero"
-              inputType='text'
-              isFirstItem={false}
-              labelText="Full Name"
-              name='firstname'
-              placeholder=''
-            />
+          <h1 className='font-medium'>Personal Information</h1>
 
-            <FormInput 
-              defaultValue="Kino"
-              inputType='text'
-              isFirstItem={false}
-              labelText="Last Name"
-              name='lastname'
-              placeholder=''
-            />
-
-            <FormInput 
-              defaultValue="zerokino@gmail.com"
-              inputType='text'
-              isFirstItem={false}
-              labelText="Email"
-              name='email'
-              placeholder=''
-            />
-
-            <FormInput 
-              defaultValue="zerokino@gmail.com"
-              inputType='text'
-              isFirstItem={false}
-              labelText="Email"
-              name='email'
-              placeholder=''
-            />
-
-            <FormInput 
-              defaultValue="zerokino@gmail.com"
-              inputType='text'
-              isFirstItem={false}
-              labelText="Email"
-              name='email'
-              placeholder=''
-            />
-
-            <FormInput 
-              defaultValue="zerokino@gmail.com"
-              inputType='text'
-              isFirstItem={false}
-              labelText="Email"
-              name='email'
-              placeholder=''
-            />
+          <div className='w-full grid grid-cols-3 gap-x-6 gap-y-8 mt-8'>
+            <ProfileInput isEdit={isEditData} label='First Name' name='firstname' defaultValue='Aan' isAutoFocus={true} />
+            <ProfileInput isEdit={isEditData} label='Last Name' name='lastname' defaultValue='Bahudin' />
+            <ProfileInput isEdit={isEditData} label='Email' name='email' defaultValue='aanbahudin$gmail.com' />
+            <ProfileInput isEdit={isEditData} label='Jenis Kelamin' name='jenisKelamin' defaultValue='Pria' />
+            <ProfileInput isEdit={isEditData} label='No Handphone' name='nohp' defaultValue='0812 7334 0834' />
+            <ProfileInput isEdit={isEditData} label='TanggalLahir' name='tanggalLahir' defaultValue='04 Desember 2023' />
+            <ProfileInput isEdit={isEditData} label='Preferensi Diet' name='preferensiDiet' defaultValue='Vegetarian' />
+            <ProfileInput isEdit={isEditData} label='Target Kesehatan' name='targetKesehatan' defaultValue='Menurunkan Berat' />
+            <ProfileInput isEdit={isEditData} label='Kondisi Tubuh' name='kondisiTubuh' defaultValue='Kurang Sehat' />
           </div>
-          <div>
-            
-          </div>
+
+        <button className={`${isEditData ? 'visible' : 'invisible'} mr-auto bg-blue px-4 py-2 rounded-md font-medium mt-10 text-small`}>Save changes</button>
         </div>
       
+
       </section>
 
 
-      <section className="col-span-4 bg-white rounded-3xl">
-        profile additional information
+      <section className="col-span-4 bg-white rounded-xl flex flex-col justify-start py-8 px-4">
+        <h1 className='text-center text-xl font-semibold text-grey'> Laporan Kesehatan</h1>
+
+        {/* STATUS */}
+        <div className='flex w-full gap-x-6 my-6'>
+            <div className='p-2 flex-1 bg-lightGrey rounded-md'>
+              <h5 className='text-center text-medium'>BMI</h5>
+              <h1 className='text-center text-xl font-semibold my-4'>Obesitas</h1>
+              <h5 className='text-small text-center'>BMI - 43,42</h5>
+            </div>
+
+            <div className='p-2 flex-1 bg-lightGrey rounded-md'>
+              <h5 className='text-center text-medium'>Gula Darah</h5>
+              <h1 className='text-center text-xl font-semibold my-4'>Rendah</h1>
+              <h5 className='text-small text-center'>Gula - 43,42/mg</h5>
+            </div>
+
+        </div>
+        <div>
+          <h3 className='font-medium text-medium mb-2'>Status Gula & Obesitas</h3>
+          <h5 className='flex gap-x-4'>
+            <span className='px-4 py-2 bg-green-400 rounded-full text-small'>Rendah </span>
+            <span className='px-4 py-2 bg-red-400 rounded-full text-small'>Obesitas</span>
+          </h5>
+        </div>
       </section>
     </div>
   )
