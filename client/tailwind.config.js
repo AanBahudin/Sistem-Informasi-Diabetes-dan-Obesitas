@@ -12,7 +12,7 @@ export default {
       colors: {
         'grey': '#181C14',
         'blue': "#51A2FE ",
-        'lightGrey': "#F4F6FF"
+        'lightGrey': "#E8EAEE"
       },
       width: {
         'fullScreen': '100vw',
