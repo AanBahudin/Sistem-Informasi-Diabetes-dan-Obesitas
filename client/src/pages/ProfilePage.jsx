@@ -79,7 +79,7 @@ const ProfilePage = () => {
 
 
       <section className="col-span-4 bg-white rounded-xl flex flex-col justify-start py-8 px-4">
-        <h1 className='text-center text-xl font-semibold text-grey'> Laporan Kesehatan</h1>
+        <h1 className='text-center text-xl font-semibold text-grey'> Additional Report </h1>
 
         {/* STATUS */}
         <div className='flex w-full gap-x-6 my-6'>
@@ -96,13 +96,33 @@ const ProfilePage = () => {
             </div>
 
         </div>
-        <div>
-          <h3 className='font-medium text-medium mb-2'>Status Gula & Obesitas</h3>
-          <h5 className='flex gap-x-4'>
-            <span className='px-4 py-2 bg-green-400 rounded-full text-small'>Rendah </span>
-            <span className='px-4 py-2 bg-red-400 rounded-full text-small'>Obesitas</span>
-          </h5>
-        </div>
+
+
+        <section className="w-full px-4 flex flex-col gap-y-6 mt-4">
+          <div className=''>
+            <h3 className='font-medium text-medium'>Status Gula & Obesitas</h3>
+            <h5 className='flex mt-2 gap-x-4'>
+              <span className='px-4 py-2 bg-green-400 rounded-full text-small'>Rendah </span>
+              <span className='px-4 py-2 bg-red-400 rounded-full text-small'>Obesitas</span>
+            </h5>
+          </div>
+
+          <div className='m'>
+            <h3 className='font-medium text-medium'>Artikel yang disukai</h3>
+            <h5 className='text-gray-500 text-small'> 5 Artikel </h5>
+          </div>
+
+          <div className=''>
+            <h3 className='font-medium text-medium'>Artikel yang disimpan</h3>
+            <h5 className='text-gray-500 text-small'> 5 Artikel </h5>
+          </div>
+
+          <div className=''>
+            <h3 className='font-medium text-medium'>Login sejak</h3>
+            <h5 className='text-gray-500 text-small'> 4 Desember 2023 </h5>
+          </div>
+        </section>
+        
       </section>
     </div>
   )
