@@ -57,11 +57,11 @@ export const sidebarLinkAdmin = [
         path: '/admin/dashboard',
         name: 'Artikel'
     },
-    {
-        icon: <Users size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
-        path: '/admin/dashboard/users',
-        name: 'Users'
-    },
+    // {
+    //     icon: <Users size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
+    //     path: '/admin/dashboard/users',
+    //     name: 'Users'
+    // },
     {
         icon: <BookMarked size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
         path: '/admin/dashboard/create',

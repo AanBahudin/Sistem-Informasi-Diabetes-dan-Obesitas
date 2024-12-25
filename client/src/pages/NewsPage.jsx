@@ -12,7 +12,7 @@ const NewsPage = () => {
   return (
     <div className='w-full  h-full flex flex-col overflow-y-auto p-10'>
 
-      <section className="w-full flex justify-between items-center">
+      <section className="w-full flex justify-between items-center ">
         <h1 className='text-2xl font-semibold'>1043 Articles</h1>
 
         <article className='flex justify-center items-center gap-x-4'>
