@@ -1,3 +1,4 @@
+import { TextEditor } from './components';
 import { 
   HomeLayout, 
   Landing, 
@@ -9,7 +10,11 @@ import {
   SingleNewsPage,
   ProfilePage,
   BookmarkPage,
-  FavoritePage } from './pages';
+  FavoritePage,
+  AdminDashboard,
+  AllNews,
+  AllUsers,
+  AddNews } from './pages';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 function App() {
@@ -33,7 +38,8 @@ function App() {
           element: <Register />
         },
       ],
-    },{
+    },
+    {
       path: '/dashboard',
       element: <DashboardLayout />,
       errorElement: <Error />,
@@ -58,12 +64,37 @@ function App() {
           path: 'favorite',
           element: <FavoritePage />
         }
-        
+      ]
+    },
+    {
+      path: '/admin/dashboard',
+      element: <AdminDashboard />,
+      errorElement: <Error />,
+      children: [
+        {
+          index: true,
+          element: <AllNews />
+        },
+        {
+          path: 'users',
+          element: <AllUsers />
+        },
+        {
+          path: 'create',
+          element: <AddNews />
+        },
+        {
+          path: 'news/:id',
+          element: <SingleNewsPage />
+        }
       ]
     }
   ])
 
-  return <RouterProvider router={router} />
+  return (
+    <RouterProvider router={router} />
+    // <TextEditor />
+  )
 }
 
 export default App

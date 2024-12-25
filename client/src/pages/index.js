@@ -10,4 +10,9 @@ export { default as ProfilePage } from './ProfilePage'
 export { default as BookmarkPage } from './BookmarkPage'
 export { default as FavoritePage } from './FavoritePage'
 
+export { default as AdminDashboard } from './AdminDashboard'
+export { default as AllNews } from './AllNews'
+export { default as AllUsers } from './AllUsers'
+export { default as AddNews } from './AddNews'
+
 export { default as Error } from './Error'

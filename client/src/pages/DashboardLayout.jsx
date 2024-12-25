@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom"
 import { Sidebar } from "../components"
 import { useContext, createContext } from 'react'
+import { sidebarLink as sidebarLinkUser } from "../utils/constants"
 
 
 const DashboardContext = createContext()
@@ -12,7 +13,7 @@ const DashboardLayout = () => {
 
     }}>
       <div className="w-full h-[100vh] flex bg-lightGrey">
-          <Sidebar />
+          <Sidebar links={sidebarLinkUser} />
 
           <section className="flex-1">
               <Outlet />

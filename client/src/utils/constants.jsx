@@ -4,7 +4,8 @@ import {
     RefreshCw, 
     TrendingUp,
     Headset,
-    Mail, 
+    Mail,
+    Users, 
     AtSign,
     LayoutDashboard,
     SquareUser,
@@ -48,7 +49,24 @@ export const sidebarLink = [
         path: 'favorite',
         name: 'Favorite'
     }
-    
+]
+
+export const sidebarLinkAdmin = [
+    {
+        icon: <LayoutDashboard size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
+        path: '/admin/dashboard',
+        name: 'Artikel'
+    },
+    {
+        icon: <Users size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
+        path: '/admin/dashboard/users',
+        name: 'Users'
+    },
+    {
+        icon: <BookMarked size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
+        path: '/admin/dashboard/create',
+        name: 'Add Artikel'
+    }
 ]
 
 export const articleData = [
