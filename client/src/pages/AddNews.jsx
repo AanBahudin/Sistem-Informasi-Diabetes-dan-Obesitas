@@ -3,7 +3,7 @@ import { TextEditor } from '../components'
 
 const AddNews = () => {
   return (
-    <div className='w-full p-10'>
+    <div className='w-full h-fit p-10 overflow-y-auto'>
       <TextEditor />
     </div>
   )
