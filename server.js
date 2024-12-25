@@ -28,12 +28,16 @@ app.use('/api/v1/users', userRouter);
 
 app.use(errorHandler);
 
-try {
-    await mongoose.connect(process.env.DB_CONNECTION);
-    app.listen(process.env.PORT || 5000, () => {
-        console.log("server is running on port 5000");
-    })
-} catch (error) {
-    console.log(error.message);
-    process.exit(1);
+const start = async() => {
+    try {
+        await mongoose.connect(process.env.DB_CONNECTION);
+        app.listen(process.env.PORT || 5000, () => {
+            console.log("server is running on port 5000");
+        })
+    } catch (error) {
+        console.log(error.message);
+        process.exit(1);
+    }
 }
+
+await start();
