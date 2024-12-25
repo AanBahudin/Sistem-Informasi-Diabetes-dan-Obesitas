@@ -30,7 +30,7 @@ const AddNews = () => {
 
         <FormInput 
           inputType='text'
-          labelText="Penyuting"
+          labelText="Penyuting Artikel"
           name='narasumber'
           placeholder='Dr. Kino Kinora'
           useBorder={true}
