@@ -5,4 +5,5 @@ export {default as FormSelect} from './FormSelect';
 export {default as Navbar} from './Navbar';
 export {default as ProfileInput} from './ProfileInput'
 export {default as Sidebar} from './Sidebar';
+export {default as TextAreaInput} from './TextAreaInput';
 export {default as TextEditor} from './TextEditor';

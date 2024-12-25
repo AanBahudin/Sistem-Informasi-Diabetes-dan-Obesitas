@@ -21,16 +21,18 @@ class TextEditor extends Component {
   render() {
     const { editorState } = this.state;
     return (
-      <div className='w-full bg-white h-[70ch] border-[1px] border-grey px-6'>
-          <Editor
-            toolbar={{
-              popupParent: document.body
-            }}
-            editorState={editorState}
-            wrapperClassName="wrapperClassName"
-            editorClassName="editorClassName"
-            onEditorStateChange={this.onEditorStateChange}
-          />
+      <div className='w-full bg-white h-[70ch] rounded-lg border-[1px] border-grey px-6'>
+
+        <Editor
+          placeholder='Start typing articles...'
+          toolbar={{
+            popupParent: document.body
+          }}
+          editorState={editorState}
+          wrapperClassName="wrapperClassName"
+          editorClassName="editorClassName"
+          onEditorStateChange={this.onEditorStateChange}
+        />
       </div>
     )
   }
