@@ -1,7 +1,15 @@
-import React from 'react'
 import { TextEditor, FormInput, TextAreaInput, FormSelect } from '../components'
+import React, { useState, useCallback } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
 
 const AddNews = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const onEditorStateChange = useCallback((newEditorState) => {
+    setEditorState(newEditorState);
+  }, []);
+
   return (
     <div className='w-full h-fit p-10 overflow-y-auto'>
 
@@ -64,8 +72,13 @@ const AddNews = () => {
 
       {/* editor anjay */}
       <h5 className='mt-6 text-xl font-medium border-b-[2px] pb-2 border-gray-500/50'>Struktur Artikel</h5>
-      <section className='w-full mt-6'>
-        <TextEditor />
+      <section className='w-full bg-white h-[70ch] rounded-lg border-[1px] border-grey px-6 mt-6'>
+        <Editor
+          placeholder='Start typing articles ...'
+            editorState={editorState}
+            wrapperClassName="wrapperClassName"
+            editorClassName="editorClassName"
+            onEditorStateChange={onEditorStateChange} />
       </section>
 
       <section className='flex items-center justify-end gap-x-6'>
@@ -73,7 +86,7 @@ const AddNews = () => {
         <button className='bg-blue text-sm font-medium px-10 py-3 rounded-md mt-6 w-48'>Create article</button>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default AddNews
+export default AddNews;

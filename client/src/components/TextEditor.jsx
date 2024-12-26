@@ -21,7 +21,7 @@ class TextEditor extends Component {
   render() {
     const { editorState } = this.state;
     return (
-      <div className='w-full bg-white h-[70ch] rounded-lg border-[1px] border-grey px-6'>
+      <div className=''>
 
         <Editor
           placeholder='Start typing articles...'
