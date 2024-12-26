@@ -15,7 +15,7 @@ const DashboardLayout = () => {
       <div className="w-full h-[100vh] flex bg-lightGrey">
           <Sidebar links={sidebarLinkUser} />
 
-          <section className="flex-1">
+          <section className="flex-1 h-[100vh] overflow-y-auto">
               <Outlet />
           </section>
       </div>
