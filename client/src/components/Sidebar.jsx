@@ -4,7 +4,7 @@ import { LogOut } from 'lucide-react';
 const Sidebar = ({ links }) => {
   return (
     <div className='w-[8%] h-full flex flex-col justify-between items-center py-10 bg-white'>
-        <h1 className='text-center font-medium select-none'>E-Health</h1>
+        <h1 className='text-center font-semibold text-xl select-none'>E-Health</h1>
 
         <div className='w-20 h-12 mx-auto flex flex-col gap-y-4 items-stretch justify-center'>
           {links.map((item, index) => {
@@ -17,7 +17,7 @@ const Sidebar = ({ links }) => {
           })}
         </div>
         
-        <LogOut size={25} className='stroke-[1.5px] mx-auto stroke-gray-600'/>
+        <LogOut size={25} className='stroke-[1.5px] mx-auto stroke-gray-400'/>
     </div>
   )
 }

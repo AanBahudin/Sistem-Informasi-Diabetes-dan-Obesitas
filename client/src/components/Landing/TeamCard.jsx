@@ -6,7 +6,7 @@ const TeamCard = ({ name, username, spesialis, message, photo }) => {
     
     <div className='flex items-center gap-x-6 hover:ring-[2px] ring-none hover:ring-blue rounded-xl p-2 h-fit flex-1 bg-lightGrey duration-200 ease-in-out hover:shadow-xl'>
         <div className='bg-lightGrey w-28 h-28 rounded-lg'>
-            <img className='object-cover m-auto h-full rounded-md' src={photo} alt="" />
+            <img className='object-cover m-auto h-full w-[120px] rounded-md' src={photo} alt="" />
         </div>
 
         <article className='flex justify-start flex-col flex-1'>

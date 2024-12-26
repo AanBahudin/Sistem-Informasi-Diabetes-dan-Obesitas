@@ -14,10 +14,43 @@
 
 @font-face {
     font-family: 'PoppinsMedium';
-    src: url('/src/assets/fonts/NetflixSansBold.otf') format('opentype');
+    src: url('/src/assets/fonts/PoppinsMedium.ttf') format('truetype');
 }
 
 * {
     font-family: 'poppins';
     scroll-behavior: smooth;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
+/* Hanya berlaku di container WYSIWYG */
+.wysiwyg-container h1,
+.wysiwyg-container h2,
+.wysiwyg-container h3 {
+  all: unset; /* Reset styling yang konflik */
+  font-size: initial; /* Sesuaikan ukuran font sesuai kebutuhan */
+  font-weight: bold; /* Atur ulang gaya bawaan */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Pastikan hanya berlaku di React Draft WYSIWYG */
+.rdw-editor-wrapper {
+  font-family: 'Arial', sans-serif;
+}
+.rdw-editor-wrapper h1 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  
+  .rdw-editor-wrapper h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .rdw-editor-wrapper h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  

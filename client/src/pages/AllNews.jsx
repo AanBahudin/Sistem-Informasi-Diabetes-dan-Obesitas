@@ -10,7 +10,7 @@ const AllNews = () => {
   const [filter, setFilter] = useState('');
 
   return (
-    <div className='w-full  h-full flex flex-col overflow-y-auto p-10'>
+    <div className='w-full  h-full flex flex-col p-10'>
 
     <section className="w-full flex justify-between items-center border-b-[1px] py-2 border-grey/50">
       <h1 className='text-2xl font-semibold'>1043 Articles</h1>

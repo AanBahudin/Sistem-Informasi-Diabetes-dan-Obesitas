@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  corePlugins: {
+    // preflight: false
+  },
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,7 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'poppins' : ['PoppinsRegular', 'sans']
+        'poppins' : ['PoppinsRegular', 'sans'],
+        'poppinsMedium': ['PoppinsMedium', 'sans']
       },
       colors: {
         'grey': '#181C14',

@@ -21,12 +21,23 @@ class TextEditor extends Component {
   render() {
     const { editorState } = this.state;
     return (
-      <div className=''>
+      <div className='w-full bg-white h-[70ch] rounded-lg border-[1px] border-grey px-6 wysiwyg-container rdw-editor-wrapper'>
 
         <Editor
           placeholder='Start typing articles...'
           toolbar={{
-            popupParent: document.body
+            options: [
+              'inline', 
+              'blockType', 
+              'fontSize', 
+              'list', 
+              'textAlign', 
+              'link', 
+              'embedded', 
+              'image', 
+              'remove', 
+              'history',
+            ], // Hilangkan fontFamily dari daftar
           }}
           editorState={editorState}
           wrapperClassName="wrapperClassName"

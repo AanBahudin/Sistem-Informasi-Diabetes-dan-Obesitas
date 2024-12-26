@@ -3,6 +3,10 @@ import { FormInput, FormSelect } from '../components'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+export const registerAction = async({request}) => {
+  return null;
+}
+
 const Register = () => {
 
   const [showPass, setShowPass] = useState(false);
@@ -14,21 +18,12 @@ const Register = () => {
               <h1 className='font-semibold text-2xl'>Bergabung bersama kami</h1>
               <p className='text-sm mt-2 mb-10'>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 
-                <div className="w-full flex gap-x-6">
-                  <FormInput 
-                    labelText="Firstname"
-                    inputType="text"
-                    name="firstName"
-                    placeholder="John"
-                    isFirstItem={true} />
-
-                  <FormInput  
-                    labelText="Lastname"
-                    inputType="text"
-                    name="lastName"
-                    placeholder="Doe"
-                    isFirstItem={false} />
-                </div>
+                <FormInput 
+                  labelText="Nama lengkap"
+                  inputType="text"
+                  name="name"
+                  placeholder="John"
+                  isFirstItem={true} />
 
                 <div className='w-full flex gap-x-6 flex-row-reverse'>
                   <FormSelect 

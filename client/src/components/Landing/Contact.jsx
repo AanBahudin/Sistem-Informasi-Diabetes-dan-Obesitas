@@ -38,7 +38,7 @@ const Contact = () => {
 
             <hr className='border-[1px] border-solid border-grey' />
 
-            <h5 className='mt-2 text-grey'>Contact with us</h5>
+            <p className='mt-2 text-grey'>Contact with us</p>
             <div className='w-full flex justify-around'>
               <Instagram className='hover:stroke-grey ease-in-out duration-200' />
               <Facebook className='hover:stroke-grey ease-in-out duration-200' />

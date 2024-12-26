@@ -1,6 +1,7 @@
 import { methodPhoto } from '../../assets/images'
 import { methods } from '../../utils/constants'
 import MethodCard from './MethodCard'
+import { Link } from 'react-router-dom'
 
 const Methods = () => {
   return (
@@ -18,9 +19,9 @@ const Methods = () => {
               })}
           </div>
 
-          <button className='bg-blue px-8 py-2 rounded-md'>
+          <Link to='/login' className='bg-blue no-underline text-grey cursor-default px-8 py-2 rounded-md'>
             Start now
-          </button>
+          </Link>
         </section>
     </div>
   )

@@ -1,5 +1,6 @@
 import { body, validationResult } from "express-validator";
-import { UnathorizedError, BadRequestError } from '../middleware/ErrorHandlerMiddleware'
+import { UnathorizedError, BadRequestError } from '../middleware/ErrorHandlerMiddleware.js'
+import User from "../models/UserModel.js";
 
 const withValidationErrors = (validateValues) => {  
     return [
@@ -23,11 +24,14 @@ const withValidationErrors = (validateValues) => {
 export const validateLogin = withValidationErrors([
     body('email')
         .notEmpty()
+        .withMessage('Please provide email')
         .isEmail()
-        .withMessage('Please provide email'),
+        .withMessage('Email is not valid'),
     body('password')
         .notEmpty()
         .withMessage('Please provide password')
+        .isLength({ min: 6, max: 10 })
+        .withMessage('Password min 6, max 10 characters')
 ])
 
 export const validateRegister = withValidationErrors([
@@ -41,6 +45,20 @@ export const validateRegister = withValidationErrors([
         .withMessage('Please provide email')
         .isEmail()
         .withMessage('Email is not valid')
-        .custom(),                  // we'll be back later
+        .custom( async (email) => {
+            const isUserExist = await User.findOne({email});
+            if (isUserExist) {
+                throw new BadRequestError('email already exist')
+            }
+        } ),
     body('password')
+        .notEmpty()
+        .withMessage('Please provide password')
+        .isLength({min: 6, max: 15})
+        .withMessage('Password min 6, max 10 characters'),
+    body('jenisKelamin')
+        .notEmpty()
+        .withMessage('Jenis Kelamin tidak boleh kosong')
+        .isIn(['Pria', 'Wanita'])
+        .withMessage('Jenis kelamin tidak valid')
 ])

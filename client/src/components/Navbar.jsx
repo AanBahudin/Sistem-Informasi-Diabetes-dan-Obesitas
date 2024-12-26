@@ -27,10 +27,10 @@ import { NavLink } from 'react-router-dom';
         <h1 className='text-2xl font-semibold font-poppins cursor-default'>E-Health</h1>
 
         <section className='flex flex-row gap-x-7 items-center'>
-            <a href='/#contacts' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out'>Contacts</a>
-            <a href='/#services' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out'>Services</a>
-            <a href='/#article' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out'>Articles</a>
-            <NavLink to='/login' className={({isActive}) => `${isActive ? 'hidden' : 'visible'} bg-blue px-8 py-2 text-sm rounded-md`} end>
+            <a href='/#contacts' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out no-underline'>Contacts</a>
+            <a href='/#services' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out no-underline'>Services</a>
+            <a href='/#article' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out no-underline'>Articles</a>
+            <NavLink to='/login' className={({isActive}) => `${isActive ? 'hidden' : 'visible'} bg-blue px-8 py-2 text-sm rounded-md no-underline text-grey`} end>
                 Login
             </NavLink>
         </section>

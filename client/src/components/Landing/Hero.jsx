@@ -9,10 +9,10 @@ const Hero = () => {
           <p className='mt-4 text-grey'>Temukan panduan lengkap, edukasi, dan solusi untuk mencegah obesitas dan diabetes.<br/> Bersama, kita bisa menciptakan gaya hidup yang lebih sehat dan berkualitas.</p>
 
           <div className='flex gap-x-4'>
-              <button className='mt-6 bg-white px-[42px] py-[12px] rounded-md font-medium flex gap-x-2 items-center hover:shadow-lg duration-200 ease-in-out cursor-default'>
+              <a className='mt-6 no-underline text-grey bg-white px-[42px] py-[12px] rounded-md font-medium hover:shadow-lg duration-200 ease-in-out cursor-default'>
                   Start Now
-              </button>
-              <a href='#partnership' className=' mt-6 bg-white px-[42px] py-[12px] rounded-md font-medium hover:shadow-lg duration-200 ease-in-out cursor-default'>Learn More</a>
+              </a>
+              <a href='#partnership' className=' mt-6 no-underline text-grey bg-white px-[42px] py-[12px] rounded-md font-medium hover:shadow-lg duration-200 ease-in-out cursor-default'>Learn More</a>
           </div>
       </section>
     </div>

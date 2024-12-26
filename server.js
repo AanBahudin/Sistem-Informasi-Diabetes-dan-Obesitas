@@ -1,7 +1,10 @@
+import 'express-async-errors'
+
 import express from 'express';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 
 // route
 import authRouter from './routes/authRoute.js';
@@ -13,13 +16,10 @@ import errorHandler from './errors/ErrorHandler.js';
 
 const app = express();
 dotenv.config();
+app.use(cookieParser());
 if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
 app.use(express.json());
 
-// test route
-app.get('/', (req, res) => {
-    res.send('Hello there')
-});
 
 // using route
 app.use('/api/v1/news', newsRouter);
