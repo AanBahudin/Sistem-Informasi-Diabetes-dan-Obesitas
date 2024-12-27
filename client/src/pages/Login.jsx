@@ -1,7 +1,23 @@
 import { aboutPhoto } from '../assets/images';
 import { FormInput } from '../components'
-import { Link } from 'react-router-dom';
+import { Link, redirect, Form } from 'react-router-dom';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import customFetch from '../utils/customFetch';
+
+export const action = async({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  
+  try {
+    await customFetch.post('/auth/login', data);
+    toast.success('Successfully logged in');
+    return redirect('/dashboard');
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return error
+  }
+}
 
 const Login = () => {
 
@@ -10,7 +26,7 @@ const Login = () => {
   return (
     <div className='w-fullScreen h-fullScreen grid grid-cols-12'>
 
-        <section className="w-full h-full flex justify-center items-center col-span-6 bg-[url('/src/assets/images/gradient.jpg')] bg-no-repeat bg-cover">
+        <Form method="POST" className="w-full h-full flex justify-center items-center col-span-6 bg-[url('/src/assets/images/gradient.jpg')] bg-no-repeat bg-cover">
             <div className="px-6 py-10 w-[70%]">
               <h1 className='font-semibold text-2xl'>Selamat datang kembali</h1>
               <p className='text-sm mt-2 mb-10'>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -43,7 +59,7 @@ const Login = () => {
               <p className='text-grey text-center text-[12px] mt-4'>Belum punya akun? <Link to='/register' className='underline'>Daftar disini</Link></p>
 
             </div>
-        </section>
+        </Form>
 
         <section className='w-full h-full bg-green-100 col-span-6 overflow-hidden'>
             <img className='h-fit' src={aboutPhoto} alt="" />

@@ -16,6 +16,7 @@ import {
   AddNews } from './pages';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { action as registerAction } from './pages/Register';
+import { action as loginAction } from './pages/Login';
 
 function App() {
 
@@ -31,7 +32,8 @@ function App() {
         },
         {
           path: 'login',
-          element: <Login />
+          element: <Login />,
+          action: loginAction
         },
         {
           path: 'register',
