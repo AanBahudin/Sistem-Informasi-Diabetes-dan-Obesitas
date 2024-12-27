@@ -15,6 +15,7 @@ import {
   AllUsers,
   AddNews } from './pages';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { action as registerAction } from './pages/Register';
 
 function App() {
 
@@ -34,7 +35,8 @@ function App() {
         },
         {
           path: 'register',
-          element: <Register />
+          element: <Register />,
+          action: registerAction
         },
       ],
     },

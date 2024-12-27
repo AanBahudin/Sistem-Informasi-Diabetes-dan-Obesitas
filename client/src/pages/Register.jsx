@@ -2,6 +2,7 @@ import { registerPhoto } from '../assets/images'
 import { FormInput, FormSelect } from '../components'
 import { useState } from 'react'
 import { Form, Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export const action = async({request}) => {
   const formData = await request.formData();
@@ -25,7 +26,7 @@ const Register = () => {
                   labelText="Nama lengkap"
                   inputType="text"
                   name="name"
-                  placeholder="John"
+                  placeholder="John Doe"
                   isFirstItem={true} />
 
                 <div className='w-full flex gap-x-6 flex-row-reverse'>
@@ -44,8 +45,6 @@ const Register = () => {
                     placeholder="enter your email"
                     isFirstItem={false} />
                 </div>
-
-                
 
                 <FormInput  
                   labelText="Password"
@@ -72,7 +71,7 @@ const Register = () => {
 
 
       <section className="col-span-1 bg-green-100">
-        <img src={registerPhoto} alt="" srcset="" />
+        <img src={registerPhoto} alt="" />
       </section>
     </div>
   )
