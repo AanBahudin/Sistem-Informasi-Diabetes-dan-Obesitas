@@ -4,7 +4,10 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export const registerAction = async({request}) => {
-  return null;
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  console.log(data);
+  return formData;
 }
 
 const Register = () => {
