@@ -1,9 +1,9 @@
 import { registerPhoto } from '../assets/images'
 import { FormInput, FormSelect } from '../components'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Form, Link } from 'react-router-dom'
 
-export const registerAction = async({request}) => {
+export const action = async({request}) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   console.log(data);
@@ -16,7 +16,7 @@ const Register = () => {
 
   return (
     <div className='w-fullScreen h-fullScreen overflow-hidden grid grid-cols-2'>
-      <section className="w-full h-full flex items-center justify-items-start col-span-1 bg-[url('/src/assets/images/gradient.jpg')] bg-no-repeat bg-cover">
+      <Form method='POST' className="w-full h-full flex items-center justify-items-start col-span-1 bg-[url('/src/assets/images/gradient.jpg')] bg-no-repeat bg-cover">
             <div className="w-[80%] mx-auto ">
               <h1 className='font-semibold text-2xl'>Bergabung bersama kami</h1>
               <p className='text-sm mt-2 mb-10'>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -64,11 +64,11 @@ const Register = () => {
 
                 </div>
 
-              <button className='w-full text-md text-grey font-semibold tracking-wider cursor-default hover:bg-blue duration-200 ease-in-out bg-blue/80 py-3 rounded-md'>Daftar</button>
+              <button type='submit' className='w-full text-md text-grey font-semibold tracking-wider cursor-default hover:bg-blue duration-200 ease-in-out bg-blue/80 py-3 rounded-md'>Daftar</button>
               <p className='text-grey text-center text-[12px] mt-4'>Sudah punya akun? <Link to='/login' className='underline'>Daftar disini</Link></p>
 
             </div>
-        </section>
+        </Form>
 
 
       <section className="col-span-1 bg-green-100">
