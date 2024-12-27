@@ -1,14 +1,22 @@
 import { registerPhoto } from '../assets/images'
 import { FormInput, FormSelect } from '../components'
 import { useState } from 'react'
-import { Form, Link } from 'react-router-dom'
+import { Form, Link, redirect } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import customFetch from '../utils/customFetch'
 
 export const action = async({request}) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
-  return formData;
+
+  try {
+    await customFetch.post('/auth/register', data);
+    toast.success('Registration Successfull !')
+    return redirect('/login');
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return error
+  }
 }
 
 const Register = () => {
