@@ -1,5 +1,4 @@
-import {Route} from 'lucide-react'
-import { heroPhoto } from '../../assets/images'
+import { Link } from "react-router-dom"
 
 const Hero = () => {
   return (
@@ -9,9 +8,9 @@ const Hero = () => {
           <p className='mt-4 text-grey'>Temukan panduan lengkap, edukasi, dan solusi untuk mencegah obesitas dan diabetes.<br/> Bersama, kita bisa menciptakan gaya hidup yang lebih sehat dan berkualitas.</p>
 
           <div className='flex gap-x-4'>
-              <a className='mt-6 no-underline text-grey bg-white px-[42px] py-[12px] rounded-md font-medium hover:shadow-lg duration-200 ease-in-out cursor-default'>
+              <Link to='/login' className='mt-6 no-underline text-grey bg-white px-[42px] py-[12px] rounded-md font-medium hover:shadow-lg duration-200 ease-in-out cursor-default'>
                   Start Now
-              </a>
+              </Link>
               <a href='#partnership' className=' mt-6 no-underline text-grey bg-white px-[42px] py-[12px] rounded-md font-medium hover:shadow-lg duration-200 ease-in-out cursor-default'>Learn More</a>
           </div>
       </section>
