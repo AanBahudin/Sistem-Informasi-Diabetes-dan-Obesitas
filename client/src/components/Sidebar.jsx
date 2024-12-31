@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { LogOut } from 'lucide-react';
 
-const Sidebar = ({ links }) => {
+const Sidebar = ({ links, logoutFunction }) => {
   return (
     <div className='w-[8%] h-full flex flex-col justify-between items-center py-10 bg-white'>
         <h1 className='text-center font-semibold text-xl select-none'>E-Health</h1>
@@ -17,7 +17,7 @@ const Sidebar = ({ links }) => {
           })}
         </div>
         
-        <LogOut size={25} className='stroke-[1.5px] mx-auto stroke-gray-400'/>
+        <LogOut onClick={logoutFunction} size={25} className='stroke-[1.5px] mx-auto stroke-gray-400'/>
     </div>
   )
 }

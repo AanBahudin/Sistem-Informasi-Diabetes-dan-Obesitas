@@ -1,5 +1,6 @@
-import { Outlet, redirect } from "react-router-dom"
+import { Outlet, redirect, useNavigate } from "react-router-dom"
 import { Sidebar } from "../components"
+import { toast } from 'react-toastify'
 import { useContext, createContext } from 'react'
 import { sidebarLink as sidebarLinkUser } from "../utils/constants"
 import customFetch from "../utils/customFetch"
@@ -23,13 +24,21 @@ export const loader = async() => {
 }
 
 const DashboardLayout = () => {
+
+  const navigate = useNavigate()
+
+  const logoutUser = async() => {
+    toast.success('logout successfully!')
+    await customFetch.get('/auth/logout')
+    navigate('/')
+  }
+
   return (
-
     <DashboardContext.Provider value={{
-
+      logoutUser
     }}>
       <div className="w-full h-[100vh] flex bg-lightGrey">
-          <Sidebar links={sidebarLinkUser} />
+          <Sidebar links={sidebarLinkUser} logoutFunction={logoutUser} />
 
           <section className="flex-1 h-[100vh] overflow-y-auto">
               <Outlet />
