@@ -17,6 +17,9 @@ import {
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { loader as dashboardLayoutLoader } from './pages/DashboardLayout'
+import { loader as adminDashboardLoader } from './pages/AdminDashboard'
+import { loader as registerLoader } from './pages/Register'
+import { loader as loginLoader } from './pages/Login'
 
 import { action as landingAction } from './pages/Landing';
 import { action as registerAction } from './pages/Register';
@@ -38,12 +41,14 @@ function App() {
         {
           path: 'login',
           element: <Login />,
-          action: loginAction
+          action: loginAction,
+          loader: loginLoader
         },
         {
           path: 'register',
           element: <Register />,
-          action: registerAction
+          loader: registerLoader,
+          action: registerAction,
         },
       ],
     },
@@ -78,6 +83,7 @@ function App() {
     {
       path: '/admin/dashboard',
       element: <AdminDashboard />,
+      loader: adminDashboardLoader,
       errorElement: <Error />,
       children: [
         {

@@ -5,6 +5,22 @@ import { Form, Link, redirect } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import customFetch from '../utils/customFetch'
 
+export const loader = async() => {
+  try {
+    const {data} = await customFetch.get('/users/current-user')
+    
+    if ( data.user.role ) {
+      if (data.user.role === 'admin') {
+        return redirect('/admin/dashboard')
+      } else {
+        return redirect('/dashboard')
+      }
+    }
+  } catch (error) {
+    return null
+  }
+}
+
 export const action = async({request}) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
