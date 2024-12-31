@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
  
- const Navbar = () => {
+ const Navbar = ({data}) => {
 
     const [bgOpacity, setBgOpacity] = useState(0);
 
@@ -31,7 +31,7 @@ import { NavLink } from 'react-router-dom';
             <a href='/#services' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out no-underline'>Services</a>
             <a href='/#article' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out no-underline'>Articles</a>
             <NavLink to='/login' className={({isActive}) => `${isActive ? 'hidden' : 'visible'} bg-blue px-8 py-2 text-sm rounded-md no-underline text-grey`} end>
-                Login
+                {data ? 'Dashboard' : 'Login'}
             </NavLink>
         </section>
     </div>

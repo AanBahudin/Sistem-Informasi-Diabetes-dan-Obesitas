@@ -20,7 +20,6 @@ export const loader = async() => {
   } catch (error) {
     return redirect('/')
   }
-
 }
 
 const DashboardLayout = () => {

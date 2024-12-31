@@ -20,6 +20,7 @@ import { loader as dashboardLayoutLoader } from './pages/DashboardLayout'
 import { loader as adminDashboardLoader } from './pages/AdminDashboard'
 import { loader as registerLoader } from './pages/Register'
 import { loader as loginLoader } from './pages/Login'
+import { loader as homeLayoutLoader } from './pages/HomeLayout'
 
 import { action as landingAction } from './pages/Landing';
 import { action as registerAction } from './pages/Register';
@@ -31,6 +32,7 @@ function App() {
     {
       path: '/',
       element: <HomeLayout />,
+      loader: homeLayoutLoader,
       errorElement: <Error />,
       children: [
         {

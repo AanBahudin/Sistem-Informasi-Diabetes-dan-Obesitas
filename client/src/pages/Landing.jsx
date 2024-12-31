@@ -3,6 +3,7 @@ import { Navbar, Footer } from '../components'
 import customFetch from '../utils/customFetch'
 import { toast } from 'react-toastify'
 import { About, Contact, Hero, Tagline, Services, Testimonial, Method, Narasumber, Partnership, Article, Dukungan } from '../components/Landing'
+import { useLoaderData } from 'react-router-dom'
 
 export const action = async({ request }) => {
   const formData = await request.formData()
@@ -19,6 +20,11 @@ export const action = async({ request }) => {
 }
 
 const Landing = () => {
+
+
+  const data = useLoaderData();
+  
+
   return (
     <section className=' m-auto flex flex-col items-center my-auto relative '>
       
