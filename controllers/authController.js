@@ -7,6 +7,13 @@ import { createToken } from '../utils/jwt.js'
 export const register = async(req, res) => {
 
     req.body.password = await hashPassword(req.body.password);
+
+    const totalDocuments = await UserModel.countDocuments();
+
+    if (totalDocuments === 0) {
+        req.body.role = 'admin'
+    }
+
     const registeredUser = await UserModel.create(req.body);
 
     return res.status(StatusCodes.CREATED).json({ msg: 'Successfully registered', user: registeredUser })
@@ -24,8 +31,9 @@ export const login = async(req, res) => {
         throw new NotAuthenticatedError('password is wrong!')
     }
 
-    const { _id, name, email } = isUserExist
-    const token = createToken({user_id: _id, name, email })
+    const { _id, name, email, role } = isUserExist
+    const token = createToken({user_id: _id, name, email, role })
+
 
     const oneDay = 1000 * 60 * 60 * 24;
     res.cookie('token', token, {

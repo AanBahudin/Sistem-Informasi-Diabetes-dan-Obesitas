@@ -2,6 +2,7 @@ import FormInput from '../FormInput'
 import {hotlineData} from '../../utils/constants'
 import HotlineCard from './HotlineCard'
 import { Instagram, Facebook, Twitter, Linkedin, Youtube } from 'lucide-react'
+import { Form } from 'react-router-dom'
 
 const Contact = () => {
   return (
@@ -11,21 +12,22 @@ const Contact = () => {
         <section className='flex items-center p-10 rounded-xl bg-lightGrey mt-4 justify-around'>
 
           {/* form contact */}
-          <article className='flex-1 max-w-[50%]'>
+          <Form method='POST' className='flex-1 max-w-[50%]'>
             <h3 className='text-xl font-semibold '>Send us a message</h3>
             <p className='text-sm mt-2'>Kami ingin mendengar dari Anda! Jika ada yang ingin ditanyakan atau dibicarakan, kirimkan pesan dan kami akan siap membantu dengan solusi terbaik.</p>
 
             {/* form */}
             <div className='grid grid-cols-2 gap-x-8 gap-y-4 mt-6'>
-             <FormInput name="firstName" labelText="First name" placeholder="John" />
-             <FormInput name="lastName" labelText="Last name" placeholder="Doe" />
-             <FormInput name="email" labelText="Email" placeholder="johnDoe@gmail.com" />
-             <FormInput name="contactDetails" labelText="Contact Details" placeholder="+62 82345" />
+             <FormInput name="firstName" labelText="First name" placeholder="John" useBorder={true} />
+             <FormInput name="lastName" labelText="Last name" placeholder="Doe"  useBorder={true}/>
+             <FormInput name="email" labelText="Email" placeholder="johnDoe@gmail.com"  useBorder={true}/>
+             <FormInput name="contact" labelText="Contact Details" placeholder="+62 82345"  useBorder={true} />
             </div>
 
             <label className='mt-4 text-sm font-semibold' htmlFor="message">Message</label>
             <textarea name="message" className='block ring-grey ring-1 w-full rounded-lg mt-2 resize-none h-40 px-4 py-[10px] text-sm' id="message" placeholder='Masukan pesan'></textarea>
-          </article>
+            <button className='w-full bg-blue text-sm py-2 rounded-md mt-4 cursor-default'>send message</button>
+          </Form>
 
 
           {/* detail contact */}

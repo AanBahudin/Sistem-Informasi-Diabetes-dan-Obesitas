@@ -1,10 +1,26 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, redirect } from "react-router-dom"
 import { Sidebar } from "../components"
 import { useContext, createContext } from 'react'
 import { sidebarLink as sidebarLinkUser } from "../utils/constants"
+import customFetch from "../utils/customFetch"
 
 
 const DashboardContext = createContext()
+
+export const loader = async() => {
+
+  try {
+    const { data } = await customFetch.get('/users/current-user')
+    
+    if (data.user.role === 'admin') {
+      return redirect('/admin/dashboard')
+    }
+    return data;
+  } catch (error) {
+    return redirect('/')
+  }
+
+}
 
 const DashboardLayout = () => {
   return (

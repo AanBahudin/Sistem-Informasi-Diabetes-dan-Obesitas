@@ -4,8 +4,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "supervisor server.js",
-    "server": "nodemon server.js",
+    "server": "supervisor server.js",
     "dev": "cd client && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

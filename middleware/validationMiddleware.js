@@ -21,6 +21,9 @@ const withValidationErrors = (validateValues) => {
     ]
 }
 
+
+// ============================        LOGIN         ============================================
+
 export const validateLogin = withValidationErrors([
     body('email')
         .notEmpty()
@@ -61,4 +64,37 @@ export const validateRegister = withValidationErrors([
         .withMessage('Jenis Kelamin tidak boleh kosong')
         .isIn(['Pria', 'Wanita'])
         .withMessage('Jenis kelamin tidak valid')
+])
+
+
+// ============================        MESSAGE         ============================================
+
+export const validateMessage = withValidationErrors([
+    body('firstName')
+        .notEmpty()
+        .withMessage('Please provide first name')
+        .isLength({ min: 3 })
+        .withMessage('first name is too short'),
+    body('lastName')
+        .notEmpty()
+        .withMessage('Please provide last name')
+        .isLength({ min: 3 })
+        .withMessage('last name is too short'),
+    body('email')
+        .notEmpty()
+        .withMessage('please provide email')
+        .isEmail()
+        .withMessage('invalid email format'),
+    body('contact')
+        .notEmpty()
+        .withMessage('please provide phone number')
+        .isInt()
+        .withMessage('invalid contact informations')
+        .isLength({ min: 10, max: 12 })
+        .withMessage('invalid phone number'),
+    body('message')
+        .notEmpty()
+        .withMessage('please provide message')
+        .isLength({ min: 10, max: 300 })
+        .withMessage('message is 10 & 300 characters long'),
 ])

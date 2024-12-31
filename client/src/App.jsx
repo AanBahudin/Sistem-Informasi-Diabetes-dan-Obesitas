@@ -15,6 +15,10 @@ import {
   AllUsers,
   AddNews } from './pages';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import { loader as dashboardLayoutLoader } from './pages/DashboardLayout'
+
+import { action as landingAction } from './pages/Landing';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 
@@ -28,7 +32,8 @@ function App() {
       children: [
         {
           index: true,
-          element: <Landing />
+          element: <Landing />,
+          action: landingAction
         },
         {
           path: 'login',
@@ -45,6 +50,7 @@ function App() {
     {
       path: '/dashboard',
       element: <DashboardLayout />,
+      loader: dashboardLayoutLoader,
       errorElement: <Error />,
       children: [
         {

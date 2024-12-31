@@ -10,9 +10,14 @@ import cookieParser from 'cookie-parser';
 import authRouter from './routes/authRoute.js';
 import userRouter from './routes/userRoute.js';
 import newsRouter from './routes/newsRoute.js';
+import messageRouter from './routes/messageRoute.js';
 
 // errors
 import errorHandler from './errors/ErrorHandler.js';
+
+
+// middleware
+import { authenticatedUser } from './middleware/authMiddleware.js'
 
 const app = express();
 dotenv.config();
@@ -22,9 +27,10 @@ app.use(express.json());
 
 
 // using route
+app.use('/api/v1/message', messageRouter);
 app.use('/api/v1/news', newsRouter);
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/users', userRouter);
+app.use('/api/v1/users', authenticatedUser, userRouter);
 
 app.use(errorHandler);
 
