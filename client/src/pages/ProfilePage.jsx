@@ -22,6 +22,7 @@ const ProfilePage = () => {
     <div className='p-10 h-full overflow-y-auto grid grid-cols-12 gap-x-6 text-grey'>
 
       <section className='bg-white h-fit col-span-8 rounded-xl px-10 py-8 '>
+        
         <div className='w-full flex justify-end items-end'>
           {isEditData ? (
             <NavLink to='/dashboard/profile' className='flex items-center justify-center gap-x-2 text-medium'>
@@ -44,7 +45,8 @@ const ProfilePage = () => {
 
           <article className='flex flex-col items-start justify-center'>
 
-            <div className='flex flex-wrap gap-x-6'>
+            <h1 className='text-xl font-medium'>Aan Bahudin</h1>
+            <div className='flex flex-wrap gap-x-6 mt-4'>
               <label htmlFor="avatar" className='px-6 py-1 bg-blue text-center text-[12px] rounded-sm'>upload</label>
               <button className='px-6 py-1 bg-red-400 text-center text-[12px] rounded-sm'>delete</button >
               <input className='text-[12px] font-medium mb-4 text-gray-500 hidden' type="file" name="avatar" id="avatar" />

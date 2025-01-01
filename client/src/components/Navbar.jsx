@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
  
  const Navbar = ({data}) => {
-
+    
     const [bgOpacity, setBgOpacity] = useState(0);
 
     useEffect(() => {

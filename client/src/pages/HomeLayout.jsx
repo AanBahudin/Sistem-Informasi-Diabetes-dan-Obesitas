@@ -11,13 +11,14 @@ export const loader = async() => {
     const { data } = await customFetch.get('/users/current-user')
     return data.user;
   } catch (error) {
-    return redirect('/')
+    return null
   }
 }
 
 const HomeLayout = () => {
 
   const data = useLoaderData();
+  
   
   return (
 
@@ -26,7 +27,7 @@ const HomeLayout = () => {
     }}>
       <div>
         <section className='m-auto flex flex-col items-center my-auto relative'>
-          <Navbar data />
+          <Navbar data={data} />
         </section>
 
         <Outlet />

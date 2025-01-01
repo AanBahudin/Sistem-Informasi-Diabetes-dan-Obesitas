@@ -8,5 +8,5 @@ export const getCurrentUser = async(req, res) => {
 }
 
 export const updateUser = async(req, res) => {
-    res.send('update user controller')
+    
 }

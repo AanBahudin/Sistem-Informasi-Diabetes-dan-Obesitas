@@ -27,8 +27,8 @@ const DashboardLayout = () => {
   const navigate = useNavigate()
 
   const logoutUser = async() => {
-    toast.success('logout successfully!')
     await customFetch.get('/auth/logout')
+    toast.success('logout successfully!')
     navigate('/')
   }
 
