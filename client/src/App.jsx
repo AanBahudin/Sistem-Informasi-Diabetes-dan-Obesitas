@@ -1,7 +1,7 @@
 import { 
   HomeLayout, 
   Landing, 
-  Error, 
+  ErrorPage,
   Login, 
   Register, 
   DashboardLayout, 
@@ -21,10 +21,12 @@ import { loader as adminDashboardLoader } from './pages/AdminDashboard'
 import { loader as registerLoader } from './pages/Register'
 import { loader as loginLoader } from './pages/Login'
 import { loader as homeLayoutLoader } from './pages/HomeLayout'
+import { loader as loaderProfilePage } from './pages/ProfilePage'
 
 import { action as landingAction } from './pages/Landing';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
+import { action as profileAction } from './pages/ProfilePage'
 
 function App() {
 
@@ -33,7 +35,7 @@ function App() {
       path: '/',
       element: <HomeLayout />,
       loader: homeLayoutLoader,
-      errorElement: <Error />,
+      errorElement: <ErrorPage />,
       children: [
         {
           index: true,
@@ -58,7 +60,7 @@ function App() {
       path: '/dashboard',
       element: <DashboardLayout />,
       loader: dashboardLayoutLoader,
-      errorElement: <Error />,
+      errorElement: <ErrorPage />,
       children: [
         {
           index: true,
@@ -70,6 +72,8 @@ function App() {
         },
         {
           path: 'profile',
+          loader: loaderProfilePage,
+          action: profileAction,
           element: <ProfilePage />
         },
         {
@@ -86,7 +90,7 @@ function App() {
       path: '/admin/dashboard',
       element: <AdminDashboard />,
       loader: adminDashboardLoader,
-      errorElement: <Error />,
+      errorElement: <ErrorPage />,
       children: [
         {
           index: true,

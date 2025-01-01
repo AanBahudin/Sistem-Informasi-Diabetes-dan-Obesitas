@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema({
     nama : String,
     email: String,
+    nomorTelepon: String,
     password: String,
     data_kesehatan: {
         beratBadan: {
@@ -19,12 +20,20 @@ const UserSchema = new mongoose.Schema({
         },
         IBMStatus: {
             type: String,
-            enum: ['Kurang', 'Sehat', 'Kelebihan', 'Obesitas'],
+            enum: ['Kekurangan', 'Sehat', 'Kelebihan', 'Obesitas'],
+            default: 'Sehat'
+        },
+        kondisiTubuh: {
+            type: String,
             default: 'Sehat'
         },
         kadarGula: {
             type: Number,
             default: 0
+        },
+        statusKadarGula: {
+            type: String,
+            default: 'Normal'
         },
         targetKesehatan: {
             type: String,
@@ -38,8 +47,15 @@ const UserSchema = new mongoose.Schema({
         }
     },
     photo: String,
-    jenisKelamin: String,
-    tanggalLahir: Date,
+    jenisKelamin: {
+        type: String,
+        enum: ['Pria', 'Wanita'],
+        default: 'Pria'
+    },
+    tanggalLahir: {
+        type: Date,
+        default: new Date(Date.now())
+    },
     role: {
         type: String,
         default: 'user'

@@ -1,22 +1,58 @@
 import { Edit, X } from 'lucide-react'
+import moment from 'moment'
 import { firstDoctor } from '../assets/images'
 import { ProfileInput } from '../components'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, redirect, useLoaderData, useLocation, Form } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import customFetch from '../utils/customFetch'
 
-export const actionProfilePage = async({ request }) => {
+export const action = async({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  return null;
+
+  try {
+    await customFetch.patch('/users/edit', data)
+    toast.success('Berhasil di update !')
+    return redirect('/dashboard/profile')
+  } catch (error) {
+    const errorArr = error?.response?.data?.msg
+    console.log(error);
+    
+    toast.error(errorArr.join(", "));
+    return error
+  }
 }
 
-export const loaderProfilePage = async({ request }) => {
-  return null;
+export const loader = async() => {
+
+  try {
+    const { data } = await customFetch.get('/users/current-user')
+    return data.user;
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return redirect('/dashboard')
+  }
+
 }
 
 const ProfilePage = () => {
 
   const queryParams = new URLSearchParams(useLocation().search).get('edit');
   const isEditData = queryParams === 'true';  
+
+  const data = useLoaderData()
+  
+  const {beratBadan, tinggiBadan, IBM, IBMStatus, kondisiTubuh, kadarGula, statusKadarGula, targetKesehatan, jenisDiet } = data.data_kesehatan;
+  
+  const dateOnly = moment(data.createdAt).subtract(10, 'days').calendar();
+  const terakhirUpdate = moment(data.updatedAt).calendar();
+  const formattedDate = data.tanggalLahir.split('T')[0];
+
+  const deleteProfileFunc = async() => {
+    await customFetch.patch('/users/delete-profile')
+    toast.success('Foto dihapus!')
+    return redirect('.')
+  }
 
   return (
     <div className='p-10 h-full overflow-y-auto grid grid-cols-12 gap-x-6 text-grey'>
@@ -45,10 +81,10 @@ const ProfilePage = () => {
 
           <article className='flex flex-col items-start justify-center'>
 
-            <h1 className='text-xl font-medium'>Aan Bahudin</h1>
             <div className='flex flex-wrap gap-x-6 mt-4'>
               <label htmlFor="avatar" className='px-6 py-1 bg-blue text-center text-[12px] rounded-sm'>upload</label>
-              <button className='px-6 py-1 bg-red-400 text-center text-[12px] rounded-sm'>delete</button >
+        
+              { data.photo && <button onClick={deleteProfileFunc} className='px-6 py-1 bg-red-400 text-center text-[12px] rounded-sm cursor-default'>delete</button >}
               <input className='text-[12px] font-medium mb-4 text-gray-500 hidden' type="file" name="avatar" id="avatar" />
             </div>
             <p className='text-[12px] text-gray-500 mt-6'>At least 800 x 800 px recommended</p>
@@ -57,24 +93,26 @@ const ProfilePage = () => {
         </div>
 
         {/* personal info */}
-        <div className='w-full h-[65%] mt-14 bg-lightGrey p-4 rounded-xl flex flex-col items-start'>
+        <Form method="POST" className='w-full h-[65%] mt-14 bg-lightGrey p-4 rounded-xl flex flex-col items-start'>
 
           <h1 className='font-medium'>Personal Information</h1>
 
           <div className='w-full grid grid-cols-3 gap-x-6 gap-y-8 mt-8'>
-            <ProfileInput isEdit={isEditData} label='First Name' name='firstname' defaultValue='Aan' isAutoFocus={true} />
-            <ProfileInput isEdit={isEditData} label='Last Name' name='lastname' defaultValue='Bahudin' />
-            <ProfileInput isEdit={isEditData} label='Email' name='email' defaultValue='aanbahudin$gmail.com' />
-            <ProfileInput isEdit={isEditData} label='Jenis Kelamin' name='jenisKelamin' defaultValue='Pria' />
-            <ProfileInput isEdit={isEditData} label='No Handphone' name='nohp' defaultValue='0812 7334 0834' />
-            <ProfileInput isEdit={isEditData} label='TanggalLahir' name='tanggalLahir' defaultValue='04 Desember 2023' />
-            <ProfileInput isEdit={isEditData} label='Preferensi Diet' name='preferensiDiet' defaultValue='Vegetarian' />
-            <ProfileInput isEdit={isEditData} label='Target Kesehatan' name='targetKesehatan' defaultValue='Menurunkan Berat' />
-            <ProfileInput isEdit={isEditData} label='Kondisi Tubuh' name='kondisiTubuh' defaultValue='Kurang Sehat' />
+            <ProfileInput isEdit={isEditData} label='Nama Lengkap' name='nama' defaultValue={data.nama} isAutoFocus={true}/>
+            <ProfileInput isEdit={isEditData} label='Email' name='email' defaultValue={data.email} inputType='email'/>
+            <ProfileInput isEdit={isEditData} label='Jenis Kelamin' name='jenisKelamin' defaultValue={data.jenisKelamin} typeInput='select' lists={['Pria', 'Wanita']}/>
+            <ProfileInput isEdit={isEditData} label='No Handphone' name='nomorTelepon' defaultValue={data.nomorTelepon}/>
+            <ProfileInput isEdit={isEditData} label='Tanggal Lahir' name='tanggalLahir' defaultValue={formattedDate} inputType='date'/>
+            <ProfileInput isEdit={isEditData} label='Tinggi badan (cm)' name='tinggiBadan' defaultValue={tinggiBadan.toString()} inputType='number'/>
+            <ProfileInput isEdit={isEditData} label='Berat Badan (cm)' name='beratBadan' defaultValue={beratBadan.toString()} inputType='number' />
+            <ProfileInput isEdit={isEditData} label='Preferensi Diet' name='jenisDiet' defaultValue={jenisDiet} typeInput='select' lists={['Diet Rendah Karbohidrat', 'Diet Rendah Gula', 'Diet Vegatarian', 'Diet Rendah Lemak', 'Diet Tinggi Protein']} />
+            <ProfileInput isEdit={isEditData} label='Gula Darah' name='kadarGula' defaultValue={kadarGula.toString()} inputType='number' />
+            <ProfileInput isEdit={isEditData} label='Target Kesehatan' name='targetKesehatan' defaultValue={targetKesehatan} typeInput='select' lists={['Menurunkan Berat Badan', 'Mempertahankan Berat Badan', 'Menaikkan Berat Badan']}/>
+            <ProfileInput isEdit={isEditData} label='Kondisi Tubuh' name='kondisiTubuh' defaultValue={kondisiTubuh} typeInput='select' lists={['Sehat', 'Cukup Sehat', 'Kurang Sehat', 'Tidak Sehat']}/>
           </div>
 
-        <button className={`${isEditData ? 'visible' : 'invisible'} mr-auto bg-blue px-4 py-2 rounded-md font-medium mt-10 text-small`}>Save changes</button>
-        </div>
+          <button type='submit' className={`${isEditData ? 'visible' : 'invisible'} mr-auto bg-blue px-4 py-2 rounded-md font-medium mt-10 text-small`}>Save changes</button>
+        </Form>
       
 
       </section>
@@ -87,14 +125,14 @@ const ProfilePage = () => {
         <div className='flex w-full gap-x-6 my-6'>
             <div className='p-2 flex-1 bg-lightGrey rounded-md'>
               <h5 className='text-center text-medium'>BMI</h5>
-              <h1 className='text-center text-xl font-semibold my-4'>Obesitas</h1>
-              <h5 className='text-small text-center'>BMI - 43,42</h5>
+              <h1 className='text-center text-xl font-semibold my-4'>{IBMStatus}</h1>
+              <h5 className='text-small text-center'>BMI - {IBM}</h5>
             </div>
 
             <div className='p-2 flex-1 bg-lightGrey rounded-md'>
               <h5 className='text-center text-medium'>Gula Darah</h5>
-              <h1 className='text-center text-xl font-semibold my-4'>Rendah</h1>
-              <h5 className='text-small text-center'>Gula - 43,42/mg</h5>
+              <h1 className='text-center text-xl font-semibold my-4'>{statusKadarGula}</h1>
+              <h5 className='text-small text-center'>Gula - {kadarGula}/mg</h5>
             </div>
 
         </div>
@@ -104,8 +142,8 @@ const ProfilePage = () => {
           <div className=''>
             <h3 className='font-medium text-medium'>Status Gula & Obesitas</h3>
             <h5 className='flex mt-2 gap-x-4'>
-              <span className='px-4 py-2 bg-green-400 rounded-full text-small'>Rendah </span>
-              <span className='px-4 py-2 bg-red-400 rounded-full text-small'>Obesitas</span>
+              <span className={`px-4 py-2 ${ statusKadarGula === 'Normal' ? 'bg-green-300' : ( statusKadarGula === 'Pre Diabetes' ? 'bg-yellow-300' : 'bg-red-300' ) } rounded-full text-small`}>{statusKadarGula} </span>
+              <span className={`px-4 py-2 ${ IBMStatus === 'Sehat' ? 'bg-green-300' : ( IBMStatus === 'Kelebihan' ? 'bg-yellow-300' : ( IBMStatus === 'Kekurangan' ? 'bg-blue' : 'bg-red-600' ) ) } rounded-full text-small`}>{IBMStatus}</span>
             </h5>
           </div>
 
@@ -121,7 +159,12 @@ const ProfilePage = () => {
 
           <div className=''>
             <h3 className='font-medium text-medium'>Login sejak</h3>
-            <h5 className='text-gray-500 text-small'> 4 Desember 2023 </h5>
+            <h5 className='text-gray-500 text-small mt-2'> {dateOnly} </h5>
+          </div>
+          
+          <div className=''>
+            <h3 className='font-medium text-medium'>Terakhir update</h3>
+            <h5 className='text-gray-500 text-small mt-2'> {terakhirUpdate} </h5>
           </div>
         </section>
         

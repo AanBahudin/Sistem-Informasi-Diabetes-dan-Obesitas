@@ -49,7 +49,7 @@ const Register = () => {
                 <FormInput 
                   labelText="Nama lengkap"
                   inputType="text"
-                  name="name"
+                  name="nama"
                   placeholder="John Doe"
                   isFirstItem={true} />
 

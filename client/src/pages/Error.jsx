@@ -13,13 +13,6 @@ const Error = () => {
 
         <Link className='w-fit px-20 py-3 mt-10 rounded-md shadow-lg bg-blue text-white cursor-default'> Kembali Ke Home </Link>
       </div>
-
-
-      <div className='w-[30%] mx-auto flex justify-between items-center'>
-        <Link to='/' className='text-grey/80 text-sm hover:text-grey cursor-default duration-200 ease-in-out'>Home</Link>
-        <Link to='/register' className='text-grey/80 text-sm hover:text-grey cursor-default duration-200 ease-in-out'>Register</Link>
-        <Link to='/login' className='text-grey/80 text-sm hover:text-grey cursor-default duration-200 ease-in-out'>Login</Link>
-      </div>
     </section>  
   )
 }

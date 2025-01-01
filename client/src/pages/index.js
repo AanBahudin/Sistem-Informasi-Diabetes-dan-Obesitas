@@ -15,4 +15,4 @@ export { default as AllNews } from './AllNews'
 export { default as AllUsers } from './AllUsers'
 export { default as AddNews } from './AddNews'
 
-export { default as Error } from './Error'
+export { default as ErrorPage } from './Error'
