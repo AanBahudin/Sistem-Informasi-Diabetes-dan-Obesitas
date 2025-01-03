@@ -32,9 +32,18 @@ const DashboardLayout = () => {
     navigate('/')
   }
 
+  const deleteProfileFunc = async(event, url) => {
+    event.preventDefault()
+
+    await customFetch.patch('/users/delete-profile')
+    window.location.reload('/dashboard/profile')
+    toast.success('Foto dihapus!')
+  }
+
   return (
     <DashboardContext.Provider value={{
-      logoutUser
+      logoutUser,
+      deleteProfileFunc
     }}>
       <div className="w-full h-[100vh] flex bg-lightGrey">
           <Sidebar links={sidebarLinkUser} logoutFunction={logoutUser} />

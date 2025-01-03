@@ -1,5 +1,7 @@
 import { StatusCodes } from 'http-status-codes'
 import User from '../models/UserModel.js'
+import { promises as fs } from 'fs'
+import cloudinary from 'cloudinary'
 
 export const getCurrentUser = async(req, res) => {
     const user = await User.findOne({_id: req.user.user_id})
@@ -15,8 +17,9 @@ export const deletePhotoProfile = async(req, res) => {
 }
 
 export const updateUser = async(req, res) => {
-    
+        
     const tanggalUser= req.body.tanggalLahir
+
 
     const [day, month, year] = tanggalUser.split('/');
     const parsedDate = new Date(`${year}-${month}-${day}`);
@@ -24,13 +27,16 @@ export const updateUser = async(req, res) => {
     // set BMI
     const newBerat = Number(req.body.beratBadan)
     const newTinggi = Number(req.body.tinggiBadan)/100
+
+
     if ( newTinggi > 0 && newBerat > 0) {
         req.body.IBM = (newBerat / (Math.pow(newTinggi, 2))).toFixed(2);
         const beratBadanIdeal = newBerat / (Math.pow(newTinggi, 2));
-        if (beratBadanIdeal < 18,5) {
-            req.body.IBMStatus = 'Kekurangan'
-        } else if (beratBadanIdeal >= 18,5 && beratBadanIdeal <= 24,9) {
+
+        if (beratBadanIdeal >= 18,5 && beratBadanIdeal <= 24,9) {
             req.body.IBMStatus = 'Sehat'
+        } else if (beratBadanIdeal < 18,5) {
+            req.body.IBMStatus = 'Kekurangan'
         } else if (beratBadanIdeal >= 25 && beratBadanIdeal <= 29,9) {
             req.body.IBMStatus = 'Kelebihan'
         } else {
@@ -38,14 +44,32 @@ export const updateUser = async(req, res) => {
         }
     }
 
+    if (newTinggi === 0 || newBerat === 0 ) {
+        req.body.IBM = '0'
+        req.body.IBMStatus = '-'
+    }
+
+
     // set status kadar gula
     const newKadarGula = Number(req.body.kadarGula)
-    if (newKadarGula < 140) {
+
+    if (newKadarGula < 40) {
+        req.body.statusKadarGula = '-'
+    } else if (newKadarGula >= 40 && newKadarGula <= 70) {
+        req.body.statusKadarGula = 'Kekurangan'
+    } else if (newKadarGula > 70 && newKadarGula < 140) {
         req.body.statusKadarGula = 'Normal'
-    } else if (newKadarGula >= 140 && newKadarGula < 200 ) {
+    } else if (newKadarGula >= 140 && newKadarGula < 200) {
         req.body.statusKadarGula = 'Pre Diabetes'
     } else {
         req.body.statusKadarGula = 'Diabetes'
+    }
+
+    if(req.file) {
+        const response = await cloudinary.v2.uploader.upload(req.file.path);
+        await fs.unlink(req.file.path)
+        req.body.photo = response.secure_url
+        req.body.photoPublicId = response.public_id
     }
 
     const newData = {
@@ -64,8 +88,16 @@ export const updateUser = async(req, res) => {
             jenisDiet: req.body.jenisDiet, 
         },
         jenisKelamin: req.body.jenisKelamin,
-        tanggalLahir: parsedDate
+        tanggalLahir: parsedDate,
+        photo: req.body.photo,
+        photoPublicId: req.body.photoPublicId
     }
-     await User.findOneAndUpdate({ _id: req.user.user_id }, newData,  { new: true, runValidators: true } )
+
+    const updatedUser = await User.findOneAndUpdate({ _id: req.user.user_id }, newData,  { new: true, runValidators: true } )
+
+    if (req.file && updatedUser.avatarPublicId) {
+        await cloudinary.v2.uploader.destroy(updatedUser.avatarPublicId)
+    }   
+
     return res.status(StatusCodes.OK).json({ msg: 'Berhasil di update!' })
 }

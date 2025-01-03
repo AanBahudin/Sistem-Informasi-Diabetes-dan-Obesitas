@@ -4,8 +4,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "server": "supervisor server.js",
-    "dev": "cd client && npm run dev",
+    "setup-project": "npm i && cd client && npm i",
+    "server": "supervisor server",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently --kill-others-on-fail \" supervisor server.js \" \" npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,6 +16,8 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.1",
+    "concurrently": "^9.1.2",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

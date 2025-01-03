@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
+import cloudinary from 'cloudinary'
 
 // route
 import authRouter from './routes/authRoute.js';
@@ -25,6 +26,12 @@ app.use(cookieParser());
 if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
 app.use(express.json());
 
+// cloudinary setup
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+})
 
 // using route
 app.use('/api/v1/message', messageRouter);

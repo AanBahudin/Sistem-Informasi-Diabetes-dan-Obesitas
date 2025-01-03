@@ -1,17 +1,25 @@
-import { Edit, X } from 'lucide-react'
+import { Edit, X, LoaderCircle, Loader, LoaderCircleIcon } from 'lucide-react'
 import moment from 'moment'
-import { firstDoctor } from '../assets/images'
+import { userPhoto } from '../assets/images'
 import { ProfileInput } from '../components'
-import { NavLink, redirect, useLoaderData, useLocation, Form } from 'react-router-dom'
+import { NavLink, redirect, useLoaderData, useLocation, Form, useNavigation, replace } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import customFetch from '../utils/customFetch'
+import { useDashboardContext } from './DashboardLayout'
+import { useState } from 'react'
 
 export const action = async({ request }) => {
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+  const data = Object.fromEntries(formData)
+  
+  const file = formData.get('photo');
+  if (file && file.size > 500000) {
+    toast.error('Ukuran gambar terlalu berat')
+    return null
+  }
 
   try {
-    await customFetch.patch('/users/edit', data)
+    await customFetch.patch('/users/edit', formData)
     toast.success('Berhasil di update !')
     return redirect('/dashboard/profile')
   } catch (error) {
@@ -38,26 +46,30 @@ export const loader = async() => {
 const ProfilePage = () => {
 
   const queryParams = new URLSearchParams(useLocation().search).get('edit');
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting'
   const isEditData = queryParams === 'true';  
 
   const data = useLoaderData()
-  
+
   const {beratBadan, tinggiBadan, IBM, IBMStatus, kondisiTubuh, kadarGula, statusKadarGula, targetKesehatan, jenisDiet } = data.data_kesehatan;
-  
+  const { deleteProfileFunc } = useDashboardContext()
   const dateOnly = moment(data.createdAt).subtract(10, 'days').calendar();
   const terakhirUpdate = moment(data.updatedAt).calendar();
   const formattedDate = data.tanggalLahir.split('T')[0];
+  const [selectedImage, setSelectedImage] = useState(null)
 
-  const deleteProfileFunc = async() => {
-    await customFetch.patch('/users/delete-profile')
-    toast.success('Foto dihapus!')
-    return redirect('.')
+  const imageUpload = (event) => {
+    const file = event.target.files[0]
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file))
+    }
   }
 
   return (
     <div className='p-10 h-full overflow-y-auto grid grid-cols-12 gap-x-6 text-grey'>
 
-      <section className='bg-white h-fit col-span-8 rounded-xl px-10 py-8 '>
+      <Form method="POST" encType='multipart/form-data' className='bg-white h-fit col-span-8 rounded-xl px-10 py-8 '>
         
         <div className='w-full flex justify-end items-end'>
           {isEditData ? (
@@ -77,15 +89,20 @@ const ProfilePage = () => {
        
         {/* avatar container */}
         <div className='flex gap-x-10'>
-          <img className='w-28 h-28 object-cover rounded-full' src={firstDoctor} alt="" />
+          {selectedImage ? (
+            <img className='w-28 h-28 object-cover object-center rounded-full' src={selectedImage} alt="avatar" />
+          ) : (
+            <img className='w-28 h-28 object-cover object-center rounded-full' src={data.photo || userPhoto} alt="avatar" />
+          )}
 
           <article className='flex flex-col items-start justify-center'>
 
             <div className='flex flex-wrap gap-x-6 mt-4'>
-              <label htmlFor="avatar" className='px-6 py-1 bg-blue text-center text-[12px] rounded-sm'>upload</label>
-        
+
               { data.photo && <button onClick={deleteProfileFunc} className='px-6 py-1 bg-red-400 text-center text-[12px] rounded-sm cursor-default'>delete</button >}
-              <input className='text-[12px] font-medium mb-4 text-gray-500 hidden' type="file" name="avatar" id="avatar" />
+              { isEditData && <label htmlFor="photo" className='px-6 py-1 bg-blue text-center text-[12px] rounded-sm'>{ isSubmitting ? <LoaderCircleIcon size={20} className='animate-spin' /> : 'upload' }</label> }
+
+              <input className='text-[12px] font-medium mb-4 text-gray-500 hidden' type="file" name="photo" id="photo" accept='image/*' onChange={imageUpload} />
             </div>
             <p className='text-[12px] text-gray-500 mt-6'>At least 800 x 800 px recommended</p>
             <p className='text-[12px] text-gray-500'>JPG and PNG are allowed</p>
@@ -93,7 +110,7 @@ const ProfilePage = () => {
         </div>
 
         {/* personal info */}
-        <Form method="POST" className='w-full h-[65%] mt-14 bg-lightGrey p-4 rounded-xl flex flex-col items-start'>
+        <section className='w-full h-[65%] mt-14 bg-lightGrey p-4 rounded-xl flex flex-col items-start'>
 
           <h1 className='font-medium'>Personal Information</h1>
 
@@ -104,18 +121,21 @@ const ProfilePage = () => {
             <ProfileInput isEdit={isEditData} label='No Handphone' name='nomorTelepon' defaultValue={data.nomorTelepon}/>
             <ProfileInput isEdit={isEditData} label='Tanggal Lahir' name='tanggalLahir' defaultValue={formattedDate} inputType='date'/>
             <ProfileInput isEdit={isEditData} label='Tinggi badan (cm)' name='tinggiBadan' defaultValue={tinggiBadan.toString()} inputType='number'/>
-            <ProfileInput isEdit={isEditData} label='Berat Badan (cm)' name='beratBadan' defaultValue={beratBadan.toString()} inputType='number' />
+            <ProfileInput isEdit={isEditData} label='Berat Badan (kg)' name='beratBadan' defaultValue={beratBadan.toString()} inputType='number' />
             <ProfileInput isEdit={isEditData} label='Preferensi Diet' name='jenisDiet' defaultValue={jenisDiet} typeInput='select' lists={['Diet Rendah Karbohidrat', 'Diet Rendah Gula', 'Diet Vegatarian', 'Diet Rendah Lemak', 'Diet Tinggi Protein']} />
             <ProfileInput isEdit={isEditData} label='Gula Darah' name='kadarGula' defaultValue={kadarGula.toString()} inputType='number' />
             <ProfileInput isEdit={isEditData} label='Target Kesehatan' name='targetKesehatan' defaultValue={targetKesehatan} typeInput='select' lists={['Menurunkan Berat Badan', 'Mempertahankan Berat Badan', 'Menaikkan Berat Badan']}/>
             <ProfileInput isEdit={isEditData} label='Kondisi Tubuh' name='kondisiTubuh' defaultValue={kondisiTubuh} typeInput='select' lists={['Sehat', 'Cukup Sehat', 'Kurang Sehat', 'Tidak Sehat']}/>
           </div>
 
-          <button type='submit' className={`${isEditData ? 'visible' : 'invisible'} mr-auto bg-blue px-4 py-2 rounded-md font-medium mt-10 text-small`}>Save changes</button>
-        </Form>
+          <button type='submit' disabled={isSubmitting} className={`${isEditData ? 'visible' : 'invisible'} flex items-center justify-center cursor-default gap-x-4 mr-auto bg-blue px-4 py-2 rounded-md font-medium mt-10 text-small`}>
+            {isSubmitting && <LoaderCircle size={20} className='stroke-white my-auto animate-spin' />}
+            <span>{ isSubmitting ? 'Saving' : 'Save Changes' }</span>
+          </button>
+        </section>
       
 
-      </section>
+      </Form>
 
 
       <section className="col-span-4 bg-white rounded-xl flex flex-col justify-start py-8 px-4">
@@ -142,8 +162,8 @@ const ProfilePage = () => {
           <div className=''>
             <h3 className='font-medium text-medium'>Status Gula & Obesitas</h3>
             <h5 className='flex mt-2 gap-x-4'>
-              <span className={`px-4 py-2 ${ statusKadarGula === 'Normal' ? 'bg-green-300' : ( statusKadarGula === 'Pre Diabetes' ? 'bg-yellow-300' : 'bg-red-300' ) } rounded-full text-small`}>{statusKadarGula} </span>
-              <span className={`px-4 py-2 ${ IBMStatus === 'Sehat' ? 'bg-green-300' : ( IBMStatus === 'Kelebihan' ? 'bg-yellow-300' : ( IBMStatus === 'Kekurangan' ? 'bg-blue' : 'bg-red-600' ) ) } rounded-full text-small`}>{IBMStatus}</span>
+              <span className={`px-4 py-2 ${ statusKadarGula === 'Normal' ? 'bg-green-300' : ( statusKadarGula === 'Pre Diabetes' ? 'bg-yellow-300' : ( statusKadarGula === '-' ? 'bg-lightGrey' : 'bg-red-300' ) ) } rounded-full text-small`}>{statusKadarGula} </span>
+              <span className={`px-4 py-2 ${ IBMStatus === 'Sehat' ? 'bg-green-300' : ( IBMStatus === 'Kelebihan' ? 'bg-yellow-300' : ( IBMStatus === 'Kekurangan' ? 'bg-blue' : ( IBMStatus === '-' ? 'bg-lightGrey' : 'bg-red-600' ) ) ) } rounded-full text-small`}>{IBMStatus}</span>
             </h5>
           </div>
 

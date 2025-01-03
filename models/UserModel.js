@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
         },
         IBMStatus: {
             type: String,
-            enum: ['Kekurangan', 'Sehat', 'Kelebihan', 'Obesitas'],
+            enum: ['-', 'Kekurangan', 'Sehat', 'Kelebihan', 'Obesitas'],
             default: 'Sehat'
         },
         kondisiTubuh: {
@@ -33,6 +33,7 @@ const UserSchema = new mongoose.Schema({
         },
         statusKadarGula: {
             type: String,
+            enum: ['-', 'Kekurangan', 'Normal', 'Pre Diabetes', 'Diabetes'],
             default: 'Normal'
         },
         targetKesehatan: {
@@ -47,6 +48,7 @@ const UserSchema = new mongoose.Schema({
         }
     },
     photo: String,
+    photoPublicId: String,
     jenisKelamin: {
         type: String,
         enum: ['Pria', 'Wanita'],
