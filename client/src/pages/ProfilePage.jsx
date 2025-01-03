@@ -100,7 +100,10 @@ const ProfilePage = () => {
             <div className='flex flex-wrap gap-x-6 mt-4'>
 
               { data.photo && <button onClick={deleteProfileFunc} className='px-6 py-1 bg-red-400 text-center text-[12px] rounded-sm cursor-default'>delete</button >}
-              { isEditData && <label htmlFor="photo" className='px-6 py-1 bg-blue text-center text-[12px] rounded-sm'>{ isSubmitting ? <LoaderCircleIcon size={20} className='animate-spin' /> : 'upload' }</label> }
+              { isEditData && <label htmlFor="photo" className='px-6 py-1 bg-blue text-center text-[12px] rounded-md flex items-center justify-center gap-x-4'>
+                { isSubmitting && <LoaderCircle className='stroke-white animate-spin' size={20} /> }
+                { isSubmitting? 'Saving ...' : 'Select Picture' }
+              </label> }
 
               <input className='text-[12px] font-medium mb-4 text-gray-500 hidden' type="file" name="photo" id="photo" accept='image/*' onChange={imageUpload} />
             </div>
