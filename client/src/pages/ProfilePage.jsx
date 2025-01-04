@@ -10,7 +10,6 @@ import { useState } from 'react'
 
 export const action = async({ request }) => {
   const formData = await request.formData();
-  const data = Object.fromEntries(formData)
   
   const file = formData.get('photo');
   if (file && file.size > 500000) {

@@ -5,30 +5,23 @@ import cloudinary from 'cloudinary'
 
 export const getCurrentUser = async(req, res) => {
     const user = await User.findOne({_id: req.user.user_id})
-
     return res.status(StatusCodes.OK).json({msg: 'success', user})
 }
 
 export const deletePhotoProfile = async(req, res) => {
-
     await User.findByIdAndUpdate({_id: req.user.user_id}, { photo: '' }, {new: true, runValidators: true});
-
     return res.status(StatusCodes.OK).json({ msg: 'Berhasil dihapus' })
 }
 
 export const updateUser = async(req, res) => {
         
     const tanggalUser= req.body.tanggalLahir
-
-
     const [day, month, year] = tanggalUser.split('/');
     const parsedDate = new Date(`${year}-${month}-${day}`);
 
     // set BMI
     const newBerat = Number(req.body.beratBadan)
     const newTinggi = Number(req.body.tinggiBadan)/100
-
-
     if ( newTinggi > 0 && newBerat > 0) {
         req.body.IBM = (newBerat / (Math.pow(newTinggi, 2))).toFixed(2);
         const beratBadanIdeal = newBerat / (Math.pow(newTinggi, 2));
@@ -52,7 +45,6 @@ export const updateUser = async(req, res) => {
 
     // set status kadar gula
     const newKadarGula = Number(req.body.kadarGula)
-
     if (newKadarGula < 40) {
         req.body.statusKadarGula = '-'
     } else if (newKadarGula >= 40 && newKadarGula <= 70) {
@@ -65,6 +57,7 @@ export const updateUser = async(req, res) => {
         req.body.statusKadarGula = 'Diabetes'
     }
 
+    // image upload
     if(req.file) {
         const response = await cloudinary.v2.uploader.upload(req.file.path);
         await fs.unlink(req.file.path)

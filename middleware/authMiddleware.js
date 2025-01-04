@@ -19,7 +19,7 @@ export const authenticatedUser = (req, res, next) => {
     }
 }
 
-export const authorizedAdminPermission = () => {
+export const authorizedAdminPermission = (req, res, next) => {
     const { role } = req.user
     
     if (role !== 'admin') {

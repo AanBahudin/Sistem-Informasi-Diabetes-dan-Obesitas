@@ -2,9 +2,33 @@ import React, { useState } from 'react'
 import { Search, X, FilePenLine, Trash2 } from 'lucide-react'
 import { articleData } from '../utils/constants'
 import { ArticleCards } from '../components'
+import customFetch from '../utils/customFetch'
+import { toast } from 'react-toastify'
+import { useLoaderData, useNavigation } from 'react-router-dom'
 
+
+export const loader = async() => {
+  try {
+    const { data } = await customFetch.get('/news')
+    return { data }
+  } catch (error) {
+    console.log(error.response.data.msg);
+    return toast.error(error.response.data.msg)
+  }
+}
 
 const AllNews = () => {
+
+  const { data } = useLoaderData()
+  
+  const navigation = useNavigation()
+
+  const isLoading = navigation.state === 'loading'
+
+  if (isLoading) {
+    return <h1 className='text-center text-4xl font-semibold'>Loading</h1>
+  }
+  
 
   const [isSearch, setIsSearch] = useState('');
   const [filter, setFilter] = useState('');
@@ -32,14 +56,8 @@ const AllNews = () => {
       </article>
     </section>
   
-    <section className='w-full grid grid-cols-4 gap-y-4 place-items-center gap-x-6 my-10'>
-     {articleData.slice(0, 12).filter((newItem) => {
-      if (filter) {
-        return newItem.type === filter
-      } else {
-        return articleData
-      }
-     }).map((item, index) => {
+    <section className='w-full grid grid-cols-4 place-items-stretch gap-y-4 place-items-center gap-x-6 my-10'>
+     {data.news.map((item, index) => {
       return <ArticleCards key={index} {...item} isBgWhite={true}>
         <div className='flex gap-x-4 justify-end py-2'>
           <FilePenLine className="stroke-[1.5px] w-6 h-6 mb-2 stroke-blue" />

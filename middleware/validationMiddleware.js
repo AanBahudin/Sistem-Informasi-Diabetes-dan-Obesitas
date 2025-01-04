@@ -109,7 +109,7 @@ export const validateUpdateUser = withValidationErrors([
         .withMessage('nama tidak boleh kosong')
         .isLength({ min: 3 })
         .withMessage('nama terlalu pendek'),
-    body('email')
+        body('email')
         .notEmpty()
         .withMessage('email tidak boleh kosong')
         .isEmail()
@@ -128,7 +128,7 @@ export const validateUpdateUser = withValidationErrors([
         .withMessage('tinggi badan harus angka')
         .isFloat({ min: 0 })
         .withMessage('tinggi badan tidak boleh dibawah 0'),
-    body('kadarGula')
+        body('kadarGula')
         .notEmpty()
         .withMessage('kadar gula tidak boleh kosong')
         .isNumeric()
@@ -143,13 +143,54 @@ export const validateUpdateUser = withValidationErrors([
     body('jenisDiet'),
     // body('photo'),     will be added leter
     body('jenisKelamin')
-        .notEmpty()
+    .notEmpty()
         .withMessage('jenis kelamin tidak boleh kosong')
         .isIn(['Pria', 'Wanita'])
         .withMessage('jenis kelamin hanya boleh pria dan wanita'),
-    body('tanggalLahir')
+        body('tanggalLahir')
         .notEmpty()
         .withMessage('tanggal lahir tidak boleh kosong')
         .isDate()
         .withMessage('tanggal lahir tidak valid'),
+    ])
+    
+    
+// ============================        UPDATE USER         ============================================
+
+export const validateNews = withValidationErrors([
+    body('judulArtikel')
+        .notEmpty()
+        .withMessage('judul tidak boleh kosong')
+        .isLength({ min: 10 })
+        .withMessage('judul terlalu pendek'),
+    body('tagArtikel')
+        .notEmpty()
+        .withMessage('tag tidak boleh kosong')
+        .isLength({ min: 3 })
+        .withMessage('tag terlalu pendek'),
+    body('penyutingArtikel')
+        .notEmpty()
+        .withMessage('penyunting artikel tidak boleh kosong')
+        .isLength({ min: 3 })
+        .withMessage('penyunting artikel terlalu pendek'),
+    body('jenisArtikel')
+        .notEmpty()
+        .withMessage('jenis tidak boleh kosong')
+        .isIn(['Diabetes', 'Obesitas'])
+        .withMessage('Jenis tidak tersedia'),
+    body('tagar')
+        .notEmpty()
+        .withMessage('tagar tidak boleh kosong')
+        .isLength({ min: 3 })
+        .withMessage('tagar terlalu pendek'),
+    body('referensi')
+        .notEmpty()
+        .withMessage('referensi tidak boleh kosong')
+        .isLength({ min: 3 })
+        .withMessage('referensi terlalu pendek'),
+    body('editorContent')
+        .notEmpty()
+        .withMessage('konten tidak boleh kosong')
+        .isLength({ min: 3 })
+        .withMessage('konten terlalu pendek'),
 ])

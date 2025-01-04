@@ -11,6 +11,7 @@ import {
   BookmarkPage,
   FavoritePage,
   AdminDashboard,
+  SingleNewsPageAdmin,
   AllNews,
   AllUsers,
   AddNews } from './pages';
@@ -22,11 +23,14 @@ import { loader as registerLoader } from './pages/Register'
 import { loader as loginLoader } from './pages/Login'
 import { loader as homeLayoutLoader } from './pages/HomeLayout'
 import { loader as loaderProfilePage } from './pages/ProfilePage'
+import { loader as allArticleLoader } from './pages/AllNews'
+import { loader as singleNewsAdminPage } from './pages/SingleNewsPageAdmin'
 
 import { action as landingAction } from './pages/Landing';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 import { action as profileAction } from './pages/ProfilePage'
+import { action as addNewsAction } from './pages/AddNews'
 
 function App() {
 
@@ -94,7 +98,13 @@ function App() {
       children: [
         {
           index: true,
+          loader: allArticleLoader,
           element: <AllNews />
+        },
+        {
+          path: 'news/:id',
+          loader: singleNewsAdminPage,
+          element: <SingleNewsPageAdmin />
         },
         {
           path: 'users',
@@ -102,6 +112,7 @@ function App() {
         },
         {
           path: 'create',
+          action: addNewsAction,
           element: <AddNews />
         },
         {
