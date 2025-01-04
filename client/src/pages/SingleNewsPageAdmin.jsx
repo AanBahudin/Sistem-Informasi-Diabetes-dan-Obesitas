@@ -49,7 +49,7 @@ const SingleNewsPageAdmin = () => {
 
         <div className='w-full flex flex-wrap gap-x-4 mt-4'>
           {tags.map((item, index) => {
-            return <p className='text-white bg-blue py-2 px-4 italic rounded-full text-[12px]'>{item}</p>
+            return <p key={index} className='text-white bg-blue py-2 px-4 italic rounded-full text-[12px]'>{item}</p>
           })}
         </div>
       </div> 

@@ -5,7 +5,8 @@ import {
   Login, 
   Register, 
   DashboardLayout, 
-  NewsPage, 
+  NewsPage,
+  EditNewsPage,
   SingleNewsPage,
   ProfilePage,
   BookmarkPage,
@@ -25,6 +26,7 @@ import { loader as homeLayoutLoader } from './pages/HomeLayout'
 import { loader as loaderProfilePage } from './pages/ProfilePage'
 import { loader as allArticleLoader } from './pages/AllNews'
 import { loader as singleNewsAdminPage } from './pages/SingleNewsPageAdmin'
+import { loader as editNewsPageLoader } from './pages/EditNews'
 
 import { action as landingAction } from './pages/Landing';
 import { action as registerAction } from './pages/Register';
@@ -32,6 +34,7 @@ import { action as loginAction } from './pages/Login';
 import { action as profileAction } from './pages/ProfilePage'
 import { action as addNewsAction } from './pages/AddNews'
 import { action as allNewsAction } from './pages/AllNews'
+import { action as editNewsAction } from './pages/EditNews'
 
 function App() {
 
@@ -107,6 +110,12 @@ function App() {
           path: 'news/:id',
           loader: singleNewsAdminPage,
           element: <SingleNewsPageAdmin />
+        },
+        {
+          path: 'news/edit/:id',
+          loader: editNewsPageLoader,
+          action: editNewsAction,
+          element: <EditNewsPage />
         },
         {
           path: 'users',

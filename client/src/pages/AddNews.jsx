@@ -34,7 +34,7 @@ const AddNews = () => {
 
   const navigation = useNavigation()
   const isSubmitting = navigation.state === 'submitting'
-  const isLoading = navigation.state === 'loadings'
+  const isLoading = navigation.state === 'loading'
 
   const onEditorStateChange = (newEditorState) => {
     setEditorState(newEditorState);

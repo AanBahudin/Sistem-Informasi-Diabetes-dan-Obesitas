@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FormInput = ({ name, labelText, placeholder, inputType, isFirstItem = false, defaultValue, useBorder }) => {
+const FormInput = ({ name, labelText, placeholder, inputType, isFirstItem = false, defaultValue='', useBorder }) => {
   return (
     <article className='w-full flex flex-col gap-y-2'>
       <label className='text-sm font-medium' htmlFor={name}>{labelText}</label>

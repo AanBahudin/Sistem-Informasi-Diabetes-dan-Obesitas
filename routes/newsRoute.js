@@ -19,7 +19,7 @@ router.route('/')
 
 router.route('/:id')
     .get(getSingleNews)
-    .patch(authenticatedUser, authorizedAdminPermission, updateNews)
+    .patch(authenticatedUser, authorizedAdminPermission, upload.single('thumbnail'), updateNews)
     .delete(authenticatedUser, authorizedAdminPermission, deleteNews)
 
 export default router

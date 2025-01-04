@@ -7,12 +7,6 @@ import { NotFoundError } from '../middleware/ErrorHandlerMiddleware.js'
 export const addNews = async(req, res) => {
 
     req.body.createdBy = req.user.user_id
-
-    console.log(req.body.thumbnail);
-    console.log(req.file);
-    
-    
-
     if(req.file) {
         const response = await cloudinary.v2.uploader.upload(req.file.path);
         await fs.unlink(req.file.path)
@@ -22,7 +16,6 @@ export const addNews = async(req, res) => {
 
     await News.create(req.body)
     return res.status(StatusCodes.CREATED).json({msg: 'Artikel ditambahkan!'})
-
 }
 
 export const getAllNews = async(req, res) => {
@@ -36,7 +29,15 @@ export const getSingleNews = async(req, res) => {
 }
 
 export const updateNews = async(req, res) => {
-    res.send('update news')
+    if(req.file) {
+        const response = await cloudinary.v2.uploader.upload(req.file.path);
+        await fs.unlink(req.file.path)
+        req.body.thumbnail = response.secure_url
+        req.body.thumbnailId = response.public_id
+    }
+
+    await News.findOneAndUpdate({ judulArtikel: req.params.id }, req.body, { new: true, runValidators: true })
+    return res.status(StatusCodes.OK).json({ msg:'update berhasil!' })
 }
 
 export const deleteNews = async(req, res) => {

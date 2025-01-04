@@ -12,6 +12,7 @@ export { default as FavoritePage } from './FavoritePage'
 
 export { default as AdminDashboard } from './AdminDashboard'
 export { default as SingleNewsPageAdmin } from './SingleNewsPageAdmin'
+export { default as EditNewsPage } from './EditNews'
 export { default as AllNews } from './AllNews'
 export { default as AllUsers } from './AllUsers'
 export { default as AddNews } from './AddNews'
