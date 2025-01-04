@@ -14,9 +14,9 @@ const ArticelCards = ({children, thumbnail = '', judulArtikel, deskripsi='', cre
           </span>
 
           <Link to={`/admin/dashboard/news/${judulArtikel}`} className="cursor-default">
-            <img className='w-full rounded-sm h-40 object-cover overflow-hidden' src={thumbnail} alt="" />
+            <img className='w-full rounded-sm h-52 object-cover overflow-hidden' src={thumbnail} alt="" />
             <h5 className='text-[14px] my-2 font-semibold text-grey no-underline truncate'>{judulArtikel}</h5>
-            <p className='text-[12px]'>{deskripsi.slice(0,95) + '....'}</p>
+            <p className='text-[12px]'>{deskripsi.slice(0,100) + '....'}</p>
             
             <div className='w-full flex items-center justify-between mt-2'>
                 <p className='text-[10px] text-gray-400'>{ newDate }</p>

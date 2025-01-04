@@ -25,6 +25,7 @@ import { loader as loginLoader } from './pages/Login'
 import { loader as homeLayoutLoader } from './pages/HomeLayout'
 import { loader as loaderProfilePage } from './pages/ProfilePage'
 import { loader as allArticleLoader } from './pages/AllNews'
+import { loader as landingLoader } from './pages/Landing'
 import { loader as singleNewsAdminPage } from './pages/SingleNewsPageAdmin'
 import { loader as editNewsPageLoader } from './pages/EditNews'
 
@@ -48,7 +49,8 @@ function App() {
         {
           index: true,
           element: <Landing />,
-          action: landingAction
+          action: landingAction,
+          loader: landingLoader 
         },
         {
           path: 'login',

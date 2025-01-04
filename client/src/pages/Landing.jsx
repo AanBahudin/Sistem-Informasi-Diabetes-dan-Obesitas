@@ -1,9 +1,9 @@
 import React from 'react'
-import { Navbar, Footer } from '../components'
+import { Navbar, Footer, Loading } from '../components'
 import customFetch from '../utils/customFetch'
 import { toast } from 'react-toastify'
 import { About, Contact, Hero, Tagline, Services, Testimonial, Method, Narasumber, Partnership, Article, Dukungan } from '../components/Landing'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigation } from 'react-router-dom'
 
 export const action = async({ request }) => {
   const formData = await request.formData()
@@ -19,12 +19,28 @@ export const action = async({ request }) => {
   }
 }
 
+export const loader = async() => {
+  try {
+    const { data } = await customFetch.get('/news')
+    return data
+  } catch (error) {
+    console.log(error.response.data.msg);
+    toast.error('Terjadi kesalahan')
+    return error
+  }
+}
+
 const Landing = () => {
 
-
-  const data = useLoaderData();
+  const navigation = useNavigation()
+  const isLoading = navigation.state === 'loading'
+  const { news: data } = useLoaderData();
   
 
+  if (isLoading) {
+    return <Loading />
+  }
+  
   return (
     <section className=' m-auto flex flex-col items-center my-auto relative '>
       
@@ -35,7 +51,7 @@ const Landing = () => {
           <Dukungan />
           <Method />
           <Narasumber />
-          <Article />
+          <Article data={data} />
           <Testimonial />
           <Tagline />
           {/* <Services /> */}
