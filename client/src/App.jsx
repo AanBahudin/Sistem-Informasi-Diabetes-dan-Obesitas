@@ -31,6 +31,7 @@ import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 import { action as profileAction } from './pages/ProfilePage'
 import { action as addNewsAction } from './pages/AddNews'
+import { action as allNewsAction } from './pages/AllNews'
 
 function App() {
 
@@ -99,6 +100,7 @@ function App() {
         {
           index: true,
           loader: allArticleLoader,
+          action: allNewsAction,
           element: <AllNews />
         },
         {

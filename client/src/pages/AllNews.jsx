@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { Search, X, FilePenLine, Trash2 } from 'lucide-react'
-import { articleData } from '../utils/constants'
-import { ArticleCards } from '../components'
+import { ArticleCards, Loading } from '../components'
 import customFetch from '../utils/customFetch'
 import { toast } from 'react-toastify'
-import { useLoaderData, useNavigation } from 'react-router-dom'
+import { Form, useLoaderData, useNavigation, Link } from 'react-router-dom'
 
 
 export const loader = async() => {
@@ -17,16 +16,27 @@ export const loader = async() => {
   }
 }
 
+export const action = async({ request }) => {
+
+  const formData = await request.formData()
+  const data = Object.fromEntries(formData)  
+  try {
+    await customFetch.delete(`/news/${data.id}`)
+    toast.success('Artikel Dihapus')
+  } catch (error) {
+    toast.error(error.response.data.msg)
+    return error
+  }
+}
+
 const AllNews = () => {
 
   const { data } = useLoaderData()
-  
   const navigation = useNavigation()
-
   const isLoading = navigation.state === 'loading'
 
   if (isLoading) {
-    return <h1 className='text-center text-4xl font-semibold'>Loading</h1>
+    return <Loading />
   }
   
 
@@ -56,12 +66,26 @@ const AllNews = () => {
       </article>
     </section>
   
-    <section className='w-full grid grid-cols-4 place-items-stretch gap-y-4 place-items-center gap-x-6 my-10'>
+    <section className='w-full grid grid-cols-4 place-items-stretch gap-y-4 gap-x-6 my-10'>
+
+      {data.news.length === 0 ? (
+        <div className='w-full col-span-3'>
+          <h1 className='text-2xl font-medium mb-6'>Tidak ada artikel untuk ditampilkan</h1>
+          <Link to='/admin/dashboard/create' className=' bg-blue py-2 px-10 rounded-md text-sm cursor-default'>Buat artikel</Link>
+        </div>
+      ) : null} 
+
+
+
      {data.news.map((item, index) => {
       return <ArticleCards key={index} {...item} isBgWhite={true}>
         <div className='flex gap-x-4 justify-end py-2'>
           <FilePenLine className="stroke-[1.5px] w-6 h-6 mb-2 stroke-blue" />
-          <Trash2 className="stroke-[1.5px] w-6 h-6 mb-2 stroke-red-400" />
+
+          <Form method='POST'>
+            <input type="hidden" name='id' value={item._id} />
+            <button type="submit"><Trash2 className="stroke-[1.5px] w-6 h-6 mb-2 stroke-red-400" /> </button>
+          </Form>
         </div>
       </ArticleCards>
      })}

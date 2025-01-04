@@ -65,7 +65,7 @@ export const sidebarLinkAdmin = [
     {
         icon: <BookMarked size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
         path: '/admin/dashboard/create',
-        name: 'Add Artikel'
+        name: 'Buat Artikel'
     }
 ]
 

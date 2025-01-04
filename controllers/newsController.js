@@ -31,7 +31,6 @@ export const getAllNews = async(req, res) => {
 }
 
 export const getSingleNews = async(req, res) => {
-    
     const news = await News.findOne({judulArtikel: req.params.id})
     return res.status(StatusCodes.OK).json({news});
 }
@@ -41,5 +40,8 @@ export const updateNews = async(req, res) => {
 }
 
 export const deleteNews = async(req, res) => {
-    res.send('delete news')
+    const { id } = req.params    
+
+    await News.findOneAndDelete({_id: id})
+    return res.status(StatusCodes.OK).json({msg: 'Berhasil dihapus'})
 }
