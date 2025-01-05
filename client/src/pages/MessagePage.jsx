@@ -36,7 +36,7 @@ const MessagePage = () => {
                     
 
                     return (
-                        <Link to={`./${item._id}`} key={index} className='w-[400px] bg-transparent hover:bg-[#00bbf9]/20 border-[2px] shadow-md hover:border-transparent border-slate-500/30 rounded-xl p-4 hover:shadow-lg duration-200 ease-in-out'>
+                        <Link to={`./${item._id}`} key={index} className='w-[400px] bg-transparent cursor-default hover:bg-[#00bbf9]/20 border-[2px] shadow-md hover:border-transparent border-slate-500/30 rounded-xl p-4 hover:shadow-lg duration-200 ease-in-out'>
                             <div className='w-full flex gap-x-4 items-center justify-start'>
                                 <Mail className='h-5 w-5 stroke-[#00bbf9]' />
                                 <h1 className='text-sm text-slate-500'>{ index === 0 ? 'Pesan terbaru' : 'Pesan pengguna' }</h1>
