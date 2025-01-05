@@ -35,7 +35,7 @@ import { loader as editNewsPageLoader } from './pages/EditNews'
 import { loader as publicAllNewsLoader } from './pages/PublicAllNews'
 import { loader as publicSingleNewsLoader } from './pages/PublicSinglePage'
 import { loader as messageLoader } from './pages/MessagePage'
-// import { loader as singleMessageLoader } from './pages/SingleMessage'
+import { loader as singleMessageLoader } from './pages/SingleMessage'
 
 import { action as landingAction } from './pages/Landing';
 import { action as registerAction } from './pages/Register';
@@ -145,7 +145,7 @@ function App() {
         {
           path: 'message/:id',
           element: <SingleMessagePage />,
-          // loader: singleMessageLoader
+          loader: singleMessageLoader
         },
         {
           path: 'users',

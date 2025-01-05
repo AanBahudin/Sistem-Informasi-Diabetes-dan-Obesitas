@@ -28,7 +28,7 @@ const AdminDashboard = () => {
   }
   
   return (
-      <div className="w-full h-[100vh] flex bg-lightGrey overflow-y-auto">
+      <div className="w-full h-[100vh] flex bg-slate-100 overflow-y-auto">
           <Sidebar links={sidebarLinkAdmin} logoutFunction={logoutUser} />
 
           <section className='flex-1 h-fullScreen overflow-y-auto'>

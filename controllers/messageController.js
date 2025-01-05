@@ -16,7 +16,11 @@ export const getAllMessage = async(req, res) => {
 } 
 
 export const getSingleMessage = async(req, res) => {
-    res.send('get all message')
+    const { id } = req.params
+
+    const message = await Message.findOne({ _id: id })
+
+    res.status(StatusCodes.OK).json({ message })
 }
 
 export const deleteMessage = async(req, res) => {

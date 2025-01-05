@@ -78,7 +78,7 @@ const AllNews = () => {
 
 
      {data.news.map((item, index) => {
-      return <ArticleCards key={index} {...item} isBgWhite={true}>
+      return <ArticleCards url={`/admin/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true}>
         <div className='flex gap-x-4 justify-end py-2'>
           <Link to={`/admin/dashboard/news/edit/${item.judulArtikel}`} className='cursor-default'> 
             <FilePenLine className="stroke-[1.5px] w-6 h-6 mb-2 stroke-blue" />
