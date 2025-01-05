@@ -21,7 +21,7 @@ const SingleMessage = () => {
   return (
     <div className='w-full h-full items-center justify-center flex'>
 
-      <section className='w-[60%] h-[80%] bg-transparent border-[2px] border-slate-500/30 rounded-xl p-4'>
+      <section className='w-[60%] h-[80%] bg-transparent border-[2px] border-slate-500/30 rounded-xl p-4 shadow-md'>
         
         <div className='w-full flex gap-x-4 items-center justify-start'>
           <Sparkle className='stroke-[#00bbf9]' />

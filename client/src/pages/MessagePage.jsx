@@ -2,7 +2,7 @@ import React from 'react'
 import customFetch from '../utils/customFetch'
 import { Link, useLoaderData } from 'react-router-dom'
 import moment from 'moment'
-import { Mail } from 'lucide-react'
+import { CalendarRange, Mail, Phone } from 'lucide-react'
 
 export const loader = async() => {
     try {
@@ -47,8 +47,16 @@ const MessagePage = () => {
                             <p className='text-slate-600 text-sm'>{item.message.slice(0, 87)}....</p>
 
                             <div className='w-full flex justify-between items-center mt-6'>
-                                <h1 className='text-[12px] text-slate-900'>{moment(item.createdAt).subtract(10, 'days').calendar()}</h1>
-                                <h1 className='text-[12px] text-slate-600'>{item.contact}</h1>
+
+                                <article className='flex justify-start items-center gap-x-3'>
+                                    <CalendarRange className='stroke-slate-500 w-4 h-4' />
+                                    <h1 className='text-[12px] text-slate-900'>{moment(item.createdAt).subtract(10, 'days').calendar()}</h1>
+                                </article>
+
+                                <article className='flex justify-start items-center gap-x-3'>
+                                    <Phone className='stroke-slate-500 w-4 h-4' />
+                                    <h1 className='text-[12px] text-slate-600'>{item.contact}</h1>
+                                </article>
                             </div>
                         </Link>
                     )
