@@ -1,6 +1,8 @@
 export { default as HomeLayout } from './HomeLayout'
 export { default as Landing } from './Landing'
 export { default as Login } from './Login'
+export { default as PublicAllNewsPage } from './PublicAllNews'
+export { default as PublicSingleNewsPage } from './PublicSinglePage'
 export { default as Register } from './Register'
 
 export { default as DashboardLayout } from './DashboardLayout'
@@ -9,6 +11,8 @@ export { default as SingleNewsPage } from './SingleNewsPage'
 export { default as ProfilePage } from './ProfilePage'
 export { default as BookmarkPage } from './BookmarkPage'
 export { default as FavoritePage } from './FavoritePage'
+export { default as MessagePage } from './MessagePage'
+export { default as SingleMessagePage } from './SingleMessage'
 
 export { default as AdminDashboard } from './AdminDashboard'
 export { default as SingleNewsPageAdmin } from './SingleNewsPageAdmin'

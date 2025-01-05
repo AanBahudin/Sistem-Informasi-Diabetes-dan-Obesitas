@@ -9,7 +9,10 @@ export const addMessage = async(req, res) => {
 };
 
 export const getAllMessage = async(req, res) => {
-    res.send('get all message')
+    const messges = await Message.find({})
+    const countDocuments = await Message.countDocuments()
+
+    return res.status(StatusCodes.OK).json({ messges, total: countDocuments })
 } 
 
 export const getSingleMessage = async(req, res) => {

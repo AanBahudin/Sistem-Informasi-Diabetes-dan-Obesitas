@@ -3,11 +3,15 @@ import {
   Landing, 
   ErrorPage,
   Login, 
-  Register, 
+  Register,
+  PublicAllNewsPage,
+  PublicSingleNewsPage,
   DashboardLayout, 
   NewsPage,
   EditNewsPage,
   SingleNewsPage,
+  MessagePage,
+  SingleMessagePage,
   ProfilePage,
   BookmarkPage,
   FavoritePage,
@@ -28,6 +32,10 @@ import { loader as allArticleLoader } from './pages/AllNews'
 import { loader as landingLoader } from './pages/Landing'
 import { loader as singleNewsAdminPage } from './pages/SingleNewsPageAdmin'
 import { loader as editNewsPageLoader } from './pages/EditNews'
+import { loader as publicAllNewsLoader } from './pages/PublicAllNews'
+import { loader as publicSingleNewsLoader } from './pages/PublicSinglePage'
+import { loader as messageLoader } from './pages/MessagePage'
+// import { loader as singleMessageLoader } from './pages/SingleMessage'
 
 import { action as landingAction } from './pages/Landing';
 import { action as registerAction } from './pages/Register';
@@ -64,6 +72,16 @@ function App() {
           loader: registerLoader,
           action: registerAction,
         },
+        {
+          path: 'artikel',
+          element: <PublicAllNewsPage />,
+          loader: publicAllNewsLoader
+        },
+        {
+          path: 'artikel/:id',
+          element: <PublicSingleNewsPage />,
+          loader: publicSingleNewsLoader
+        }
       ],
     },
     {
@@ -118,6 +136,16 @@ function App() {
           loader: editNewsPageLoader,
           action: editNewsAction,
           element: <EditNewsPage />
+        },
+        {
+          path: 'message',
+          element: <MessagePage />,
+          loader: messageLoader
+        },
+        {
+          path: 'message/:id',
+          element: <SingleMessagePage />,
+          // loader: singleMessageLoader
         },
         {
           path: 'users',

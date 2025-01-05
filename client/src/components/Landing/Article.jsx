@@ -15,7 +15,7 @@ const Article = ({ data=[] }) => {
       {/* CARDS CONTAINER */}
       <div className="w-[80%] mt-6 grid grid-cols-3 gap-4 mx-auto">
         {data.map((item, index) => {
-          return <ArticleCards key={index} {...item} isBgWhite={false} />
+          return <ArticleCards url={`/artikel/${item.judulArtikel}`} key={index} {...item} isBgWhite={false} />
         })}
       </div>
     </div>

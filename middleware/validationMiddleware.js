@@ -81,12 +81,12 @@ export const validateMessage = withValidationErrors([
         .withMessage('Please provide last name')
         .isLength({ min: 3 })
         .withMessage('last name is too short'),
-        body('email')
+    body('email')
         .notEmpty()
         .withMessage('please provide email')
         .isEmail()
         .withMessage('invalid email format'),
-        body('contact')
+    body('contact')
         .notEmpty()
         .withMessage('please provide phone number')
         .isInt()
