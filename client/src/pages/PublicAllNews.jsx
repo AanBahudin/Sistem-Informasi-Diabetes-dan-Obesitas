@@ -65,7 +65,7 @@ const PublicAllNews = () => {
         
         <div className='bg-white w-[40%] h-fit flex items-center justify-start gap-x-2 px-2 rounded-lg border-slate-500 border-[2px]'>
           <Search size={35} className='py-2 stroke-slate-500 stroke-[1.5px]' />
-          <input autoComplete='off' autoFocus className='text-[12px] outline-none h-10 w-80 flex-1  placeholder:text-[12px] ' type="text" name='query' id='query' placeholder='search articel' onChange={(e) => setIsSearch(e.target.value)} value={isSearch}/>
+          <input autoComplete='off' autoFocus className='text-[12px] outline-none h-10 w-80 flex-1  placeholder:text-[12px] ' type="text" name='query' id='query' placeholder='Tips menjaga berat badan' onChange={(e) => setIsSearch(e.target.value)} value={isSearch}/>
           <X size={35} className={`py-2 stroke-red-800 stroke-[1.5px] ${isSearch ? 'visible' : 'invisible'}`} onClick={() => setIsSearch("")} />
         </div>
 
