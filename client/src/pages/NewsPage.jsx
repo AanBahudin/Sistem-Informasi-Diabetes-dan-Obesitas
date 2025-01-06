@@ -1,19 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { articleData } from '../utils/constants'
 import { Search, X } from 'lucide-react'
 import ArticelCards from '../components/ArticelCards'
+import customFetch from '../utils/customFetch'
+import { useLoaderData } from 'react-router-dom'
+
+export const loader = async() => {
+  try {
+    const { data } = await customFetch.get('/news')
+    return data
+  } catch (error) {
+    console.log(error);
+    return error
+  }
+}
+
 
 const NewsPage = () => {
 
+  const { data } = useLoaderData()
+  
   const [isSearch, setIsSearch] = useState('');
   const [filter, setFilter] = useState('');
-
   
   return (
     <div className='w-full  h-full flex flex-col overflow-y-auto p-10'>
 
       <section className="w-full flex justify-between items-center ">
-        <h1 className='text-2xl font-semibold'>1043 Articles</h1>
+        <h1 className='text-2xl font-semibold'>{data.news.length} Articles</h1>
 
         <article className='flex justify-center items-center gap-x-4'>
           <div className='bg-white h-fit flex items-center justify-center gap-x-2 px-2 rounded-lg border-blue/50 border-[1px]'>
@@ -33,14 +47,14 @@ const NewsPage = () => {
       </section>
     
       <section className='w-full grid grid-cols-4 gap-y-4 place-items-center gap-x-6 my-10'>
-       {articleData.slice(0, 12).filter((newItem) => {
+       {data.news.filter((newItem) => {
         if (filter) {
-          return newItem.type === filter
+          return newItem.jenisArtikel === filter
         } else {
           return articleData
         }
        }).map((item, index) => {
-        return <ArticelCards key={index} {...item} isBgWhite={true} />
+        return <ArticelCards url={`/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true} />
        })}
       </section>
     </div>

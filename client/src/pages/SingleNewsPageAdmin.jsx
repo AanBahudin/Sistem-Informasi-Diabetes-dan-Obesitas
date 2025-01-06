@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { sehatPhoto } from "../assets/images"
 import { ChevronDown } from 'lucide-react'
 import { toast } from 'react-toastify'
 import customFetch from '../utils/customFetch'

@@ -19,7 +19,18 @@ export const addNews = async(req, res) => {
 }
 
 export const getAllNews = async(req, res) => {
-    const news = await News.find();
+
+    const { judul } = req.query
+    let news = []
+
+    if (!judul) {
+        news = await News.find(); 
+    } else {
+        news = await News.find({
+            judulArtikel: { $regex: judul, $options: 'i' }
+        })
+    }
+
     return res.status(StatusCodes.OK).json({news, total: news.length})
 }
 

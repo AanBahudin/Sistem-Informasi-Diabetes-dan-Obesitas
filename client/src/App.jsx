@@ -36,6 +36,8 @@ import { loader as publicAllNewsLoader } from './pages/PublicAllNews'
 import { loader as publicSingleNewsLoader } from './pages/PublicSinglePage'
 import { loader as messageLoader } from './pages/MessagePage'
 import { loader as singleMessageLoader } from './pages/SingleMessage'
+import { loader as userAllNewsLoader } from './pages/AllNews'
+import { loader as userSingleNewsLoader } from './pages/SingleNewsPage'
 
 import { action as landingAction } from './pages/Landing';
 import { action as registerAction } from './pages/Register';
@@ -92,11 +94,13 @@ function App() {
       children: [
         {
           index: true,
-          element: <NewsPage />
+          element: <NewsPage />,
+          loader: userAllNewsLoader
         },
         {
           path: 'news/:id',
-          element: <SingleNewsPage />
+          element: <SingleNewsPage />,
+          loader: userSingleNewsLoader
         },
         {
           path: 'profile',
@@ -166,7 +170,6 @@ function App() {
 
   return (
     <RouterProvider router={router} />
-    // <TextEditor />
   )
 }
 

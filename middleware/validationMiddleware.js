@@ -155,7 +155,7 @@ export const validateUpdateUser = withValidationErrors([
     ])
     
     
-// ============================        UPDATE USER         ============================================
+// ============================        UPDATE BERITA         ============================================
 
 export const validateNews = withValidationErrors([
     body('judulArtikel')

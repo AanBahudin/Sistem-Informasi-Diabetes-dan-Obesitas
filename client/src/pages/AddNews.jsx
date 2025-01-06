@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
-import { Form, useNavigation } from 'react-router-dom';
+import { Form, useNavigation, redirect } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { FormInput, TextAreaInput, FormSelect, Loading } from '../components'
 import { toast } from 'react-toastify'
@@ -10,7 +10,6 @@ import { convertToRaw } from 'draft-js'
 
 export const action = async({ request }) => {
   const formData = await request.formData()
-  const data = Object.fromEntries(formData)
   
   const file = formData.get('thumbnail');
   if (file && file.size > 500000) {
@@ -45,7 +44,6 @@ const AddNews = () => {
   if (isLoading) {
     return <Loading />
   }
-
   
 
   return (

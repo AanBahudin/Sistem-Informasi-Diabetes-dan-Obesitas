@@ -23,7 +23,7 @@ export const authorizedAdminPermission = (req, res, next) => {
     const { role } = req.user
     
     if (role !== 'admin') {
-        throw new UnathorizedError('Not Authorized')
+        throw new UnathorizedError('your are not Authorized')
     }
 
     next()
