@@ -61,7 +61,19 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'user'
-    }
+    },
+    bookmark: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'News'
+        }
+    ],
+    favorite: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'News'
+        }
+    ]
 }, { timestamps: true })
 
 export default mongoose.model('User', UserSchema);

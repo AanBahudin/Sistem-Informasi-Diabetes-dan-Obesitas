@@ -1,8 +1,9 @@
 import { StatusCodes } from 'http-status-codes'
 import News from '../models/NewsModel.js'
+import User from '../models/UserModel.js'
 import cloudinary from 'cloudinary'
 import { promises as fs } from 'fs'
-import { NotFoundError } from '../middleware/ErrorHandlerMiddleware.js'
+
 
 export const addNews = async(req, res) => {
 
@@ -19,7 +20,6 @@ export const addNews = async(req, res) => {
 }
 
 export const getAllNews = async(req, res) => {
-
     const { judul } = req.query
     let news = []
 
@@ -49,6 +49,43 @@ export const updateNews = async(req, res) => {
 
     await News.findOneAndUpdate({ judulArtikel: req.params.id }, req.body, { new: true, runValidators: true })
     return res.status(StatusCodes.OK).json({ msg:'update berhasil!' })
+}
+
+export const addBookmark = async(req, res) => {
+
+    const userId = req.body.user_id
+    const { id : addedNewsId } = req.params
+
+    // WILL REFACTOR LATER
+    const isAlreadyExist = await User.find({_id: userId, bookmark: addedNewsId})
+    if (isAlreadyExist) {
+        return res.status(StatusCodes.OK).json({ msg: 'Artikel sudah ada' })
+    }
+
+    await User.findOneAndUpdate({_id: userId}, {$push : { bookmark: addedNewsId}})
+    return res.status(StatusCodes.OK).json({  msg: 'successfully'})
+}
+
+export const addFavorite = async(req, res) => {
+    const userId = req.body.user_id
+    const { id : addedNewsId } = req.params
+
+    // WILL REFACTOR LATER
+    const isAlreadyExist = await User.find({_id: userId, favorite: addedNewsId})
+    if (isAlreadyExist) {
+        return res.status(StatusCodes.OK).json({ msg: 'Artikel sudah ada' })
+    }
+
+    await User.findOneAndUpdate({_id: userId}, {$push : { favorite: addedNewsId}})
+    return res.status(StatusCodes.OK).json({  msg: 'successfully'})
+}
+
+export const deleteBookmark = async(req, res) => {
+    return res.status(StatusCodes.OK).json({msg: 'successfully'})
+}
+
+export const deleteFavorite = async(req, res) => {
+    return res.status(StatusCodes.OK).json({msg: 'successfully'})
 }
 
 export const deleteNews = async(req, res) => {
