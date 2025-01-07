@@ -86,9 +86,17 @@ export const getAllFavorite = async(req, res) => {
 }
 
 export const deleteBookmark = async(req, res) => {
-    return res.status(StatusCodes.OK).json({msg: 'successfully'})
+    const userId = req.user.user_id;
+    const deletedItem = new mongoose.Types.ObjectId(req.body.id);
+    
+    await User.findOneAndUpdate({ _id: userId }, { $pull: { bookmark: deletedItem } }, { new: true, runValidators: true })
+    return res.status(StatusCodes.OK).json({ msg: 'Successfully deleted' })
 }
 
 export const deleteFavorite = async(req, res) => {
-    return res.status(StatusCodes.OK).json({msg: 'successfully'})
+    const userId = req.user.user_id
+    const deletedItem = new mongoose.Types.ObjectId(req.body.id);
+
+    await User.findOneAndUpdate({ _id: userId }, { $pull: { favorite: deletedItem } }, { new: true, runValidators: true });
+    return res.status(StatusCodes.OK).json({ msg: 'berhasil dihapus' })
 }
