@@ -95,7 +95,7 @@ export const deleteBookmark = async(req, res) => {
 
 export const deleteFavorite = async(req, res) => {
     const userId = req.user.user_id
-    const deletedItem = new mongoose.Types.ObjectId(req.body.id);
+    const deletedItem = new mongoose.Types.ObjectId(req.params.id);
 
     await User.findOneAndUpdate({ _id: userId }, { $pull: { favorite: deletedItem } }, { new: true, runValidators: true });
     return res.status(StatusCodes.OK).json({ msg: 'berhasil dihapus' })

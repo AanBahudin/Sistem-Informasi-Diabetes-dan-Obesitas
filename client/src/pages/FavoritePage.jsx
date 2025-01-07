@@ -1,7 +1,7 @@
 import ArticelCards from "../components/ArticelCards"
 import { BookmarkMinus, Heart, Trash } from "lucide-react"
 import customFetch from "../utils/customFetch"
-import { Form, useLoaderData } from "react-router-dom"
+import { Form, redirect, useLoaderData } from "react-router-dom"
 import { toast } from "react-toastify"
 
 export const loader = async() => {
@@ -15,12 +15,12 @@ export const loader = async() => {
 }
 
 export const action = async({ request }) => {
+
   try {
     const data = Object.fromEntries(await request.formData())
-
-    await customFetch.post('/news/favorite', data)
+    await customFetch.delete(`/news/favorite/${data.id}`)
     toast.success('Dihapus dari favorite')
-    return ''
+    return redirect('.')
   } catch (error) {
     console.log(error.response.data.msg);
     return error
@@ -30,7 +30,6 @@ export const action = async({ request }) => {
 const FavoritePage = () => {
 
   const { favorited } = useLoaderData()
-  console.log(favorited);
   
 
   return (
@@ -38,7 +37,7 @@ const FavoritePage = () => {
       <h1 className='text-2xl font-semibold'>Artikel yang disukai</h1>
 
 
-      {!favorited ? (
+      {favorited.length === 0 ? (
         <div className="mt-10">
           <h1 className="text-slate-700 font-medium text-xl">tidak ada artikel yang disukai</h1>
         </div>

@@ -26,16 +26,19 @@ router.route('/')
 router.route('/favorite')
     .get(authenticatedUser, getAllFavorite)
     .post(authenticatedUser,  addFavorite)
+    
+router.route('/favorite/:id')
     .delete(authenticatedUser, deleteFavorite)
-
+    
 router.route('/bookmark')
     .get(authenticatedUser, getAllBookmark)
     .post(authenticatedUser, addBookmark)
     .delete(authenticatedUser, deleteBookmark)
-
-    router.route('/:id')
+    
+    
+router.route('/:id')
     .get(getSingleNews)
     .patch(authenticatedUser, authorizedAdminPermission, upload.single('thumbnail'), updateNews)
     .delete(authenticatedUser, authorizedAdminPermission, deleteNews)
-
+    
 export default router
