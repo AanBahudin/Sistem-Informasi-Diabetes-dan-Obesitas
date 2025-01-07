@@ -1,4 +1,4 @@
-import { Outlet, redirect, useNavigate } from "react-router-dom"
+import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom"
 import { Sidebar } from "../components"
 import { toast } from 'react-toastify'
 import { useContext, createContext } from 'react'
@@ -25,6 +25,7 @@ export const loader = async() => {
 const DashboardLayout = () => {
 
   const navigate = useNavigate()
+  const data = useLoaderData()
 
   const logoutUser = async() => {
     await customFetch.get('/auth/logout')
@@ -42,6 +43,7 @@ const DashboardLayout = () => {
 
   return (
     <DashboardContext.Provider value={{
+      data,
       logoutUser,
       deleteProfileFunc
     }}>

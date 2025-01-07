@@ -38,6 +38,8 @@ import { loader as messageLoader } from './pages/MessagePage'
 import { loader as singleMessageLoader } from './pages/SingleMessage'
 import { loader as userAllNewsLoader } from './pages/AllNews'
 import { loader as userSingleNewsLoader } from './pages/SingleNewsPage'
+import { loader as bookmarkPageLoader } from './pages/BookmarkPage'
+import { loader as favoritePageLoader } from './pages/FavoritePage'
 
 import { action as landingAction } from './pages/Landing';
 import { action as registerAction } from './pages/Register';
@@ -112,11 +114,13 @@ function App() {
         },
         {
           path: 'bookmark',
-          element: <BookmarkPage />
+          element: <BookmarkPage />,
+          loader: bookmarkPageLoader
         },
         {
           path: 'favorite',
-          element: <FavoritePage />
+          element: <FavoritePage />,
+          loader: favoritePageLoader
         }
       ]
     },

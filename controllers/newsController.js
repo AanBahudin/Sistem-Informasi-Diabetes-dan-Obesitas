@@ -69,6 +69,12 @@ export const addBookmark = async(req, res) => {
     return res.status(StatusCodes.OK).json({  msg: 'successfully'})
 }
 
+export const addFavorite = async(req, res) => {
+    const addedNewsId = new mongoose.Types.ObjectId(req.body.id)
+    await User.findOneAndUpdate({_id: req.user.user_id}, { $addToSet: { favorite: addedNewsId } }, { new: true, runValidators: true })
+    return res.status(StatusCodes.OK).json({  msg: 'successfully'})
+}
+
 export const getAllBookmark = async(req, res) => {
     const bookmarked = await User.findOne({_id: req.user.user_id}).populate({ path: 'bookmark', select: '-editorContent -tagar -referensi' });
     return res.status(StatusCodes.OK).json({bookmarked: bookmarked.bookmark})
@@ -77,12 +83,6 @@ export const getAllBookmark = async(req, res) => {
 export const getAllFavorite = async(req, res) => {
     const favorite = await User.findOne({_id: req.user.user_id}).populate({ path: 'favorite', select: '-editorContent -tagar -referensi' });
     return res.status(StatusCodes.OK).json({favorited: favorite.favorite})
-}
-
-export const addFavorite = async(req, res) => {
-    const addedNewsId = new mongoose.Types.ObjectId(req.body.id)
-    await User.findOneAndUpdate({_id: req.user.user_id}, { $addToSet: { favorite: addedNewsId } }, { new: true, runValidators: true })
-    return res.status(StatusCodes.OK).json({  msg: 'successfully'})
 }
 
 export const deleteBookmark = async(req, res) => {

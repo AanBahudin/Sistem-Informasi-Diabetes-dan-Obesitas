@@ -7,6 +7,7 @@ import {
     getSingleNews,
     updateNews,
     getAllBookmark,
+    getAllFavorite,
     deleteBookmark,
     deleteFavorite,
     deleteNews
@@ -23,6 +24,7 @@ router.route('/')
     .post(authenticatedUser, authorizedAdminPermission, upload.single('thumbnail'), validateNews, addNews)
 
 router.route('/favorite')
+    .get(authenticatedUser, getAllFavorite)
     .post(authenticatedUser,  addFavorite)
     .delete(authenticatedUser, deleteFavorite)
 
