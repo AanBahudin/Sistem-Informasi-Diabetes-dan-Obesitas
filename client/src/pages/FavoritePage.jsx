@@ -13,6 +13,16 @@ export const loader = async() => {
   }
 }
 
+export const action = async({ request }) => {
+  try {
+    const data = Object.fromEntries(await request.formData())
+    console.log(data);
+  } catch (error) {
+    console.log(error.response.data.msg);
+    return error
+  }
+}
+
 const FavoritePage = () => {
 
   const { favorited } = useLoaderData()

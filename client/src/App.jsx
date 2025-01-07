@@ -49,6 +49,8 @@ import { action as addNewsAction } from './pages/AddNews'
 import { action as allNewsAction } from './pages/AllNews'
 import { action as editNewsAction } from './pages/EditNews'
 import { action as allNewsUserAction } from './pages/NewsPage'
+import { action as bookmarkAction } from './pages/BookmarkPage'
+import { action as favoriteAction } from './pages/FavoritePage'
 
 function App() {
 
@@ -115,12 +117,14 @@ function App() {
         {
           path: 'bookmark',
           element: <BookmarkPage />,
-          loader: bookmarkPageLoader
+          loader: bookmarkPageLoader,
+          action: bookmarkAction
         },
         {
           path: 'favorite',
           element: <FavoritePage />,
-          loader: favoritePageLoader
+          loader: favoritePageLoader,
+          action: favoriteAction
         }
       ]
     },
