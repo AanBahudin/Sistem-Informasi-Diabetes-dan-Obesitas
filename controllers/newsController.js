@@ -3,6 +3,7 @@ import News from '../models/NewsModel.js'
 import User from '../models/UserModel.js'
 import cloudinary from 'cloudinary'
 import { promises as fs } from 'fs'
+import mongoose from 'mongoose'
 
 
 export const addNews = async(req, res) => {
@@ -52,31 +53,14 @@ export const updateNews = async(req, res) => {
 }
 
 export const addBookmark = async(req, res) => {
-
-    const userId = req.body.user_id
-    const { id : addedNewsId } = req.params
-
-    // WILL REFACTOR LATER
-    const isAlreadyExist = await User.find({_id: userId, bookmark: addedNewsId})
-    if (isAlreadyExist) {
-        return res.status(StatusCodes.OK).json({ msg: 'Artikel sudah ada' })
-    }
-
-    await User.findOneAndUpdate({_id: userId}, {$push : { bookmark: addedNewsId}})
+    const addedNewsId = new mongoose.Types.ObjectId(req.body.id)
+    await User.findOneAndUpdate({_id: req.user.user_id}, { $addToSet: { bookmark: addedNewsId } }, { new: true, runValidators: true })
     return res.status(StatusCodes.OK).json({  msg: 'successfully'})
 }
 
 export const addFavorite = async(req, res) => {
-    const userId = req.body.user_id
-    const { id : addedNewsId } = req.params
-
-    // WILL REFACTOR LATER
-    const isAlreadyExist = await User.find({_id: userId, favorite: addedNewsId})
-    if (isAlreadyExist) {
-        return res.status(StatusCodes.OK).json({ msg: 'Artikel sudah ada' })
-    }
-
-    await User.findOneAndUpdate({_id: userId}, {$push : { favorite: addedNewsId}})
+    const addedNewsId = new mongoose.Types.ObjectId(req.body.id)
+    await User.findOneAndUpdate({_id: req.user.user_id}, { $addToSet: { favorite: addedNewsId } }, { new: true, runValidators: true })
     return res.status(StatusCodes.OK).json({  msg: 'successfully'})
 }
 

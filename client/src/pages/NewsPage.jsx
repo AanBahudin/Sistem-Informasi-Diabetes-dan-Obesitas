@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { articleData } from '../utils/constants'
-import { Search, X } from 'lucide-react'
+import { Search, X, Trash2, BookMarked, ThumbsUp } from 'lucide-react'
 import ArticelCards from '../components/ArticelCards'
 import customFetch from '../utils/customFetch'
-import { useLoaderData, useNavigate, useNavigation } from 'react-router-dom'
+import { useLoaderData, useNavigate, useNavigation, Form } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Loading } from '../components'
 
 export const loader = async({ request}) => {
@@ -22,6 +23,21 @@ export const loader = async({ request}) => {
   }
 }
 
+export const action = async({ request }) => {
+  const formData = await request.formData()
+  const data = Object.fromEntries(formData)
+
+  let url = data.type === 'bookmark' ? '/news/bookmark' : '/news/favorite'
+  let submittingType = data.type === 'bookmark' ? 'Artikel disimpan!' : 'Artikel ditambahkan ke daftar suka'
+
+  try {
+    await customFetch.post(url, data);
+    toast.success(submittingType)
+  } catch (error) {
+    console.log(error.response.data.msg);
+    toast.error('Terjadi kesalahan')
+  }
+}
 
 const NewsPage = () => {
 
@@ -86,7 +102,22 @@ const NewsPage = () => {
           return articleData
         }
        }).map((item, index) => {
-        return <ArticelCards url={`/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true} />
+        return <ArticelCards url={`/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true}>
+          <div className='flex gap-x-4 justify-end'>
+            
+            <Form method='POST' className='h-fit bg- rounded-md bg-slate-400 py-1 px-2'>
+              <input type="hidden" name='id' value={item._id} />
+              <input type="hidden" name='type' value='bookmark' />
+              <button type="submit"><BookMarked className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
+            </Form>
+
+            <Form method='POST' className='h-fit bg- rounded-md bg-slate-400 py-1 px-2'>
+              <input type="hidden" name='id' value={item._id} />
+              <input type="hidden" name='type' value='favorite' />
+              <button type="submit"><ThumbsUp className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
+            </Form>
+          </div>
+        </ArticelCards>
        })}
       </section>
     </div>

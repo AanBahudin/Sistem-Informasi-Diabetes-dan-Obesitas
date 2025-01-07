@@ -64,7 +64,7 @@ const UserSchema = new mongoose.Schema({
     },
     bookmark: [
         {
-            type: mongoose.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'News'
         }
     ],

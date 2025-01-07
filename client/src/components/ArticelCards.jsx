@@ -8,13 +8,13 @@ const ArticelCards = ({children, thumbnail = '', judulArtikel, deskripsi='', cre
 
   return (
     <div className="text-grey no-underline cursor-default">
-      <article className={`${ isBgWhite === true ? 'bg-white' : 'bg-lightGrey' } rounded-md max-w-[300px] p-4 hover:shadow-2xl duration-200 ease-in-out`}>
-          <span>
+      <article className={`${ isBgWhite === true ? 'bg-white' : 'bg-lightGrey' } rounded-md max-w-[300px] group p-4 hover:shadow-2xl duration-200 ease-in-out`}>
+          <div>
             {children}
-          </span>
+          </div>
 
           <Link to={url} className="cursor-default">
-            <img className='w-full rounded-sm h-52 object-cover overflow-hidden' src={thumbnail} alt="" />
+            <img className='w-full rounded-sm h-52 object-cover overflow-hidden mt-2' src={thumbnail} alt="" />
             <h5 className='text-[14px] my-2 font-semibold text-grey no-underline truncate'>{judulArtikel}</h5>
             <p className='text-[12px]'>{deskripsi.slice(0,100) + '....'}</p>
             

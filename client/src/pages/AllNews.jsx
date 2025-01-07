@@ -75,7 +75,7 @@ const AllNews = () => {
     <div className='w-full  h-full flex flex-col p-10'>
 
     <section className="w-full flex justify-between items-center border-b-[1px] py-2 border-grey/50">
-      <h1 className='text-2xl font-semibold'>1043 Articles</h1>
+      <h1 className='text-2xl font-semibold'>{data.news.length} Articles</h1>
 
       <article className='flex justify-center items-center gap-x-4'>
         <div className='bg-white h-fit flex items-center justify-center gap-x-2 px-2 rounded-lg border-blue/50 border-[1px]'>
@@ -113,6 +113,7 @@ const AllNews = () => {
      }).map((item, index) => {
       return <ArticleCards url={`/admin/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true}>
         <div className='flex gap-x-4 justify-end py-2'>
+          
           <Link to={`/admin/dashboard/news/edit/${item.judulArtikel}`} className='cursor-default'> 
             <FilePenLine className="stroke-[1.5px] w-6 h-6 mb-2 stroke-blue" />
           </Link>

@@ -46,6 +46,7 @@ import { action as profileAction } from './pages/ProfilePage'
 import { action as addNewsAction } from './pages/AddNews'
 import { action as allNewsAction } from './pages/AllNews'
 import { action as editNewsAction } from './pages/EditNews'
+import { action as allNewsUserAction } from './pages/NewsPage'
 
 function App() {
 
@@ -95,7 +96,8 @@ function App() {
         {
           index: true,
           element: <NewsPage />,
-          loader: userAllNewsLoader
+          loader: userAllNewsLoader,
+          action: allNewsUserAction
         },
         {
           path: 'news/:id',

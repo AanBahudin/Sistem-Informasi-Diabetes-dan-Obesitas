@@ -22,12 +22,12 @@ router.route('/')
     .post(authenticatedUser, authorizedAdminPermission, upload.single('thumbnail'), validateNews, addNews)
 
 router.route('/favorite')
-    .post(addFavorite)
-    .delete(deleteFavorite)
+    .post(authenticatedUser,  addFavorite)
+    .delete(authenticatedUser, deleteFavorite)
 
 router.route('/bookmark')
-    .post(addBookmark)
-    .delete(deleteBookmark)
+    .post(authenticatedUser, addBookmark)
+    .delete(authenticatedUser, deleteBookmark)
 
     router.route('/:id')
     .get(getSingleNews)
