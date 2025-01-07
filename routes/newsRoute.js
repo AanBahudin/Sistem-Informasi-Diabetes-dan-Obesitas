@@ -6,6 +6,7 @@ import {
     getAllNews,
     getSingleNews,
     updateNews,
+    getAllBookmark,
     deleteBookmark,
     deleteFavorite,
     deleteNews
@@ -26,6 +27,7 @@ router.route('/favorite')
     .delete(authenticatedUser, deleteFavorite)
 
 router.route('/bookmark')
+    .get(authenticatedUser, getAllBookmark)
     .post(authenticatedUser, addBookmark)
     .delete(authenticatedUser, deleteBookmark)
 
