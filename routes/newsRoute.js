@@ -33,6 +33,8 @@ router.route('/favorite/:id')
 router.route('/bookmark')
     .get(authenticatedUser, getAllBookmark)
     .post(authenticatedUser, addBookmark)
+    
+router.route('/bookmark/:id')
     .delete(authenticatedUser, deleteBookmark)
     
     
