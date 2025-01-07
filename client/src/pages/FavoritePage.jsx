@@ -44,7 +44,7 @@ const FavoritePage = () => {
       ) : (
         <section className="w-full grid grid-cols-4 place-items-center gap-6 my-10">
           {favorited.map((item, index) => {
-            return <ArticelCards key={index} {...item} isBgWhite={true}>
+            return <ArticelCards url={`/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true}>
               <Form method='POST' className='h-fit w-fit rounded-md bg-red-300 py-1 px-2'>
                 <input type="hidden" name='id' value={item._id} />
                 <button type="submit"><Trash className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
