@@ -1,6 +1,7 @@
 import { aboutPhoto } from '../assets/images';
+import { LoaderCircle } from 'lucide-react';
 import { FormInput } from '../components'
-import { Link, redirect, Form } from 'react-router-dom';
+import { Link, redirect, Form, useNavigation } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
@@ -39,6 +40,7 @@ export const action = async({ request }) => {
 const Login = () => {
 
   const [showPass, setShowPass] = useState(false);
+  const isSubmitting = useNavigation().state === 'submitting'
 
   return (
     <div className='w-fullScreen h-fullScreen grid grid-cols-12'>
@@ -72,7 +74,9 @@ const Login = () => {
 
                 </div>
 
-              <button className='w-full text-md text-grey font-semibold tracking-wider cursor-default hover:bg-blue duration-200 ease-in-out bg-blue/80 py-3 rounded-md'>Login</button>
+              <button disabled={isSubmitting} className='w-full flex items-center justify-center gap-x-6 text-md text-grey font-semibold tracking-wider cursor-default hover:bg-blue duration-200 ease-in-out bg-blue/80 disabled:bg-blue py-3 rounded-md'>
+                { isSubmitting ?  <LoaderCircle className='stroke-white animate-spin ' /> : 'Login'}
+              </button>
               <p className='text-grey text-center text-[12px] mt-4'>Belum punya akun? <Link to='/register' className='underline'>Daftar disini</Link></p>
 
             </div>
