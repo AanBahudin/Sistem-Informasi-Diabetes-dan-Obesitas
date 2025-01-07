@@ -56,6 +56,9 @@ export const updateNews = async(req, res) => {
 export const deleteNews = async(req, res) => {
     const { id } = req.params    
 
+    await User.updateMany({ bookmark: id }, { $pull: { bookmark: id } })
+    await User.updateMany({ favorite: id }, { $pull: { favorite: id } })
+
     await News.findOneAndDelete({_id: id})
     return res.status(StatusCodes.OK).json({msg: 'Berhasil dihapus'})
 }

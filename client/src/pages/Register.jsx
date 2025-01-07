@@ -1,9 +1,11 @@
 import { registerPhoto } from '../assets/images'
 import { FormInput, FormSelect } from '../components'
 import { useState } from 'react'
-import { Form, Link, redirect } from 'react-router-dom'
+import { Form, Link, redirect, useNavigation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import customFetch from '../utils/customFetch'
+import { Loader, LoaderCircle } from 'lucide-react'
+
 
 export const loader = async() => {
   try {
@@ -38,6 +40,7 @@ export const action = async({request}) => {
 const Register = () => {
 
   const [showPass, setShowPass] = useState(false);
+  const isSubmitting = useNavigation().state === 'submitting'
 
   return (
     <div className='w-fullScreen h-fullScreen overflow-hidden grid grid-cols-2'>
@@ -87,7 +90,9 @@ const Register = () => {
 
                 </div>
 
-              <button type='submit' className='w-full text-md text-grey font-semibold tracking-wider cursor-default hover:bg-blue duration-200 ease-in-out bg-blue/80 py-3 rounded-md'>Daftar</button>
+              <button type='submit' className='w-full text-md text-grey flex items-center justify-center font-semibold tracking-wider cursor-default hover:bg-blue disabled:bg-blue duration-200 ease-in-out bg-blue/80 py-3 rounded-md'>
+                { isSubmitting ? <LoaderCircle className='animate-spin stroke-white' /> : 'Register' }
+              </button>
               <p className='text-grey text-center text-[12px] mt-4'>Sudah punya akun? <Link to='/login' className='underline'>Daftar disini</Link></p>
 
             </div>
