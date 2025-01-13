@@ -5,6 +5,7 @@ import ArticelCards from '../components/ArticelCards'
 import customFetch from '../utils/customFetch'
 import { useLoaderData, useNavigate, useNavigation, Form } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { useDashboardContext } from './DashboardLayout'
 import { Loading } from '../components'
 
 export const loader = async({ request}) => {
@@ -42,12 +43,16 @@ export const action = async({ request }) => {
 const NewsPage = () => {
 
   const { data } = useLoaderData()
+  const { data : userData } = useDashboardContext()
+  
 
   const navigate = useNavigate()
   const isLoading = useNavigation().state === 'loading'
   const [debouncedQuery, setDebounceQuery] = useState('')
   const [isSearch, setIsSearch] = useState('');
   const [filter, setFilter] = useState('');
+  let isInBookmark = false;
+  let isInFavorite = false;
 
   useEffect(() => {
     if (debouncedQuery) {
@@ -102,16 +107,28 @@ const NewsPage = () => {
           return articleData
         }
        }).map((item, index) => {
+
+        console.log(userData.user.favorite.includes(item._id));
+        
+        
+        if (userData.user?.bookmark?.length !== 0) {
+          isInBookmark = userData.bookmark?.includes(item._id.toString())
+        }
+
+        if (userData.user?.favorite?.length !== 0) {
+          isInFavorite = userData.favorite?.includes(item_id.toString())
+        }
+        
         return <ArticelCards url={`/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true}>
           <div className='flex gap-x-4 justify-end'>
             
-            <Form method='POST' className='h-fit bg- rounded-md bg-slate-400 py-1 px-2'>
+            <Form method='POST' className={`h-fit bg- rounded-md ${ userData.user.bookmark?.includes(item._id) ? 'bg-blue' : 'bg-slate-400'} py-1 px-2`}>
               <input type="hidden" name='id' value={item._id} />
               <input type="hidden" name='type' value='bookmark' />
               <button type="submit"><BookMarked className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
             </Form>
 
-            <Form method='POST' className='h-fit bg- rounded-md bg-slate-400 py-1 px-2'>
+            <Form method='POST' className={`h-fit bg- rounded-md ${userData.user.favorite.includes(item._id) ? 'bg-pink-400' : 'bg-slate-400'} py-1 px-2`}>
               <input type="hidden" name='id' value={item._id} />
               <input type="hidden" name='type' value='favorite' />
               <button type="submit"><ThumbsUp className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
