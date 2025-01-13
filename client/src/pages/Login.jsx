@@ -48,7 +48,7 @@ const Login = () => {
         <Form method="POST" className="w-full h-full flex justify-center items-center col-span-6 bg-[url('/src/assets/images/gradient.jpg')] bg-no-repeat bg-cover">
             <div className="px-6 py-10 w-[70%]">
               <h1 className='font-semibold text-2xl'>Selamat datang kembali</h1>
-              <p className='text-sm mt-2 mb-10'>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p className='text-sm mt-2 mb-10'>Akses akun Anda untuk melanjutkan</p>
 
                 <FormInput  
                   labelText="Email"

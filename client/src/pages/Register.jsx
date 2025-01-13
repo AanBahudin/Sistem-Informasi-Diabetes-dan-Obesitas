@@ -47,7 +47,7 @@ const Register = () => {
       <Form method='POST' className="w-full h-full flex items-center justify-items-start col-span-1 bg-[url('/src/assets/images/gradient.jpg')] bg-no-repeat bg-cover">
             <div className="w-[80%] mx-auto ">
               <h1 className='font-semibold text-2xl'>Bergabung bersama kami</h1>
-              <p className='text-sm mt-2 mb-10'>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p className='text-sm mt-2 mb-10'>Gabung dan nikmati kemudahan layanan kami</p>
 
                 <FormInput 
                   labelText="Nama lengkap"

@@ -19,6 +19,8 @@ export const loader = async({params}) => {
 const SingleNewsPageAdmin = () => {
 
   const { news : data } = useLoaderData();
+  console.log(data);
+  
   const newsData = convertFromRaw(JSON.parse(data.editorContent))
   const showNews = EditorState.createWithContent(newsData)
   const [showReference, setShowReference] = useState(false);
