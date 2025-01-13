@@ -52,7 +52,6 @@ const ProfilePage = () => {
   const data = useLoaderData()
 
   const {beratBadan, tinggiBadan, IBM, IBMStatus, kondisiTubuh, kadarGula, statusKadarGula, targetKesehatan, jenisDiet } = data.data_kesehatan;
-  console.log(IBMStatus);
   
   const { deleteProfileFunc } = useDashboardContext()
   const dateOnly = moment(data.createdAt).subtract(10, 'days').calendar();
@@ -173,12 +172,12 @@ const ProfilePage = () => {
 
           <div className='m'>
             <h3 className='font-medium text-medium'>Artikel yang disukai</h3>
-            <h5 className='text-gray-500 text-small'> 5 Artikel </h5>
+            <h5 className='text-gray-500 text-small'> {data.favorite?.length} Artikel </h5>
           </div>
 
           <div className=''>
             <h3 className='font-medium text-medium'>Artikel yang disimpan</h3>
-            <h5 className='text-gray-500 text-small'> 5 Artikel </h5>
+            <h5 className='text-gray-500 text-small'> {data.bookmark.length} Artikel </h5>
           </div>
 
           <div className=''>

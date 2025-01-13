@@ -5,7 +5,7 @@ import cloudinary from 'cloudinary'
 
 export const getCurrentUser = async(req, res) => {
     const user = await User.findOne({_id: req.user.user_id})
-    return res.status(StatusCodes.OK).json({msg: 'success', user})
+    return res.status(StatusCodes.OK).json({msg: 'success', user, artikelDisukai: user.favorite.length, artikelDisimpan: user.bookmark.length })
 }
 
 export const deletePhotoProfile = async(req, res) => {
