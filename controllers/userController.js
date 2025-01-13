@@ -22,18 +22,24 @@ export const updateUser = async(req, res) => {
     // set BMI
     const newBerat = Number(req.body.beratBadan)
     const newTinggi = Number(req.body.tinggiBadan)/100
+
     if ( newTinggi > 0 && newBerat > 0) {
         req.body.IBM = (newBerat / (Math.pow(newTinggi, 2))).toFixed(2);
         const beratBadanIdeal = newBerat / (Math.pow(newTinggi, 2));
 
-        if (beratBadanIdeal >= 18,5 && beratBadanIdeal <= 24,9) {
+        if (beratBadanIdeal >= 18.5 && beratBadanIdeal <= 24.9) {
             req.body.IBMStatus = 'Sehat'
-        } else if (beratBadanIdeal < 18,5) {
-            req.body.IBMStatus = 'Kekurangan'
-        } else if (beratBadanIdeal >= 25 && beratBadanIdeal <= 29,9) {
+        } 
+        else if (beratBadanIdeal >= 25 && beratBadanIdeal <= 29.9) {
             req.body.IBMStatus = 'Kelebihan'
-        } else {
+        } 
+        else if (beratBadanIdeal < 18.5) {
+            req.body.IBMStatus = 'Kekurangan'
+        } 
+        else if (beratBadanIdeal >= 30 ) {
             req.body.IBMStatus = 'Obesitas'
+        } else {
+            req.body.IBMStatus = 'Tidak'
         }
     }
 

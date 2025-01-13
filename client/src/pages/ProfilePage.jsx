@@ -52,6 +52,8 @@ const ProfilePage = () => {
   const data = useLoaderData()
 
   const {beratBadan, tinggiBadan, IBM, IBMStatus, kondisiTubuh, kadarGula, statusKadarGula, targetKesehatan, jenisDiet } = data.data_kesehatan;
+  console.log(IBMStatus);
+  
   const { deleteProfileFunc } = useDashboardContext()
   const dateOnly = moment(data.createdAt).subtract(10, 'days').calendar();
   const terakhirUpdate = moment(data.updatedAt).calendar();
