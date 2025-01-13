@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Home, Search, X } from 'lucide-react'
 import ArticelCards from '../components/ArticelCards'
 import customFetch from '../utils/customFetch'
-import { useLoaderData, useNavigate, useNavigation } from 'react-router-dom'
-import { Loading } from '../components'
+import { Link, useLoaderData, useNavigate, useNavigation } from 'react-router-dom'
+import { BreadCrumbs, Loading } from '../components'
 
 export const loader = async({ request }) => {
 
@@ -54,12 +54,7 @@ const PublicAllNews = () => {
   return (
     <div className='w-[90%] mx-auto'>
       
-      <section className='w-full bg-slate-200 flex items-center justify-start px-14 mt-32 mx-auto gap-x-6 p-4 rounded-md'>
-        <Home className='w-5 h-5 stroke-slate-600 mr-4' />
-        <p className='text-sm'>Homepage</p>
-        <p className='text-sm'>/</p>
-        <p className='text-sm font-semibold text-blue'>Artikel</p>
-      </section>
+     <BreadCrumbs />
 
       <article className='w-full flex justify-between items-center gap-x-4 mt-10'>
         

@@ -1,4 +1,5 @@
 export {default as ArticleCards } from './ArticelCards';
+export {default as BreadCrumbs } from './BreadCrumbs';
 export {default as Footer} from './Footer';
 export {default as FormInput} from './FormInput';
 export {default as FormSelect} from './FormSelect';

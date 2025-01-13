@@ -1,6 +1,7 @@
 import customFetch from '../utils/customFetch'
 import { useLoaderData } from 'react-router-dom'
 import React, { useState } from 'react'
+import { BreadCrumbs } from '../components'
 import { ChevronDown, Home } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { convertFromRaw, EditorState } from 'draft-js'
@@ -26,19 +27,8 @@ const PublicSinglePage = () => {
   const tags = data.tagar.split(' ');
 
   return (
-    <div className='w-[80%] mx-auto py-20 bg-white px-10 mt-28'>
-
-      <section className='w-full bg-slate-200 flex items-center justify-start px-14 mx-auto gap-x-6 p-4 rounded-md mb-20'>
-        <Home className='w-5 h-5 stroke-slate-600 mr-4' />
-        <p className='text-sm'>Homepage</p>
-        <p className='text-sm'>/</p>
-        <p className='text-sm font-semibold text-blue'>Artikel</p>
-      </section>
-
-      <div className='flex gap-x-4'>
-        <h5 className='bg-blue round-full w-fit font-medium px-4 rounded-full py-2 text-small text-white'>{data.tagArtikel}</h5>
-        <h5 className='bg-blue round-full w-fit font-medium px-4 rounded-full py-2 text-small text-white'>{data.jenisArtikel}</h5>
-      </div>
+    <div className='w-[80%] mx-auto py-20 bg-white px-10'>
+      <BreadCrumbs isSinglePage={true} />
 
       <Editor editorState={showNews} toolbarHidden readOnly />
       <p className='mt-10'>Terakhir kali diperbaharui : 23 September 2023</p>
