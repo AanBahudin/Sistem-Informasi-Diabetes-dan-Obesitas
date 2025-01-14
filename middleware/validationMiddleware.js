@@ -59,12 +59,7 @@ export const validateRegister = withValidationErrors([
         .notEmpty()
         .withMessage('Please provide password')
         .isLength({min: 6, max: 15})
-        .withMessage('Password min 6, max 10 characters'),
-    body('jenisKelamin')
-        .notEmpty()
-        .withMessage('Jenis Kelamin tidak boleh kosong')
-        .isIn(['Pria', 'Wanita'])
-        .withMessage('Jenis kelamin tidak valid')
+        .withMessage('Password min 6, max 10 characters')
 ])
 
 
