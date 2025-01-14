@@ -87,14 +87,15 @@ const NewsPage = () => {
             </div>
           </div>
 
-          <select name="filter" id="filter" className='flex-1 h-10 border-[2px] border-slate-400 rounded-xl text-sm px-4 outline-none focus:border-blue/80'>
+          <select name="filter" id="filter" className='flex-1 h-10 border-[2px] border-slate-400 rounded-xl text-sm px-4 outline-none focus:border-blue/80' onChange={(e) => setFilter(e.target.value)}>
+            <option value="">Semua</option>
             <option value="Diabetes">Diabetes</option>
             <option value="Obesitas">Obesitas</option>
           </select>
         </article>
 
         {/* NEWS SECTION */}
-        <article className='w-full mt-10 flex flex-wrap items-stretch justify-between gap-6'>
+        <article className={`w-full mt-10 flex flex-wrap items-stretch ${data.news?.length < 4 ? 'justify-start' : 'justify-between'} gap-6`}>
 
           { isLoading ? (
             <div className='w-full flex-1 flex items-center justify-center gap-x-4'>
@@ -103,11 +104,15 @@ const NewsPage = () => {
             </div>
 
           ) : (
-            data.news.map((item, index) => {
-              console.log(item);
-              
-              return <ArticleCardsUser key={index} {...item} />
-            })
+            data.news.filter((newItem) => {
+              if (filter) {
+                return newItem.jenisArtikel === filter
+              } else {
+                return newItem
+              }
+              }).map((item, index) => {
+                return <ArticleCardsUser key={index} {...item} />
+              })
           )}
 
         </article>
@@ -140,38 +145,23 @@ export default NewsPage
 //   </section>
 
 //   <section className='w-full grid grid-cols-4 gap-y-4 place-items-center gap-x-6 my-10'>
-//    {data.news.filter((newItem) => {
-//     if (filter) {
-//       return newItem.jenisArtikel === filter
-//     } else {
-//       return articleData
-//     }
-//    }).map((item, index) => {
-        
-//     if (userData.user?.bookmark?.length !== 0) {
-//       isInBookmark = userData.bookmark?.includes(item._id.toString())
-//     }
-
-//     if (userData.user?.favorite?.length !== 0) {
-//       isInFavorite = userData.favorite?.includes(item_id.toString())
-//     }
-    
-//     return <ArticelCards url={`/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true}>
-//       <div className='flex gap-x-4 justify-end'>
-        
-//         <Form method='POST' className={`h-fit bg- rounded-md ${ userData.user.bookmark?.includes(item._id) ? 'bg-blue' : 'bg-slate-400'} py-1 px-2`}>
-//           <input type="hidden" name='id' value={item._id} />
-//           <input type="hidden" name='type' value='bookmark' />
-//           <button type="submit"><BookMarked className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
-//         </Form>
-
-//         <Form method='POST' className={`h-fit bg- rounded-md ${userData.user.favorite.includes(item._id) ? 'bg-pink-400' : 'bg-slate-400'} py-1 px-2`}>
-//           <input type="hidden" name='id' value={item._id} />
-//           <input type="hidden" name='type' value='favorite' />
-//           <button type="submit"><ThumbsUp className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
-//         </Form>
-//       </div>
-//     </ArticelCards>
-//    })}
+//    
 //   </section>
 // </div>
+
+// <ArticelCards url={`/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true}>
+//                 <div className='flex gap-x-4 justify-end'>
+                  
+//                   <Form method='POST' className={`h-fit bg- rounded-md ${ userData.user.bookmark?.includes(item._id) ? 'bg-blue' : 'bg-slate-400'} py-1 px-2`}>
+//                     <input type="hidden" name='id' value={item._id} />
+//                     <input type="hidden" name='type' value='bookmark' />
+//                     <button type="submit"><BookMarked className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
+//                   </Form>
+          
+//                   <Form method='POST' className={`h-fit bg- rounded-md ${userData.user.favorite.includes(item._id) ? 'bg-pink-400' : 'bg-slate-400'} py-1 px-2`}>
+//                     <input type="hidden" name='id' value={item._id} />
+//                     <input type="hidden" name='type' value='favorite' />
+//                     <button type="submit"><ThumbsUp className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
+//                   </Form>
+//                 </div>
+//               </ArticelCards>
