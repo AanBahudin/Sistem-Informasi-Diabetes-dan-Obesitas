@@ -106,12 +106,13 @@ const ProfilePage = () => {
         {/* ALL INFORMATION */}
         <div className='w-full my-10 grid grid-cols-12 gap-x-4'>
           
-          <section className='col-span-8 grid grid-cols-3'>
-
+          <section className='col-span-8 grid grid-cols-3 gap-4'>
             {/* data container */}
             <DataContainer label='Nama lengkap' value={data.nama} />
-            
-
+            <DataContainer label='Email' value={data.nama} />
+            <DataContainer label='Nomor telepon' value={data.nama} />
+            <DataContainer label='Jenis kelamin' value={data.nama} />
+            <DataContainer label='Tanggal lahir' value={data.nama} />
           </section>
 
           <section className='col-span-4'>
