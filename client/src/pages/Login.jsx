@@ -60,7 +60,7 @@ const Login = () => {
             <label htmlFor="email" className='text-slate-800 mb-10 font-semibold'>Email</label>
             <div className='w-full flex items-center justify-between h-12 rounded-xl border-[2px] border-slate-400 focus-within:border-blue/80'>
               <AtSign className='stroke-slate-600 w-5 h-5 ml-2' />
-              <input type="text" name="email" id="email" className='w-full px-6 h-full text-md outline-none focus:placeholder:text-transparent' autoFocus autoComplete='off' placeholder='johndoe@gmail.com'  required autoCorrect='off' onChange={(e) => setEmail(e.target.value)} value={isEmail}/>
+              <input type="text" name="email" id="email" className='w-full px-6 h-full text-md outline-none focus:placeholder:text-transparent text-slate-800' autoFocus autoComplete='off' placeholder='johndoe@gmail.com'  required autoCorrect='off' onChange={(e) => setEmail(e.target.value)} value={isEmail}/>
               <X onClick={() => setEmail('')} className={` ${isEmail ? 'visible' : 'invisible'} stroke-red-400 w-5 h-5 mr-2`} />
             </div>
           </div>
@@ -69,7 +69,7 @@ const Login = () => {
             <label htmlFor="email" className='text-slate-800 mb-10 font-semibold'>Password</label>
             <div className='w-full flex items-center justify-between h-12 rounded-xl border-[2px] border-slate-400 focus-within:border-blue/80'>
               <KeyRound className='stroke-slate-600 w-5 h-5 ml-2' />
-              <input type={showPass ? 'text' : 'password'} name="password" id="password" className='w-full px-6 h-full text-md outline-none' autoComplete='off' placeholder='password'  required autoCorrect='off' />
+              <input type={showPass ? 'text' : 'password'} name="password" id="password" className='w-full px-6 h-full text-md outline-none focus:placeholder:text-transparent text-slate-800' autoComplete='off' placeholder='password'  required autoCorrect='off' />
 
               {showPass ? (
                 <EyeClosed onClick={() => setShowPass(false)} className='stroke-blue/80 w-5 h-5 mr-2' />
