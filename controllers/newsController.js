@@ -80,7 +80,12 @@ export const addBookmark = async(req, res) => {
 
 export const addFavorite = async(req, res) => {
     const addedNewsId = new mongoose.Types.ObjectId(req.body.id)
-    await User.findOneAndUpdate({_id: req.user.user_id}, { $addToSet: { favorite: addedNewsId } }, { new: true, runValidators: true })
+
+    const user = await User.findOne({_id: req.user.user_id})
+    const isFavorited = user.favorite.includes(addedNewsId)
+    const updateOperation = isFavorited ? { $pull: { favorite: addedNewsId } } : { $addToSet: { favorite: addedNewsId } }
+
+    await User.findOneAndUpdate({_id: req.user.user_id}, updateOperation, { new: true, runValidators: true })
     return res.status(StatusCodes.OK).json({  msg: 'successfully'})
 }
 
