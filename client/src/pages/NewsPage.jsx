@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { articleData } from '../utils/constants'
-import { Search, X, Trash2, BookMarked, ThumbsUp } from 'lucide-react'
+import { Search, Trash2, BookMarked, ThumbsUp, X, AtSign, Clock, Pin, LoaderCircle } from 'lucide-react'
 import ArticelCards from '../components/ArticelCards'
 import customFetch from '../utils/customFetch'
 import { useLoaderData, useNavigate, useNavigation, Form } from 'react-router-dom'
@@ -44,6 +44,7 @@ const NewsPage = () => {
 
   const { data } = useLoaderData()
   const { data : userData } = useDashboardContext()
+  const testdata = [1,2,3,4,5]
   
 
   const navigate = useNavigate()
@@ -72,70 +73,125 @@ const NewsPage = () => {
     }
   }, [isSearch])
 
-  if (isLoading) {
-    return <Loading />
-  }
-
   return (
-    <div className='w-full  h-full flex flex-col overflow-y-auto p-10'>
+    <section className='w-full h-full overflow-y-auto p-10 flex items-center justify-center bg-slate-50'>
+      <section className='w-full h-full '>
+        <h1 className='text-3xl text-slate-800 font-semibold'>Jelajahi Artikel Anda tentang Diabetes dan Obesitas</h1>
+        <p className='text-slate-600 w-[80%] mt-2'>Semua informasi yang Anda butuhkan ada di sini. Jelajahi yang dirancang untuk membantu Anda memahami, mencegah, dan mengelola obesitas serta diabetes dengan lebih baik.</p>
 
-      <section className="w-full flex justify-between items-center ">
-        <h1 className='text-2xl font-semibold'>{data.news.length} Articles</h1>
-
-        <article className='flex justify-center items-center gap-x-4'>
-          <div className='bg-white h-fit flex items-center justify-center gap-x-2 px-2 rounded-lg border-blue/50 border-[1px]'>
-            <Search size={35} className='py-2 stroke-gray-800 stroke-[1.5px]' />
-            <input className='text-[12px] outline-none h-12 w-40 placeholder:text-[12px]' autoFocus autoComplete='off' type="text" name='query' id='query' placeholder='search articel' onChange={(e) => setIsSearch(e.target.value)} value={isSearch}/>
-            <X size={35} className={`py-2 stroke-red-800 stroke-[1.5px] ${isSearch ? 'visible' : 'invisible'}`} onClick={() => setIsSearch("")} />
+        {/* FILTER SECTION */}
+        <article className='w-full mt-10 flex items-end gap-x-4 justify-normal'>
+          <div className='w-[75%] mt-4'>
+            <div className='w-full flex items-center justify-between h-10 rounded-xl border-[2px] border-slate-400 focus-within:border-blue/80'>
+              <Search className='stroke-slate-600 w-5 h-5 ml-2' />
+              <input type="text" name="email" id="email" className='w-full px-6 h-full text-md outline-none focus:placeholder:text-transparent placeholder:text-sm text-slate-800' autoComplete='off' placeholder='tips mengurangi berat badan '  required autoCorrect='off' onChange={(e) => setIsSearch(e.target.value)} value={isSearch}/>
+              <X onClick={() => setIsSearch('')} className={` ${isSearch ? 'visible' : 'invisible'} stroke-red-400 w-5 h-5 mr-2`} />
+            </div>
           </div>
 
-          <div>
-            <select name="type" id="type" className='h-12 rounded-lg px-4 outline-none text-[12px] border-blue/50 border-[1px]'  onChange={e => setFilter(e.target.value)} defaultValue={filter}>
-              <option value="" className='text-[12px]'>All</option>
-              <option value="Diabetes">diabetes</option>
-              <option value="Obesitas">obesitas</option>
-            </select>
-          </div>
+          <select name="filter" id="filter" className='flex-1 h-10 border-[2px] border-slate-400 rounded-xl text-sm px-4 outline-none focus:border-blue/80'>
+            <option value="Diabetes">Diabetes</option>
+            <option value="Obesitas">Obesitas</option>
+          </select>
         </article>
-      </section>
-    
-      <section className='w-full grid grid-cols-4 gap-y-4 place-items-center gap-x-6 my-10'>
-       {data.news.filter((newItem) => {
-        if (filter) {
-          return newItem.jenisArtikel === filter
-        } else {
-          return articleData
-        }
-       }).map((item, index) => {
-            
-        if (userData.user?.bookmark?.length !== 0) {
-          isInBookmark = userData.bookmark?.includes(item._id.toString())
-        }
 
-        if (userData.user?.favorite?.length !== 0) {
-          isInFavorite = userData.favorite?.includes(item_id.toString())
-        }
-        
-        return <ArticelCards url={`/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true}>
-          <div className='flex gap-x-4 justify-end'>
-            
-            <Form method='POST' className={`h-fit bg- rounded-md ${ userData.user.bookmark?.includes(item._id) ? 'bg-blue' : 'bg-slate-400'} py-1 px-2`}>
-              <input type="hidden" name='id' value={item._id} />
-              <input type="hidden" name='type' value='bookmark' />
-              <button type="submit"><BookMarked className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
-            </Form>
+        {/* NEWS SECTION */}
+        <article className='w-full mt-10 flex flex-wrap items-stretch justify-between gap-6'>
 
-            <Form method='POST' className={`h-fit bg- rounded-md ${userData.user.favorite.includes(item._id) ? 'bg-pink-400' : 'bg-slate-400'} py-1 px-2`}>
-              <input type="hidden" name='id' value={item._id} />
-              <input type="hidden" name='type' value='favorite' />
-              <button type="submit"><ThumbsUp className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
-            </Form>
-          </div>
-        </ArticelCards>
-       })}
-      </section>
-    </div>
+          { isLoading ? (
+            <div className='w-full flex-1 flex items-center justify-center gap-x-4'>
+              <LoaderCircle className='w-6 h-6 stroke-slate-800 animate-spin' />
+              <h1 className='text-center text-xl font-medium text-slate-700'>Sedang memuat artikel</h1>
+            </div>
+
+          ) : (
+            testdata.map((item, index) => {
+              return (
+              <div key={index} className='w-[23%] bg-white shadow-md p-2 rounded-xl'>
+                  <div className='w-full rounded-xl h-32 bg-slate-500'></div>
+                  <p className='text-xs text-slate-700 flex items-center justify-start gap-x-4 my-4'>
+                    <Clock className='w-4 h-4 stroke-slate-400' />
+                    30 menit yang lalu
+                  </p>
+  
+                  <h1 className='text-slate-800 text-sm font-semibold'>Cara mencegah diabetes sejak dini dimulai dari makanan yang dikonsumsi</h1>
+                  <p className='text-xs text-slate-600 mt-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident earum autem nemo placeat reprehenderit praesentium!</p>
+  
+                  <div className='w-full mt-4 flex items-center justify-between'>
+                    <p className='lowercase py-1 px-4 rounded-md text-xs bg-blue/40 '>Diabetes</p>
+  
+                    <article className='flex gap-x-2 justify-end items-center'>
+                      <ThumbsUp className='border-[2px] border-blue/60 stroke-blue p-1 rounded-md w-6 h-6' />
+                      <Pin className='border-[2px] border-pink-400 stroke-pink-400 p-1 rounded-md w-6 h-6' />
+                    </article>
+                  </div>
+              </div>
+              )
+            })
+          )}
+
+        </article>
+      </section>  
+    </section>
   )
 }
 
 export default NewsPage
+// <div className='w-full  h-full flex flex-col overflow-y-auto p-10'>
+
+//   <section className="w-full flex justify-between items-center ">
+//     <h1 className='text-2xl font-semibold'>{data.news.length} Articles</h1>
+
+//     <article className='flex justify-center items-center gap-x-4'>
+//       <div className='bg-white h-fit flex items-center justify-center gap-x-2 px-2 rounded-lg border-blue/50 border-[1px]'>
+//         <Search size={35} className='py-2 stroke-gray-800 stroke-[1.5px]' />
+//         <input className='text-[12px] outline-none h-12 w-40 placeholder:text-[12px]' autoFocus autoComplete='off' type="text" name='query' id='query' placeholder='search articel' onChange={(e) => setIsSearch(e.target.value)} value={isSearch}/>
+//         <X size={35} className={`py-2 stroke-red-800 stroke-[1.5px] ${isSearch ? 'visible' : 'invisible'}`} onClick={() => setIsSearch("")} />
+//       </div>
+
+//       <div>
+//         <select name="type" id="type" className='h-12 rounded-lg px-4 outline-none text-[12px] border-blue/50 border-[1px]'  onChange={e => setFilter(e.target.value)} defaultValue={filter}>
+//           <option value="" className='text-[12px]'>All</option>
+//           <option value="Diabetes">diabetes</option>
+//           <option value="Obesitas">obesitas</option>
+//         </select>
+//       </div>
+//     </article>
+//   </section>
+
+//   <section className='w-full grid grid-cols-4 gap-y-4 place-items-center gap-x-6 my-10'>
+//    {data.news.filter((newItem) => {
+//     if (filter) {
+//       return newItem.jenisArtikel === filter
+//     } else {
+//       return articleData
+//     }
+//    }).map((item, index) => {
+        
+//     if (userData.user?.bookmark?.length !== 0) {
+//       isInBookmark = userData.bookmark?.includes(item._id.toString())
+//     }
+
+//     if (userData.user?.favorite?.length !== 0) {
+//       isInFavorite = userData.favorite?.includes(item_id.toString())
+//     }
+    
+//     return <ArticelCards url={`/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true}>
+//       <div className='flex gap-x-4 justify-end'>
+        
+//         <Form method='POST' className={`h-fit bg- rounded-md ${ userData.user.bookmark?.includes(item._id) ? 'bg-blue' : 'bg-slate-400'} py-1 px-2`}>
+//           <input type="hidden" name='id' value={item._id} />
+//           <input type="hidden" name='type' value='bookmark' />
+//           <button type="submit"><BookMarked className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
+//         </Form>
+
+//         <Form method='POST' className={`h-fit bg- rounded-md ${userData.user.favorite.includes(item._id) ? 'bg-pink-400' : 'bg-slate-400'} py-1 px-2`}>
+//           <input type="hidden" name='id' value={item._id} />
+//           <input type="hidden" name='type' value='favorite' />
+//           <button type="submit"><ThumbsUp className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
+//         </Form>
+//       </div>
+//     </ArticelCards>
+//    })}
+//   </section>
+// </div>
