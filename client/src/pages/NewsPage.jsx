@@ -42,16 +42,11 @@ const NewsPage = () => {
 
   const { data } = useLoaderData()
   const { data : userData } = useDashboardContext()
-  const testdata = [1,2,3,4,5]
-  
-
   const navigate = useNavigate()
   const isLoading = useNavigation().state === 'loading'
   const [debouncedQuery, setDebounceQuery] = useState('')
   const [isSearch, setIsSearch] = useState('');
   const [filter, setFilter] = useState('');
-  let isInBookmark = false;
-  let isInFavorite = false;
 
   useEffect(() => {
     if (debouncedQuery) {
@@ -111,7 +106,7 @@ const NewsPage = () => {
                 return newItem
               }
               }).map((item, index) => {
-                return <ArticleCardsUser key={index} {...item} />
+                return <ArticleCardsUser key={index} {...item} bookmark={userData.user?.bookmark} favorite={userData.user?.favorite} />
               })
           )}
 
