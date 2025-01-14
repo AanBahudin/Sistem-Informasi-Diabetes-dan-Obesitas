@@ -38,10 +38,6 @@ const ArticleCardsUser = ({ _id, judulArtikel, bookmark, favorite, deskripsi, je
                   <Pin className={`border-[2px] ${ bookmark.includes(_id) ? 'border-transparent bg-pink-400 stroke-white' : 'bg-transparent border-pink-400 stroke-pink-400' } duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
                 </button>
               </Form>
-              
-
-
-
             </article>
           </div>
       </section>

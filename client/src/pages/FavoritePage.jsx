@@ -1,7 +1,6 @@
-import ArticelCards from "../components/ArticelCards"
-import { BookmarkMinus, Heart, Trash } from "lucide-react"
+import { ArticleCards, ArticleCardsUser } from "../components"
 import customFetch from "../utils/customFetch"
-import { Form, redirect, useLoaderData } from "react-router-dom"
+import { Form, redirect, useLoaderData, useNavigation } from "react-router-dom"
 import { toast } from "react-toastify"
 
 export const loader = async() => {
@@ -30,6 +29,7 @@ export const action = async({ request }) => {
 const FavoritePage = () => {
 
   const { favorited } = useLoaderData()
+  const isLoading = useNavigation().state === 'loading'
   console.log(favorited);
   
   
@@ -40,6 +40,20 @@ const FavoritePage = () => {
         <h1 className='text-3xl text-slate-800 font-semibold'>Halaman Favorit Anda</h1>
         <p className='text-slate-600 w-[80%] mt-2'>Kumpulan artikel yang Anda sukai. Akses konten favorit Anda dengan cepat di sini.</p>
 
+
+        <article className={`w-full mt-10 flex flex-wrap items-stretch ${favorited.length < 4 ? 'justify-start' : 'justify-between'} gap-6`}>
+        { isLoading ? (
+            <div className='w-full flex-1 flex items-center justify-center gap-x-4'>
+              <LoaderCircle className='w-6 h-6 stroke-slate-800 animate-spin' />
+              <h1 className='text-center text-xl font-medium text-slate-700'>Sedang memuat artikel</h1>
+            </div>
+
+          ) : (
+            favorited.map((item, index) => {
+                return <ArticleCards {...item} key={index}/>
+              })
+          )}
+        </article>
       </section>  
     </section>
   )

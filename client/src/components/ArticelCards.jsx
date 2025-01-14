@@ -1,30 +1,40 @@
-import { sehatPhoto } from "../assets/images"
-import { Link } from 'react-router-dom' 
+import { Form, Link } from 'react-router-dom' 
+import { Clock, ThumbsUp, Pin } from 'lucide-react'
 import moment from 'moment'
 
-const ArticelCards = ({children, thumbnail = '', judulArtikel, deskripsi='', createdAt, jenisArtikel, isBgWhite, url }) => {
+const ArticelCards = ({_id, thumbnail = '', judulArtikel, deskripsi='', createdAt, jenisArtikel, isBgWhite, url }) => {
 
-  const newDate = moment(createdAt).subtract(10, 'days').calendar();
+  judulArtikel = judulArtikel.length >= 70 ? judulArtikel.slice(0, 67) + '...' : judulArtikel
+  deskripsi = deskripsi.length >= 70 ? deskripsi.slice(0, 115) + '...' : deskripsi
+
 
   return (
-    <div className="text-grey no-underline cursor-default">
-      <article className={`${ isBgWhite === true ? 'bg-white' : 'bg-lightGrey' } rounded-md max-w-[300px] group p-4 hover:shadow-2xl duration-200 ease-in-out`}>
-          <div>
-            {children}
-          </div>
+    <section className='max-w-[23%] max-h-[50vh] bg-white shadow-md p-2 rounded-xl flex flex-col justify-between cursor-default'>
+          <Link to={`/dashboard/news/${judulArtikel}`} className='w-full'>
+            <img className='w-full overflow-hidden object-fill object-top rounded-xl min-h-32 bg-slate-500' src={thumbnail} alt="" />
 
-          <Link to={url} className="cursor-default">
-            <img className='w-full rounded-sm h-52 object-cover overflow-hidden mt-2' src={thumbnail} alt="" />
-            <h5 className='text-[14px] my-2 font-semibold text-grey no-underline truncate'>{judulArtikel}</h5>
-            <p className='text-[12px]'>{deskripsi.slice(0,100) + '....'}</p>
-            
-            <div className='w-full flex items-center justify-between mt-2'>
-                <p className='text-[10px] text-gray-400'>{ newDate }</p>
-                <p className='text-[10px] bg-blue text-white py-1 px-2 rounded-xl'>{jenisArtikel}</p>
-            </div>
+            <p className='text-xs text-slate-700 flex items-center justify-start gap-x-4 my-4'>
+            <Clock className='w-4 h-4 stroke-slate-400' />
+            30 menit yang lalu
+            </p>
+
+            <h1 className='text-slate-800 text-sm font-semibold'>{judulArtikel}</h1>
+            <p className='text-xs text-slate-600 mt-2 flex-grow'>{deskripsi}</p>
           </Link>
-      </article>
-    </div>
+
+          <div className='w-full mt-4 flex items-center justify-between'>
+            <p className='lowercase py-1 px-4 rounded-md text-xs bg-blue/40 '>{jenisArtikel}</p>
+
+            <article className='flex gap-x-2 justify-end items-center mt-auto'>
+              <Form method='POST' className='flex items-center'>
+                <input type="hidden" name='id' value={_id} />
+                <button type='submit' name='data' value='favorite' className='m-0 p-0 border-none bg-transparent'>
+                  <ThumbsUp className={`border-[2px] bg-blue/80 border-transparent stroke-white duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
+                </button>
+              </Form>
+            </article>
+          </div>
+      </section>
   )
 }
 
