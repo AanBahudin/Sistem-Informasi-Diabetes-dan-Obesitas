@@ -1,24 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: 'PoppinsRegular';
-    src: url('/src/assets/fonts/PoppinsRegular.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'PoppinsSemibold';
-    src: url('/src/assets/fonts/PoppinsSemiBold.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'PoppinsMedium';
-    src: url('/src/assets/fonts/PoppinsMedium.ttf') format('truetype');
-}
 
 * {
-    font-family: 'poppins';
+    font-family: "Inter", serif;
     scroll-behavior: smooth;
     box-sizing: border-box;
     margin: 0;

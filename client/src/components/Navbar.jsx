@@ -24,7 +24,7 @@ import { NavLink } from 'react-router-dom';
    return (
     <div className='py-8 mx-auto px-16 flex justify-between z-10 fixed w-[90%] transition-colors duration-75 bg-lightGrey rounded-b-[8px]'
     style={{ backgroundColor: `rgba(244, 246, 255, ${bgOpacity})` }}>
-        <h1 className='text-2xl font-semibold font-poppins cursor-default'>E-Health</h1>
+        <h1 className='text-2xl font-semibold  cursor-default'>E-Health</h1>
 
         <section className='flex flex-row gap-x-7 items-center'>
             <a href='/#contacts' className='text-grey text-sm cursor-default hover:text-blue duration-200 ease-in-out no-underline'>Contacts</a>
