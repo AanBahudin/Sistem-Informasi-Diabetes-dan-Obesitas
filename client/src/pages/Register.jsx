@@ -75,7 +75,7 @@ const Register = () => {
           </div>
 
           <div className='w-[80%] mt-2'>
-            <label htmlFor="email" className='text-slate-800 mb-10 font-semibold'>Password</label>
+            <label htmlFor="password" className='text-slate-800 mb-10 font-semibold'>Password</label>
             <div className='w-full flex items-center justify-between h-12 rounded-xl border-[2px] border-slate-400 focus-within:border-blue/80'>
               <KeyRound className='stroke-slate-600 w-5 h-5 ml-2' />
               <input type={showPass ? 'text' : 'password'} name="password" id="password" className='w-full px-6 h-full text-md outline-none text-slate-800 focus:placeholder:text-transparent' autoComplete='off' placeholder='password'  required autoCorrect='off' />
