@@ -28,14 +28,14 @@ const ArticleCardsUser = ({ _id, judulArtikel, bookmark, favorite, deskripsi, je
               <Form method='POST' className='flex items-center'>
                 <input type="hidden" name='id' value={_id} />
                 <button type='submit' name='data' value='favorite' className='m-0 p-0 border-none bg-transparent'>
-                  <ThumbsUp className={`border-[2px] ${ favorite.includes(_id) ? 'bg-blue/80 border-transparent stroke-white' : 'bg-transparent border-blue/80 stroke-blue/80' } hover:border-transparent hover:bg-blue/60 hover:stroke-white duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
+                  <ThumbsUp className={`border-[2px] ${ favorite.includes(_id) ? 'bg-blue/80 border-transparent stroke-white' : 'bg-transparent border-blue/80 stroke-blue/80' } duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
                 </button>
               </Form>
               
               <Form method='POST' className='flex items-center'>
                 <input type="hidden" name='id' value={_id} />
                 <button type='submit' name='data' value='bookmark' className='m-0 p-0 border-none bg-transparent'>
-                  <Pin className={`border-[2px] ${ bookmark.includes(_id) ? 'border-transparent bg-pink-400 stroke-white' : 'bg-transparent border-pink-400 stroke-pink-400' } hover:border-transparent hover:bg-pink-400 hover:stroke-white duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
+                  <Pin className={`border-[2px] ${ bookmark.includes(_id) ? 'border-transparent bg-pink-400 stroke-white' : 'bg-transparent border-pink-400 stroke-pink-400' } duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
                 </button>
               </Form>
               
