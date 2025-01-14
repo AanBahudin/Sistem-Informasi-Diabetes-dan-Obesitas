@@ -24,7 +24,7 @@ export const loader = async() => {
 
 export const action = async({request}) => {
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+  const data = Object.fromEntries(formData);  
 
   try {
     await customFetch.post('/auth/register', data);
@@ -102,7 +102,7 @@ const Register = () => {
           </button>
 
           <div className='w-[80%] flex items-start justify-start gap-x-2 mt-4'>
-            <input type="checkbox" className='outline-none'required />
+            <input type="checkbox" id='aggrement' className='outline-none'required />
             <label htmlFor="aggrement" className='text-[12px] text-slate-700/80'>Dengan menyetujui proses daftar ini, Anda menerima dan setuju untuk mematuhi <span className='text-blue/80'> Ketentuan Layanan, Kebijakan Privasi, </span> serta semua aturan dan regulasi yang berlaku</label>
           </div>
 
