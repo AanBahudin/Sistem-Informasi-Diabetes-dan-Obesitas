@@ -57,7 +57,7 @@ const FavoritePage = () => {
               </div>
             ) : (
               favorited.map((item, index) => {
-                  return <ArticleCards {...item} key={index}/>
+                  return <ArticleCards {...item} key={index} isInPage='favorite'/>
                 })
             )
           )}

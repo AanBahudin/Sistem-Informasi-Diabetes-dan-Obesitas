@@ -53,7 +53,7 @@ const BookmarkPage = () => {
               </div>
             ) : (
               bookmarked.map((item, index) => {
-                  return <ArticleCards {...item} key={index}/>
+                  return <ArticleCards {...item} key={index} isInPage='bookmark'/>
                 })
             ) 
           )}

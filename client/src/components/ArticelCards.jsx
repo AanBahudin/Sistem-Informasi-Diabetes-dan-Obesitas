@@ -2,7 +2,7 @@ import { Form, Link } from 'react-router-dom'
 import { Clock, ThumbsUp, Pin } from 'lucide-react'
 import moment from 'moment'
 
-const ArticelCards = ({_id, thumbnail = '', judulArtikel, deskripsi='', createdAt, jenisArtikel, isBgWhite, url }) => {
+const ArticelCards = ({_id, thumbnail = '', judulArtikel, deskripsi='', createdAt, jenisArtikel, isInPage='landing', url }) => {
 
   judulArtikel = judulArtikel.length >= 70 ? judulArtikel.slice(0, 67) + '...' : judulArtikel
   deskripsi = deskripsi.length >= 70 ? deskripsi.slice(0, 115) + '...' : deskripsi
@@ -27,12 +27,25 @@ const ArticelCards = ({_id, thumbnail = '', judulArtikel, deskripsi='', createdA
             <p className='lowercase py-1 px-4 rounded-md text-xs bg-blue/40 '>{jenisArtikel}</p>
 
             <article className='flex gap-x-2 justify-end items-center mt-auto'>
-              <Form method='POST' className='flex items-center'>
-                <input type="hidden" name='id' value={_id} />
-                <button type='submit' name='data' value='favorite' className='m-0 p-0 border-none bg-transparent'>
-                  <ThumbsUp className={`border-[2px] bg-blue/80 border-transparent stroke-white duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
-                </button>
-              </Form>
+
+              {isInPage === 'bookmark' && (
+                <Form method='POST' className='flex items-center'>
+                  <input type="hidden" name='id' value={_id} />
+                  <button type='submit' name='data' value='bookmark' className='m-0 p-0 border-none bg-transparent'>
+                    <Pin className={`border-[2px] 'border-transparent bg-pink-400 stroke-white duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
+                  </button>
+                </Form>
+              )}
+
+              {isInPage === 'favorite' && (
+                <Form method='POST' className='flex items-center'>
+                  <input type="hidden" name='id' value={_id} />
+                  <button type='submit' name='data' value='favorite' className='m-0 p-0 border-none bg-transparent'>
+                    <ThumbsUp className={`border-[2px] bg-blue/80 border-transparent stroke-white duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
+                  </button>
+                </Form>
+              )}
+
             </article>
           </div>
       </section>
