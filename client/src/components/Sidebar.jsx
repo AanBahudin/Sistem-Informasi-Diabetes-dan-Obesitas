@@ -1,7 +1,8 @@
 import { SidebarLink } from '../components'
 import { Cross, User } from 'lucide-react';
 
-const Sidebar = ({ links, logoutFunction }) => {
+const Sidebar = ({ links, logoutFunction, data }) => {
+
   return (
     <div className='w-[15%] h-full flex flex-col justify-between items-center pt-10 bg-slate-100'>
       <div className='w-full'>
@@ -22,8 +23,8 @@ const Sidebar = ({ links, logoutFunction }) => {
           <User className='bg-slate-400 p-4 rounded-full' />
 
           <section className=''>
-            <h1 className='text-sm font-semibold text-slate-700'>Aan Bahudin</h1>
-            <p className='text-xs text-slate-500 truncate'>aanbahudin@gmail.com</p>
+            <h1 className='text-sm font-semibold text-slate-700'>{data.nama}</h1>
+            <p className='text-xs text-slate-500 truncate'>{data.email}</p>
             <button onClick={logoutFunction} className='w-full text-xs mt-2 py-1 rounded-md border-[2px] cursor-default text-slate-700 duration-200 ease-in-out hover:bg-red-300 hover:text-white border-red-300'>keluar</button>
           </section>
       </div>

@@ -107,10 +107,7 @@ const NewsPage = () => {
           return articleData
         }
        }).map((item, index) => {
-
-        console.log(userData.user.favorite.includes(item._id));
-        
-        
+            
         if (userData.user?.bookmark?.length !== 0) {
           isInBookmark = userData.bookmark?.includes(item._id.toString())
         }
