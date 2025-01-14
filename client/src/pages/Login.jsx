@@ -98,6 +98,7 @@ const Login = () => {
           </div>
 
 
+          <p className='text-center w-[70%] text-sm text-slate-800 mt-4'>Belum punya akun ? <Link to='/register' className='cursor-default font-medium text-blue/80 underline'> daftar disini </Link></p>
         </article>
 
         {/* KOLOM KANAN */}
