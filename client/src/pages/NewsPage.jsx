@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react'
-import { articleData } from '../utils/constants'
-import { Search, Trash2, BookMarked, ThumbsUp, X, AtSign, Clock, Pin, LoaderCircle } from 'lucide-react'
-import ArticelCards from '../components/ArticelCards'
+import { Search, ThumbsUp, X, Clock, Pin, LoaderCircle } from 'lucide-react'
 import customFetch from '../utils/customFetch'
-import { useLoaderData, useNavigate, useNavigation, Form } from 'react-router-dom'
+import { useLoaderData, useNavigate, useNavigation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useDashboardContext } from './DashboardLayout'
-import { Loading } from '../components'
 
 export const loader = async({ request}) => {
 
