@@ -1,13 +1,13 @@
 import React from 'react'
 import { Clock, ThumbsUp, Pin } from 'lucide-react'
 
-const ArticleCardsUser = ({ judulArtikel, deskripsi, jenisArtikel }) => {
+const ArticleCardsUser = ({ judulArtikel, deskripsi, jenisArtikel, thumbnail }) => {
     judulArtikel = judulArtikel.length >= 70 ? judulArtikel.slice(0, 67) + '...' : judulArtikel
     deskripsi = deskripsi.length >= 70 ? deskripsi.slice(0, 115) + '...' : deskripsi
 
   return (
     <div className='max-w-[23%] max-h-[45vh] bg-white shadow-md p-2 rounded-xl flex flex-col'>
-        <div className='w-full rounded-xl h-32 bg-slate-500'></div>
+        <img className='w-full overflow-hidden object-fill object-top rounded-xl h-32 bg-slate-500' src={thumbnail} alt="" />
 
         <p className='text-xs text-slate-700 flex items-center justify-start gap-x-4 my-4'>
         <Clock className='w-4 h-4 stroke-slate-400' />
