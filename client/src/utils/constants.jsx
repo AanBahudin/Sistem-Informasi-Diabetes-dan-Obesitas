@@ -44,12 +44,12 @@ export const sidebarLink = [
     {
         icon: <Pin size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
         path: 'bookmark',
-        name: 'Bookmark'
+        name: 'Tersimpan'
     },
     {
         icon: <ThumbsUp size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
         path: 'favorite',
-        name: 'Favorite'
+        name: 'Disukai'
     }
 ]
 
