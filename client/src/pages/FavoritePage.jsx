@@ -33,27 +33,14 @@ const FavoritePage = () => {
   
 
   return (
-    <div className='w-full h-full flex flex-col overflow-y-auto p-10'>
-      <h1 className='text-2xl font-semibold'>Artikel yang disukai</h1>
+    <section className='w-full h-full overflow-y-auto p-10 flex items-center justify-center bg-slate-50'>
+      <section className='w-full h-full '>
+        <h1 className='text-3xl text-slate-800 font-semibold'>Kelola Profil dan Informasi Anda</h1>
+        <p className='text-slate-600 w-[80%] mt-2'>Anda dapat memperbarui data pribadi, mengelola pengaturan akun, dan memantau informasi yang terkait dengan profil Anda.</p>
 
 
-      {favorited.length === 0 ? (
-        <div className="mt-10">
-          <h1 className="text-slate-700 font-medium text-xl">tidak ada artikel yang disukai</h1>
-        </div>
-      ) : (
-        <section className="w-full grid grid-cols-4 place-items-center gap-6 my-10">
-          {favorited.map((item, index) => {
-            return <ArticelCards url={`/dashboard/news/${item.judulArtikel}`} key={index} {...item} isBgWhite={true}>
-              <Form method='POST' className='h-fit w-fit rounded-md bg-red-300 py-1 px-2'>
-                <input type="hidden" name='id' value={item._id} />
-                <button type="submit"><Trash className="stroke-[1.5px] w-4 h-4 stroke-white" /> </button>
-              </Form>
-            </ArticelCards>
-          })}
-        </section>
-      )}
-    </div>
+      </section>  
+    </section>
   )
 }
 
