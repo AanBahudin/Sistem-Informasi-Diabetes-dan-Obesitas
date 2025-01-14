@@ -7,8 +7,8 @@ const ArticleCardsUser = ({ judulArtikel, deskripsi, jenisArtikel, thumbnail }) 
     deskripsi = deskripsi.length >= 70 ? deskripsi.slice(0, 115) + '...' : deskripsi
 
   return (
-    <Link to={`/dashboard/news/${judulArtikel}`} className='max-w-[23%] max-h-[45vh] bg-white shadow-md p-2 rounded-xl flex flex-col cursor-default'>
-        <img className='w-full overflow-hidden object-fill object-top rounded-xl h-32 bg-slate-500' src={thumbnail} alt="" />
+    <Link to={`/dashboard/news/${judulArtikel}`} className='max-w-[23%] max-h-[50vh] bg-white shadow-md p-2 rounded-xl flex flex-col cursor-default'>
+        <img className='w-full overflow-hidden object-fill object-top rounded-xl min-h-32 bg-slate-500' src={thumbnail} alt="" />
 
         <p className='text-xs text-slate-700 flex items-center justify-start gap-x-4 my-4'>
         <Clock className='w-4 h-4 stroke-slate-400' />
