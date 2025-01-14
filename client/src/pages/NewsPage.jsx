@@ -26,15 +26,13 @@ export const action = async({ request }) => {
   const formData = await request.formData()
   const data = Object.fromEntries(formData)
 
-  let url = data.type === 'bookmark' ? '/news/bookmark' : '/news/favorite'
-  let submittingType = data.type === 'bookmark' ? 'Artikel disimpan!' : 'Artikel ditambahkan ke daftar suka'
-
+  let submittingType = data.type === 'bookmark' ? 'Artikel disimpan!' : 'Artikel ditambahkan ke daftar suka'  
   try {
-    await customFetch.post(url, data);
-    toast.success(submittingType)
+    await customFetch.post(`/news/${data.data}`, data);
+    return toast.success(submittingType)
   } catch (error) {
-    console.log(error.response.data.msg);
-    toast.error('Terjadi kesalahan')
+    console.log(error);
+    return toast.error('Terjadi kesalahan')
   }
 }
 

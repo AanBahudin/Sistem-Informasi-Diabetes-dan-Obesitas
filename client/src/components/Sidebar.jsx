@@ -14,7 +14,7 @@ const Sidebar = ({ links, logoutFunction, data }) => {
             
         <section className='w-full flex flex-col gap-y-2 items-center justify-start mt-16'>
           {links.map((item, index) => {
-            return <SidebarLink {...item} />
+            return <SidebarLink key={index} {...item} />
           })}
         </section>
       </div>

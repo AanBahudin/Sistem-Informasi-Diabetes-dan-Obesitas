@@ -10,7 +10,9 @@ import {
     LayoutDashboard,
     SquareUser,
     BookMarked,
-    Heart } from 'lucide-react'
+    Heart, 
+    ThumbsUp,
+    Pin} from 'lucide-react'
 
 
 import { 
@@ -40,12 +42,12 @@ export const sidebarLink = [
         name: 'Profile'
     },
     {
-        icon: <BookMarked size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
+        icon: <Pin size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
         path: 'bookmark',
         name: 'Bookmark'
     },
     {
-        icon: <Heart size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
+        icon: <ThumbsUp size={25} className='stroke-[1.5px] stroke-gray-900 mx-auto'/>,
         path: 'favorite',
         name: 'Favorite'
     }

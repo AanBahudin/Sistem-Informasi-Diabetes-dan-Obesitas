@@ -68,6 +68,8 @@ export const deleteNews = async(req, res) => {
 
 export const addBookmark = async(req, res) => {
     const addedNewsId = new mongoose.Types.ObjectId(req.body.id)
+    console.log(addedNewsId);
+    
     await User.findOneAndUpdate({_id: req.user.user_id}, { $addToSet: { bookmark: addedNewsId } }, { new: true, runValidators: true })
     return res.status(StatusCodes.OK).json({  msg: 'successfully'})
 }
