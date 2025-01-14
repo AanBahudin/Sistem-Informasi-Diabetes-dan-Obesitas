@@ -103,8 +103,10 @@ const NewsPage = () => {
             </div>
 
           ) : (
-            testdata.map((item, index) => {
-              return <ArticleCardsUser key={index} />
+            data.news.map((item, index) => {
+              console.log(item);
+              
+              return <ArticleCardsUser key={index} {...item} />
             })
           )}
 
