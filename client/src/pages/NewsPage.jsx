@@ -118,8 +118,8 @@ const NewsPage = () => {
                     <p className='lowercase py-1 px-4 rounded-md text-xs bg-blue/40 '>Diabetes</p>
   
                     <article className='flex gap-x-2 justify-end items-center'>
-                      <ThumbsUp className='border-[2px] border-blue/60 stroke-blue p-1 rounded-md w-6 h-6' />
-                      <Pin className='border-[2px] border-pink-400 stroke-pink-400 p-1 rounded-md w-6 h-6' />
+                      <ThumbsUp className='border-[2px] border-blue/60 stroke-blue hover:border-transparent hover:bg-blue/60 hover:stroke-white duration-200 ease-in-out p-1 rounded-md w-6 h-6' />
+                      <Pin className='border-[2px] border-pink-400 stroke-pink-400 hover:border-transparent hover:bg-pink-400 hover:stroke-white duration-200 ease-in-out p-1 rounded-md w-6 h-6' />
                     </article>
                   </div>
               </div>
