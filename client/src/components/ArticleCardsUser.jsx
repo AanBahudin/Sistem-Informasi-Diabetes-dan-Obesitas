@@ -1,11 +1,13 @@
 import React from 'react'
+import moment from 'moment'
 import { Clock, ThumbsUp, Pin } from 'lucide-react'
 import { Form, Link } from 'react-router-dom'
 
-const ArticleCardsUser = ({ _id, judulArtikel, bookmark, favorite, deskripsi, jenisArtikel, thumbnail }) => {
+const ArticleCardsUser = ({ _id, judulArtikel, createdAt, bookmark, favorite, deskripsi, jenisArtikel, thumbnail }) => {
 
     judulArtikel = judulArtikel.length >= 70 ? judulArtikel.slice(0, 67) + '...' : judulArtikel
     deskripsi = deskripsi.length >= 70 ? deskripsi.slice(0, 115) + '...' : deskripsi
+    const formattedTime = moment(createdAt).startOf('hour').fromNow(); 
 
     return (
       <section className='max-w-[23%] max-h-[50vh] bg-white shadow-md p-2 rounded-xl flex flex-col justify-between cursor-default'>
@@ -13,8 +15,8 @@ const ArticleCardsUser = ({ _id, judulArtikel, bookmark, favorite, deskripsi, je
             <img className='w-full overflow-hidden object-fill object-top rounded-xl min-h-32 bg-slate-500' src={thumbnail} alt="" />
 
             <p className='text-xs text-slate-700 flex items-center justify-start gap-x-4 my-4'>
-            <Clock className='w-4 h-4 stroke-slate-400' />
-            30 menit yang lalu
+              <Clock className='w-4 h-4 stroke-slate-400' />
+              {formattedTime}
             </p>
 
             <h1 className='text-slate-800 text-sm font-semibold'>{judulArtikel}</h1>
