@@ -33,8 +33,8 @@ const BookmarkPage = () => {
   return (
     <section className='w-full h-full overflow-y-auto p-10 flex items-center justify-center bg-slate-50'>
       <section className='w-full h-full '>
-        <h1 className='text-3xl text-slate-800 font-semibold'>Kelola Profil dan Informasi Anda</h1>
-        <p className='text-slate-600 w-[80%] mt-2'>Anda dapat memperbarui data pribadi, mengelola pengaturan akun, dan memantau informasi yang terkait dengan profil Anda.</p>
+        <h1 className='text-3xl text-slate-800 font-semibold'>Halaman Favorit Anda</h1>
+        <p className='text-slate-600 w-[80%] mt-2'>Kumpulan artikel yang Anda sukai. Akses konten favorit Anda dengan cepat di sini.</p>
 
 
       </section>  
