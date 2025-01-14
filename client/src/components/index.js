@@ -7,5 +7,6 @@ export {default as Loading} from './Loading';
 export {default as Navbar} from './Navbar';
 export {default as ProfileInput} from './ProfileInput'
 export {default as Sidebar} from './Sidebar';
+export {default as SidebarLink} from './SidebarLinks';
 export {default as TextAreaInput} from './TextAreaInput';
 export {default as TextEditor} from './TextEditor';

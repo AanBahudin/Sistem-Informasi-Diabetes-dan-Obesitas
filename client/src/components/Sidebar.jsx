@@ -1,23 +1,33 @@
-import { NavLink } from 'react-router-dom';
-import { LogOut } from 'lucide-react';
+import { SidebarLink } from '../components'
+import { Cross, User } from 'lucide-react';
 
 const Sidebar = ({ links, logoutFunction }) => {
   return (
-    <div className='w-[8%] h-full flex flex-col justify-between items-center py-10 bg-slate-200'>
-        <h1 className='text-center font-semibold text-xl select-none'>E-Health</h1>
-
-        <div className='w-20 h-12 mx-auto flex flex-col gap-y-4 items-stretch justify-center'>
+    <div className='w-[15%] h-full flex flex-col justify-between items-center pt-10 bg-slate-100'>
+      <div className='w-full'>
+        <section className='w-full flex items-center justify-center gap-x-4'>
+          <Cross className='stroke-white bg-blue/80 p-2 w-10 h-10 rounded xl' />
+          <h1 className='text-center font-semibold text-xl select-none text-slate-900'>Dashboard</h1>
+        </section>
+          
+            
+        <section className='w-full flex flex-col gap-y-2 items-center justify-start mt-16'>
           {links.map((item, index) => {
-            return (
-              <NavLink key={index} to={item.path} className={({ isActive }) => `rounded-lg px-3 py-4 duration-300 ease-in-out flex-col cursor-default items-center justify-center text-center ${isActive ? 'bg-lightGrey stroke-blue shadow-lg text-grey gap-y-2' : 'gap-y-0'}`} end>
-                {item.icon}
-                <p className='text-[10px] mt-2'>{item.name}</p>
-              </NavLink>
-            )
+            return <SidebarLink {...item} />
           })}
-        </div>
+        </section>
+      </div>
         
-        <LogOut onClick={logoutFunction} size={25} className='stroke-[1.5px] mx-auto stroke-gray-400'/>
+      <div className='w-full py-2 px-6 flex items-center justify-center gap-x-6 bg-slate-200'>
+          <User className='bg-slate-400 p-4 rounded-full' />
+
+          <section className=''>
+            <h1 className='text-sm font-semibold text-slate-700'>Aan Bahudin</h1>
+            <p className='text-xs text-slate-500 truncate'>aanbahudin@gmail.com</p>
+            <button onClick={logoutFunction} className='w-full text-xs mt-2 py-1 rounded-md border-[2px] cursor-default text-slate-700 duration-200 ease-in-out hover:bg-red-300 hover:text-white border-red-300'>keluar</button>
+          </section>
+      </div>
+        
     </div>
   )
 }
