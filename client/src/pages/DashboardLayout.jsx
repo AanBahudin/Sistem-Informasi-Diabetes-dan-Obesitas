@@ -47,7 +47,7 @@ const DashboardLayout = () => {
       logoutUser,
       deleteProfileFunc
     }}>
-      <div className="w-full h-[100vh] flex bg-lightGrey">
+      <div className="w-full h-[100vh] flex bg-white">
           <Sidebar links={sidebarLinkUser} logoutFunction={logoutUser} />
 
           <section className="flex-1 h-[100vh] overflow-y-auto">
