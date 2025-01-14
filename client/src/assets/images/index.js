@@ -1,4 +1,5 @@
 export { default as aboutPhoto } from './about.png'
+export { default as loginPhoto } from './login.png'
 export { default as diabetesPhoto } from './diabetes.png'
 export { default as sehatPhoto } from './sehat.webp'
 export { default as firstPhoto } from './fir_person.jpg'

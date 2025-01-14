@@ -1,5 +1,5 @@
-import { aboutPhoto } from '../assets/images';
-import { LoaderCircle } from 'lucide-react';
+import { loginPhoto, man } from '../assets/images';
+import { LoaderCircle, AtSign, X, KeyRound, EyeClosed, Cross, Eye, Loader } from 'lucide-react';
 import { FormInput } from '../components'
 import { Link, redirect, Form, useNavigation } from 'react-router-dom';
 import { useState } from 'react';
@@ -40,60 +40,74 @@ export const action = async({ request }) => {
 const Login = () => {
 
   const [showPass, setShowPass] = useState(false);
+  const [isEmail, setEmail] = useState('')
   const isSubmitting = useNavigation().state === 'submitting'
 
   return (
-    <section className='w-fullScreen h-fullScreen p-20 flex items-center justify-center'>
+    <Form method='POST' className='w-fullScreen h-fullScreen p-20 flex items-center justify-center'>
 
-      <section className='w-full h-full mt-4 bg-slate-200 rounded-xl shadow-md'>
-        <h1>This is main container</h1>
+      <section className='w-full h-full mt-4 rounded-xl grid grid-cols-2'>
+
+        {/* KOLOM KIRI */}
+        <article className='col-span-1 flex items-start justify-center flex-col p-6'>
+          <Cross className='stroke-white bg-blue/80 w-12 h-12 p-2 shadow-md mb-4 rounded-md' />
+          <h1 className='text-slate-700 font-semibold text-3xl'>Selamat datang kembali</h1>
+          <p className='text-slate-600 mt-1'>Login untuk melanjutkan dan nikmati kemudahan akses ke semua fitur kami.</p>
+
+
+          {/* input field */}
+          <div className='w-[80%] mt-4'>
+            <label htmlFor="email" className='text-slate-800 mb-10 font-semibold'>Email</label>
+            <div className='w-full flex items-center justify-between h-12 rounded-xl border-[2px] border-slate-400 focus-within:border-blue/80'>
+              <AtSign className='stroke-slate-600 w-5 h-5 ml-2' />
+              <input type="text" name="email" id="email" className='w-full px-6 h-full text-md outline-none focus:placeholder:text-transparent' autoFocus autoComplete='off' placeholder='johndoe@gmail.com'  required autoCorrect='off' onChange={(e) => setEmail(e.target.value)} value={isEmail}/>
+              <X onClick={() => setEmail('')} className={` ${isEmail ? 'visible' : 'invisible'} stroke-red-400 w-5 h-5 mr-2`} />
+            </div>
+          </div>
+
+          <div className='w-[80%] mt-4'>
+            <label htmlFor="email" className='text-slate-800 mb-10 font-semibold'>Password</label>
+            <div className='w-full flex items-center justify-between h-12 rounded-xl border-[2px] border-slate-400 focus-within:border-blue/80'>
+              <KeyRound className='stroke-slate-600 w-5 h-5 ml-2' />
+              <input type={showPass ? 'text' : 'password'} name="password" id="password" className='w-full px-6 h-full text-md outline-none' autoComplete='off' placeholder='password'  required autoCorrect='off' />
+
+              {showPass ? (
+                <EyeClosed onClick={() => setShowPass(false)} className='stroke-blue/80 w-5 h-5 mr-2' />
+              ) : (
+                <Eye onClick={() => setShowPass(true)} className='stroke-blue/80 w-5 h-5 mr-2' />
+              )}
+            </div>
+          </div>
+
+          <button type='submit' disabled={isSubmitting} className='w-[80%] cursor-default hover:bg-blue/90 duration-200 ease-in-out py-2 bg-blue/80 text-center rounded-xl font-semibold text-white mt-4 flex items-center justify-center gap-x-4'>
+            {
+              isSubmitting ? (  
+                <>
+                  <LoaderCircle className='w-6 h-6 stroke-white animate-spin' />
+                  tunggu sebentar
+                </>
+
+              ) : 'masuk'
+            }
+          
+          </button>
+
+          <div className='w-[80%] flex items-start justify-start gap-x-2 mt-4'>
+            <input type="checkbox" className='outline-none' name="aggrement" id="aggrement" required />
+            <label htmlFor="aggrement" className='text-[12px] text-slate-700/80'>Dengan menyetujui proses login ini, Anda menerima dan setuju untuk mematuhi <span className='text-blue/80'> Ketentuan Layanan, Kebijakan Privasi, </span> serta semua aturan dan regulasi yang berlaku</label>
+          </div>
+
+
+        </article>
+
+        {/* KOLOM KANAN */}
+        <article className='w-full h-full overflow-hidden rounded-xl bg-blue/80 flex items-center justify-center'>
+          <img className='h-full' src={loginPhoto} />
+        </article>
       </section>
 
-    </section>
+    </Form>
   )
 }
 
 export default Login
-    // <div className='w-fullScreen h-fullScreen grid grid-cols-12'>
-
-    //     <Form method="POST" className="w-full h-full flex justify-center items-center col-span-6 bg-[url('/src/assets/images/gradient.jpg')] bg-no-repeat bg-cover">
-    //         <div className="px-6 py-10 w-[70%]">
-    //           <h1 className='font-semibold text-2xl'>Selamat datang kembali</h1>
-    //           <p className='text-sm mt-2 mb-10'>Akses akun Anda untuk melanjutkan</p>
-
-    //             <FormInput  
-    //               labelText="Email"
-    //               inputType="email"
-    //               name="email"
-    //               placeholder="enter your email"
-    //               isFirstItem={true} />
-
-    //             <FormInput  
-    //               labelText="Password"
-    //               inputType={showPass ? 'text' : 'password'}
-    //               name='password'
-    //               placeholder="enter your password"
-    //               isFirstItem={false} />
-              
-    //             <div className='w-full flex justify-between'>
-    //               <section className='flex justify-center flex-row gap-x-4'>
-    //                 <input name='showpass' className='w-4 h-4' type="checkbox" onChange={() => setShowPass(!showPass)}/>
-    //                 <label htmlFor="showpass" className='text-[12px]'>show password</label>
-    //               </section>
-
-    //               <p className='text-right text-[12px] cursor-default text-grey lowercase mb-10 underline'>lupa password?</p>
-
-    //             </div>
-
-    //           <button disabled={isSubmitting} className='w-full flex items-center justify-center gap-x-6 text-md text-grey font-semibold tracking-wider cursor-default hover:bg-blue duration-200 ease-in-out bg-blue/80 disabled:bg-blue py-3 rounded-md'>
-    //             { isSubmitting ?  <LoaderCircle className='stroke-white animate-spin ' /> : 'Login'}
-    //           </button>
-    //           <p className='text-grey text-center text-[12px] mt-4'>Belum punya akun? <Link to='/register' className='underline'>Daftar disini</Link></p>
-
-    //         </div>
-    //     </Form>
-
-    //     <section className='w-full h-full bg-green-100 col-span-6 overflow-hidden'>
-    //         <img className='h-fit' src={aboutPhoto} alt="" />
-    //     </section>
-    // </div>
