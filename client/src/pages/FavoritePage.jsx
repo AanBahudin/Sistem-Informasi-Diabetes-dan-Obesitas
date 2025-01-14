@@ -50,9 +50,16 @@ const FavoritePage = () => {
             </div>
 
           ) : (
-            favorited.map((item, index) => {
-                return <ArticleCards {...item} key={index}/>
-              })
+            favorited.length === 0 ? (
+              <div className='w-full'>
+                <h1 className='text-slate-700 font-medium'>Belum Ada Artikel yang Disukai</h1>
+                <p className='text-sm text-slate-500 '>Temukan artikel yang menarik perhatian Anda, lalu tandai sebagai favorit untuk akses yang lebih mudah di kemudian hari</p>
+              </div>
+            ) : (
+              favorited.map((item, index) => {
+                  return <ArticleCards {...item} key={index}/>
+                })
+            )
           )}
         </article>
       </section>  

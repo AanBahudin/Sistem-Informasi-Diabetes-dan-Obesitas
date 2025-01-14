@@ -45,9 +45,17 @@ const BookmarkPage = () => {
             </div>
 
           ) : (
-            bookmarked.map((item, index) => {
-                return <ArticleCards {...item} key={index}/>
-              })
+
+            bookmarked.length === 0 ? (
+              <div className='w-full'>
+                <h1 className='text-slate-700 font-medium'>Belum Ada Artikel yang Disimpan</h1>
+                <p className='text-sm text-slate-500 '>Simpan artikel yang Anda anggap penting, dan temukan semuanya di sini untuk dibaca kapan saja.</p>
+              </div>
+            ) : (
+              bookmarked.map((item, index) => {
+                  return <ArticleCards {...item} key={index}/>
+                })
+            ) 
           )}
         </article>
       </section>  
