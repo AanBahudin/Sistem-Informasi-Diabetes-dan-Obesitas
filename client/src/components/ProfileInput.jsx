@@ -11,7 +11,11 @@ const ProfileInput = ({ isEdit, label, name, defaultValue, isAutoFocus, typeInpu
               inputType === 'date' ? (
                 <input type='date' name={name} id={name} defaultValue={defaultValue || ''} className='text-small p-2 rounded-md outline-none' />
               ) : (
-                <input type={inputType} name={name} id={name} min={0} defaultValue={defaultValue || ''} className='text-small p-2 rounded-md outline-none' autoComplete='off' spellCheck="false" autoFocus={isAutoFocus}/>
+                inputType === 'file' ? (
+                  <input type={inputType} name={name} id={name} accept='image/*' defaultValue={defaultValue || ''} className='text-small p-2 rounded-md outline-none' autoComplete='off' spellCheck="false" autoFocus={isAutoFocus}/>
+                ) : (
+                  <input type={inputType} name={name} id={name} min={0} defaultValue={defaultValue || ''} className='text-small p-2 rounded-md outline-none' autoComplete='off' spellCheck="false" autoFocus={isAutoFocus}/>
+                )
               )
 
             ) : (

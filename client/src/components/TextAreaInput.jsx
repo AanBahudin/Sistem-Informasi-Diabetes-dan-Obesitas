@@ -2,9 +2,9 @@ import React from 'react'
 
 const TextAreaInput = ({ name, labelText, placeholder, defaultValue, isFirstItem }) => {
   return (
-    <article className='w-full flex flex-col gap-y-2'>
-        <label className='text-sm font-medium' htmlFor={name}>{labelText}</label>
-        <textarea className='py-3 h-[25vh] border-[2px] border-grey/70 rounded-md px-4 bg-white text-small placeholder:text-small placeholder:italic mb-4 outline-none resize-none' name={name} id={name} placeholder={placeholder} required autoFocus={isFirstItem} autoComplete='off' defaultValue={defaultValue}></textarea>
+    <article className='flex flex-col'>
+      <label htmlFor={name} className='font-semibold text-slate-700 capitalize'>{labelText}</label>
+      <textarea name={name} id={'test'} placeholder={placeholder} className='w-full h-[20vh] overflow-y-auto resize-none border-[2px] py-2 text-slate-700/80 border-slate-400 rounded-lg text-sm outline-none px-4'></textarea>
     </article>
   )
 }
