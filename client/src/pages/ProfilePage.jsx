@@ -1,7 +1,7 @@
 import { Edit, X, LoaderCircle, Loader, LoaderCircleIcon, Camera, Pencil, UserRound, Newspaper, Hospital } from 'lucide-react'
 import moment from 'moment'
 import { userPhoto } from '../assets/images'
-import { FormInputProfile, FormSelect } from '../components'
+import { DataContainer, FormInputProfile, FormSelect } from '../components'
 import { NavLink, redirect, useLoaderData, useLocation, Form, useNavigation, replace } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import customFetch from '../utils/customFetch'
@@ -50,8 +50,11 @@ const ProfilePage = () => {
   const isEditData = queryParams === 'true';  
 
   const data = useLoaderData()
+  console.log(data);
+  
 
   const {beratBadan, tinggiBadan, IBM, IBMStatus, kondisiTubuh, kadarGula, statusKadarGula, targetKesehatan, jenisDiet } = data.data_kesehatan;
+  const { nama, email } = data
   
   const { deleteProfileFunc } = useDashboardContext()
   const dateOnly = moment(data.createdAt).subtract(10, 'days').calendar();
@@ -93,21 +96,21 @@ const ProfilePage = () => {
             <article className='w-full flex flex-col mt-10 gap-y-4'>
 
               <div onClick={() => setActiveTab('first')} className={`w-full rounded-xl ${ activeTab === 'first' ? 'bg-blue/30' : 'bg-slate-100' } py-2 flex justify-start px-4 duration-200 ease-in-out`}>
-                <p className={`flex items-center justify-start gap-x-3 clear-start text-sm ${activeTab === 'first' ? 'text-slate-900' : 'text-slate-700'}`}>
+                <p className={`cursor-default flex items-center justify-start gap-x-3 clear-start text-sm ${activeTab === 'first' ? 'text-slate-900' : 'text-slate-700'}`}>
                   <UserRound className={`stroke-slate-700 w-5 h-5`} />
                   Informasi Pribadi
                 </p>
               </div>
 
               <div onClick={() => setActiveTab('second')} className={`w-full rounded-xl ${ activeTab === 'second' ? 'bg-blue/30' : 'bg-slate-100' } py-2 flex justify-start px-4 duration-200 ease-in-out`}>
-                <p className={`flex items-center justify-start gap-x-3 clear-start text-sm ${activeTab === 'second' ? 'text-slate-900' : 'text-slate-700'}`}>
+                <p className={`cursor-default flex items-center justify-start gap-x-3 clear-start text-sm ${activeTab === 'second' ? 'text-slate-900' : 'text-slate-700'}`}>
                   <Hospital className={`stroke-slate-700 w-5 h-5`} />
                   Informasi Kesehatan
                 </p>
               </div>
 
               <div onClick={() => setActiveTab('third')} className={`w-full rounded-xl ${ activeTab === 'third' ? 'bg-blue/30' : 'bg-slate-100' } py-2 flex justify-start px-4 duration-200 ease-in-out`}>
-                <p className={`flex items-center justify-start gap-x-3 clear-start text-sm ${activeTab === 'third' ? 'text-slate-900' : 'text-slate-700'}`}>
+                <p className={`cursor-default flex items-center justify-start gap-x-3 clear-start text-sm ${activeTab === 'third' ? 'text-slate-900' : 'text-slate-700'}`}>
                   <Newspaper className={`stroke-slate-700 w-5 h-5`} />
                   Informasi Umum
                 </p>
@@ -122,41 +125,43 @@ const ProfilePage = () => {
 
             <article className='w-full mt-6'>
 
-              {
-                activeTab === 'first' ? (
-                  <section className='w-full flex flex-col gap-y-4'>
-                      <div className='w-full grid grid-cols-2 gap-x-6'>
-                        <FormInputProfile type='text' inputName='nama' label='nama lengkap' isRequired={true} defaultValue={data.nama} />
-                        <FormInputProfile type='email' inputName='email' label='email' isRequired={true} defaultValue={data.email} />
-                      </div>
+              <section className={`w-full ${activeTab === 'first' ? 'flex flex-col' : 'hidden'} gap-y-4`}>
+                  <div className='w-full grid grid-cols-2 gap-x-6'>
+                    <FormInputProfile type='text' inputName='nama' label='nama lengkap' isRequired={true} defaultValue={nama} />
+                    <FormInputProfile type='email' inputName='email' label='email' isRequired={true} defaultValue={email} />
+                  </div>
 
-                      <FormInputProfile type='text' label='Nomor telepon' isRequired={true} defaultValue={data.email} />
-                      
-                      <div className='w-full grid grid-cols-2 gap-x-6'>
-                        <FormSelect inputName='jenisKelamin' defaultValue={data.jenisKelamin} label='jenis kelamin' list={['Pria', 'Wanita']} />
-                        <FormInputProfile type='date' inputName='tanggalLahir' label='tanggal lahir' isRequired={true} defaultValue={data.tanggalLahir} />
-                      </div>
-                  </section>
-                ) : (
-                  activeTab === 'second' ? (
-                    <section className='w-full flex flex-col gap-y-4'>
-                      <div className='w-full grid grid-cols-2 gap-x-6'>
-                        <FormInputProfile type='text' inputName='nama' label='nama lengkap' isRequired={true} defaultValue={data.nama} />
-                        <FormInputProfile type='email' inputName='email' label='email' isRequired={true} defaultValue={data.email} />
-                      </div>
+                  <FormInputProfile type='text' label='Nomor telepon' isRequired={true} defaultValue={data.email} />
+                  
+                  <div className='w-full grid grid-cols-2 gap-x-6'>
+                    <FormSelect inputName='jenisKelamin' defaultValue={data.jenisKelamin} label='jenis kelamin' list={['Pria', 'Wanita']} />
+                    <FormInputProfile type='date' inputName='tanggalLahir' label='tanggal lahir' isRequired={true} defaultValue={formatDate(data.tanggalLahir)} />
+                  </div>
+              </section>
 
-                      <FormInputProfile type='text' label='Nomor telepon' isRequired={true} defaultValue={data.email} />
-                      
-                      <div className='w-full grid grid-cols-2 gap-x-6'>
-                        <FormSelect inputName='jenisKelamin' defaultValue={data.jenisKelamin} label='jenis kelamin' list={['Pria', 'Wanita']} />
-                        <FormInputProfile type='date' inputName='tanggalLahir' label='tanggal lahir' isRequired={true} defaultValue={data.tanggalLahir} />
-                      </div>
-                  </section>
-                  ) : (
-                    null
-                  )
-                )
-              }
+              <section className={`w-full ${activeTab === 'second' ? 'flex flex-col' : 'hidden'} gap-y-4`}>
+                <div className='w-full grid grid-cols-2 gap-x-6 gap-y-4'>
+                  <FormInputProfile type='number' inputName='beratBadan' label='berat badan' defaultValue={beratBadan || 0} />
+                  <FormInputProfile type='number' inputName='tinggiBadan' label='tinggi badan' defaultValue={tinggiBadan || 0} />
+                  <FormSelect inputName='kondisiTubuh' defaultValue={kondisiTubuh} label='Kondisi tubuh' list={['Sehat', 'Cukup Sehat', 'Kurang Sehat', 'Tidak Sehat']} />
+                  <FormSelect inputName='targetKesehatan' defaultValue={targetKesehatan} label='Capaian Kesehatan' list={['Menurunkan Berat Badan', 'Mempertahankan Berat Badan', 'Menaikkan Berat Badan']} />
+                  <FormSelect inputName='jenisDiet' defaultValue={jenisDiet} label='Jenis diet' list={['Diet Rendah Karbohidrat', 'Diet Rendah Gula', 'Diet Vegatarian', 'Diet Rendah Lemak', 'Diet Tinggi Protein']} />
+                  <FormInputProfile type='number' inputName='kadarGula' label='kadar gula' defaultValue={kadarGula.toString()} />
+                </div>
+              </section>
+
+              <section className={`w-full ${activeTab === 'third' ? 'flex flex-col' : 'hidden'} gap-y-4`}>
+                <div className='w-full grid grid-cols-2 gap-x-6 gap-y-4'>
+                  <DataContainer label='BMI' value={IBM} />
+                  <DataContainer label='Status BMI' value={IBMStatus} />
+                  <DataContainer label='status kadar gula' value={statusKadarGula} />
+                </div>
+
+                <div className='w-full grid grid-cols-2 gap-x-6'>
+                  <DataContainer label='jumlah artikel disukai' value={data.bookmark.length + ' Artikel'} />
+                  <DataContainer label='jumlah artikel disimpan' value={data.favorite.length + ' Artikel'}  />
+                </div>
+              </section>
               
               {/* PERSONAL MAIN CONTAINER  */}
 
