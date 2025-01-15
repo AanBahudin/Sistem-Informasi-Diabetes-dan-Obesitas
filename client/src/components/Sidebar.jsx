@@ -1,7 +1,11 @@
 import { SidebarLink } from '../components'
-import { Cross, User } from 'lucide-react';
+import { Cross } from 'lucide-react';
+import { loginPhoto } from '../assets/images'
 
 const Sidebar = ({ links, logoutFunction, data }) => {
+
+  console.log(data.photo);
+  
 
   return (
     <div className='w-[15%] h-full flex flex-col justify-between items-center pt-10 bg-slate-100'>
@@ -20,7 +24,9 @@ const Sidebar = ({ links, logoutFunction, data }) => {
       </div>
         
       <div className='w-full py-2 px-6 flex items-center justify-center gap-x-6 bg-slate-200'>
-          <User className='bg-slate-400 p-4 rounded-full' />
+          <div className='h-fit'>
+            <img className='w-14 h-14 object-cover bg-slate-500 rounded-full' src={data.photo || loginPhoto} alt="" />
+          </div>
 
           <section className=''>
             <h1 className='text-sm font-semibold text-slate-700'>{data.nama}</h1>
