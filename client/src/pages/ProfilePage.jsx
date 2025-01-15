@@ -71,12 +71,13 @@ const ProfilePage = () => {
   }
 
   return (
-    <section className='w-full h-[100vh] overflow-y-auto p-10 flex justify-center bg-slate-50'>
-      <section className='w-full max-h-full]'>
+    <section className='w-full h-[100vh] flex justify-center bg-slate-50'>
+      <section className='w-full max-h-full p-10 '>
         <h1 className='text-3xl text-slate-800 font-semibold'>Kelola Profil dan Informasi Anda</h1>
         <p className='text-slate-600 w-[80%] mt-2'>Anda dapat memperbarui data pribadi, mengelola pengaturan akun, dan memantau informasi yang terkait dengan profil Anda.</p>
 
-        <article className='w-full h-full bg-red-500 grid grid-cols-12 gap-x-10 mt-10'>
+        {/* PEMBUNGKUS ARTIKEL INI TIDAK DAPAT MEMENUHI TINGGI DARI PARENTNYA */}
+        <article className='w-full h-[80%] grid grid-cols-12 gap-x-10 mt-10'>
 
           {/* FOTO DAN MENU SECTION */}
           <div className='col-span-4 bg-slate-100 rounded-3xl py-8 px-4'>
@@ -111,7 +112,6 @@ const ProfilePage = () => {
                   Informasi Umum
                 </p>
               </div>
-
             </article>
 
 
