@@ -26,16 +26,12 @@ const ArticlesCardsAdmin = ({ _id, judulArtikel, createdAt, deskripsi, jenisArti
           <p className='lowercase py-1 px-4 rounded-md text-xs bg-blue/40 '>{jenisArtikel}</p>
 
           <article className='flex gap-x-2 justify-end items-center mt-auto'>
-            <Form method='POST' className='flex items-center'>
-              <input type="hidden" name='id' value={_id} />
-              <button type='submit' name='data' value='favorite' className='m-0 p-0 border-none bg-transparent'>
-                <Pencil className={`border-[2px] bg-blue/80 border-transparent stroke-white duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
-              </button>
-            </Form>
+            <Link to={`/admin/dashboard/news/edit/${judulArtikel}`} >
+              <Pencil className={`border-[2px] bg-blue/80 border-transparent stroke-white duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
+            </Link>
             
             <Form method='POST' className='flex items-center'>
-              <input type="hidden" name='id' value={_id} />
-              <button type='submit' name='data' value='bookmark' className='m-0 p-0 border-none bg-transparent'>
+              <button type='submit' name='id' value={_id} className='m-0 p-0 border-none bg-transparent'>
                 <Trash className={`border-[2px] border-transparent bg-pink-400 stroke-white  duration-200 ease-in-out p-1 rounded-md w-6 h-6`} />
               </button>
             </Form>
