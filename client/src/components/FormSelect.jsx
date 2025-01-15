@@ -1,16 +1,19 @@
 import React from 'react'
 
-const FormSelect = ({ name, labelText, isFirstItem, list, defaultValue, useBorder }) => {
+const FormSelect = ({label, inputName, defaultValue, list}) => {
   return (
-    <article className='w-full flex flex-col gap-y-2'>
-      <label className='text-sm font-medium' htmlFor={name}>{labelText}</label>
-      <select defaultValue={defaultValue} className={`py-3  border-[2px] focus:border-grey rounded-md px-4 bg-lightGrey text-sm placeholder:text-sm mb-4 outline-none ${ useBorder ? 'border-grey/70 bg-white' : '' }`} name={name} id={name} autoFocus={isFirstItem} autoComplete='off' required>
+    <article className='w-full '>
+        <label htmlFor={inputName} className='font-semibold text-slate-700'>{label}</label>
+        <select
+          name={inputName} 
+          id={inputName} 
+          required 
+          defaultValue={defaultValue || 'Pria'}
+          className='w-full border-[2px] py-2 text-slate-700/80 border-slate-400 rounded-lg text-sm outline-none px-4 '>
             {list.map((item, index) => {
-                return (
-                    <option key={index} value={item}>{item}</option>
-                )
+              return <option key={index} value={item}>{item}</option>
             })}
-      </select>
+        </select>
     </article>
   )
 }
