@@ -1,6 +1,6 @@
 import { Sidebar } from '../components'
 import { sidebarLinkAdmin } from '../utils/constants'
-import { Outlet, useNavigate,  } from 'react-router-dom'
+import { Outlet, useLoaderData, useNavigate,  } from 'react-router-dom'
 import customFetch from '../utils/customFetch'
 import { toast } from 'react-toastify'
 
@@ -17,9 +17,11 @@ export const loader = async() => {
     } 
 }
 
+
 const AdminDashboard = () => {
 
   const navigate = useNavigate()
+  const data = useLoaderData()
 
   const logoutUser = async() => {
     toast.success('logout successfully!')
@@ -29,7 +31,7 @@ const AdminDashboard = () => {
   
   return (
       <div className="w-full h-[100vh] flex bg-slate-100 overflow-y-auto">
-          <Sidebar links={sidebarLinkAdmin} logoutFunction={logoutUser} />
+          <Sidebar links={sidebarLinkAdmin} logoutFunction={logoutUser} data={data.user} />
 
           <section className='flex-1 h-fullScreen overflow-y-auto'>
               <Outlet />

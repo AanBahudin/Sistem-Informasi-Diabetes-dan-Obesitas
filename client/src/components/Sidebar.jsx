@@ -4,7 +4,7 @@ import { loginPhoto } from '../assets/images'
 
 const Sidebar = ({ links, logoutFunction, data }) => {
 
-  console.log(data.photo);
+  console.log(data);
   
 
   return (
@@ -25,11 +25,11 @@ const Sidebar = ({ links, logoutFunction, data }) => {
         
       <div className='w-full py-2 px-6 flex items-center justify-center gap-x-6 bg-slate-200'>
           <div className='h-fit'>
-            <img className='w-14 h-14 object-cover bg-slate-500 rounded-full' src={data.photo || loginPhoto} alt="" />
+            <img className='w-14 h-14 object-cover border-[2px] border-white   rounded-full' src={data.photo || loginPhoto} alt="" />
           </div>
 
           <section className=''>
-            <h1 className='text-sm font-semibold text-slate-700'>{data.nama}</h1>
+            <h1 className='text-sm font-semibold text-slate-700'>{data.nama || 'Administrator'}</h1>
             <p className='text-xs text-slate-500 truncate'>{data.email}</p>
             <button onClick={logoutFunction} className='w-full text-xs mt-2 py-1 rounded-md border-[2px] cursor-default text-slate-700 duration-200 ease-in-out hover:bg-red-300 hover:text-white border-red-300'>keluar</button>
           </section>
