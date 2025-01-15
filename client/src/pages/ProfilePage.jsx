@@ -71,18 +71,18 @@ const ProfilePage = () => {
   }
 
   return (
-    <section className='w-full h-full overflow-y-auto p-10 flex items-center justify-center bg-slate-50'>
-      <section className='w-full h-full '>
+    <section className='w-full h-[100vh] overflow-y-auto p-10 flex justify-center bg-slate-50'>
+      <section className='w-full max-h-full]'>
         <h1 className='text-3xl text-slate-800 font-semibold'>Kelola Profil dan Informasi Anda</h1>
         <p className='text-slate-600 w-[80%] mt-2'>Anda dapat memperbarui data pribadi, mengelola pengaturan akun, dan memantau informasi yang terkait dengan profil Anda.</p>
 
-        <article className='w-full grid grid-cols-12 gap-x-10 mt-10'>
+        <article className='w-full h-full bg-red-500 grid grid-cols-12 gap-x-10 mt-10'>
 
           {/* FOTO DAN MENU SECTION */}
-          <div className='col-span-4 bg-slate-100 rounded-3xl h-[100%] py-8 px-4'>
+          <div className='col-span-4 bg-slate-100 rounded-3xl py-8 px-4'>
             
             {/* CONTAINER FOTO PROFIL */}
-            <article className='w-full flex flex-col justify-center items-center'>
+            <article className='w-full  flex flex-col justify-center items-center'>
               <div className='w-28 h-28 bg-slate-500 rounded-full'></div>
               <h1 className='text-slate-900 font-semibold text-lg mt-2'>{data.nama}</h1>
               <p className='capitalize text-slate-800 text-sm'>{data.role === 'user' ? 'Pengguna' : 'Administrator'}</p>

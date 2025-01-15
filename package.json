@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup-project": "npm i && cd client && npm i",
+    "start": "nodemon server.js",
     "server": "supervisor server",
     "client": "cd client && npm run dev",
     "dev": "concurrently --kill-others-on-fail \" supervisor server.js \" \" npm run client\"",
