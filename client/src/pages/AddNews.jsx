@@ -6,7 +6,9 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { FormInput, FormSelect, TextAreaInput, Loading, FormInputProfile } from '../components'
 import { toast } from 'react-toastify'
 import customFetch from '../utils/customFetch'
+import { stateToHTML } from 'draft-js-export-html';
 import { convertToRaw } from 'draft-js'
+import { LoaderCircle } from 'lucide-react';
 
 export const action = async({ request }) => {
   const formData = await request.formData()
@@ -30,22 +32,32 @@ export const action = async({ request }) => {
 const AddNews = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [editorContent, setEditorContent] = useState('');
+  const [reviewContent, setReviewContent] = useState('');
   const [currentTab, setCurrentTab] = useState('first')
-
   const navigation = useNavigation()
   const isSubmitting = navigation.state === 'submitting'
-  const isLoading = navigation.state === 'loading'
 
   const onEditorStateChange = (newEditorState) => {
     setEditorState(newEditorState);
     const content = JSON.stringify(convertToRaw(newEditorState.getCurrentContent()));
+
+    const rawContent = convertToRaw(newEditorState.getCurrentContent());
+    const htmlContent = stateToHTML(newEditorState.getCurrentContent());
+
+    setReviewContent(htmlContent);
     setEditorContent(content);
   };
 
   return (
-    <Form method='POST' encType='multipart/form-data' className='w-full h-full overflow-y-auto p-10 flex items-center justify-center bg-slate-50'>
-      <section className='w-full h-full '>
-        <h1 className='text-3xl text-slate-800 font-semibold'>Buat Artikel Baru</h1>
+    <Form method='POST' encType='multipart/form-data' className='w-full h-full overflow-y-auto no-scrollbar p-10 flex items-center justify-center bg-slate-50 no-scrollbar'>
+      <section className='w-full h-full no-scrollbar'>
+        <h1 className='text-3xl text-slate-800 font-semibold w-full flex justify-between items-center'>
+          Buat Artikel Baru
+          <button className='text-sm bg-blue/70 py-2 px-10 rounded-lg flex items-center justify-center gap-x-2'>
+            {isSubmitting && <LoaderCircle className='w-4 h-4 animate-spin stroke-white' />}
+            {isSubmitting ? 'Proses' : 'Publish'}
+          </button>
+        </h1>
         <p className='text-slate-600 w-[80%] mt-2'>Mulai tulis artikel baru di sini. Sampaikan informasi berharga untuk membantu pengguna memahami lebih banyak tentang kesehatan, obesitas, dan diabetes.</p>
 
         {/* TABS */}
@@ -58,7 +70,7 @@ const AddNews = () => {
         {/* KONTAINER KONTEN */}
         <article className='w-full my-16'>
           
-          <section className={`${currentTab !== 'first' && 'hidden'} w-full`}>
+          <section className={`${currentTab !== 'first' && 'hidden'} w-full duration-200 ease-in-out`}>
             <div className='w-full grid grid-cols-3 gap-x-4'>
               <FormInputProfile inputName='judulArtikel' type='text' label='Judul Artikel' isRequired={true} placeholder='Cara mencegah diabetes' />
               <FormInputProfile inputName='tagArtikel' type='text' label='Tag Artikel' isRequired={true} placeholder='Hidup sehat' />
@@ -79,6 +91,11 @@ const AddNews = () => {
               <Editor
                 placeholder="Start typing articles..."
                 toolbar={{
+                  image: {
+                    alignmentEnabled: true, // Mengaktifkan fitur alignment
+                    uploadEnabled: true,    // Mengaktifkan upload gambar
+                    previewImage: true,     // Menampilkan preview gambar
+                  },
                   options: [
                     'inline',
                     'blockType',
@@ -102,6 +119,10 @@ const AddNews = () => {
               />
               <input type="hidden" name='editorContent' value={editorContent} />
             </div>
+          </section>
+
+          <section className={`${currentTab !== 'third' && 'hidden'} w-[95%] mx-auto  mt-6 .rdw-editor-wrapper`}>
+            <div className="w-[95%] p-6 mx-auto bg-white h-[70vh] overflow-y-auto rounded-lg border-[1px] border-grey px-6 wysiwyg-container rdw-editor-wrapper" dangerouslySetInnerHTML={{ __html: reviewContent }} />
           </section>
 
         </article>
