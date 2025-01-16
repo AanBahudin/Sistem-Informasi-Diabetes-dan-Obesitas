@@ -102,7 +102,7 @@ const Login = () => {
         </article>
 
         {/* KOLOM KANAN */}
-        <article className='w-full h-full overflow-hidden rounded-xl bg-blue/80 flex items-center justify-center'>
+        <article className='w-full h-full overflow-hidden rounded-xl bg-blue/60 flex items-center justify-center'>
           <img className='h-full' src={loginPhoto} />
         </article>
       </section>
