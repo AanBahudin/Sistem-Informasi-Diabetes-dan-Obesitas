@@ -22,13 +22,13 @@ export const register = async(req, res) => {
 export const login = async(req, res) => {
     const isUserExist = await UserModel.findOne({email: req.body.email})
     if (!isUserExist) {
-        throw new BadRequestError('Not found email');
+        throw new BadRequestError('Email yang dimasukan tidak terdaftar');
     }
 
     const isPasswordCorrect = await comparePassword(req.body.password, isUserExist.password);
     
     if (!isPasswordCorrect) {
-        throw new NotAuthenticatedError('password is wrong!')
+        throw new NotAuthenticatedError('Kata kunci anda salah ! Silahkan coba lagi')
     }
 
     const { _id, name, email, role } = isUserExist
@@ -43,7 +43,6 @@ export const login = async(req, res) => {
     });
 
     return res.status(StatusCodes.OK).json({ msg: 'Login successfully' })
-
 }
 
 export const logout = async(req, res) => {

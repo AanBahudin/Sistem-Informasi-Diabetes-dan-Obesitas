@@ -1,9 +1,8 @@
-import { loginPhoto, man } from '../assets/images';
-import { LoaderCircle, AtSign, X, KeyRound, EyeClosed, Cross, Eye, Loader } from 'lucide-react';
-import { FormInput } from '../components'
+import { loginPhoto } from '../assets/images';
+import { LoaderCircle, AtSign, X, KeyRound, EyeClosed, Cross, Eye } from 'lucide-react';
 import { Link, redirect, Form, useNavigation } from 'react-router-dom';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { handleToast } from '../utils/constants';
 import customFetch from '../utils/customFetch';
 
 
@@ -29,10 +28,10 @@ export const action = async({ request }) => {
   
   try {
     await customFetch.post('/auth/login', data);
-    toast.success('Successfully logged in');
+    handleToast('success', 'Login Berhasil', 'Selamat datang dihalaman dashboard anda', 3000)
     return redirect('/dashboard');
   } catch (error) {
-    toast.error(error?.response?.data?.msg);
+    handleToast('error', 'Terjadi Kesalahan', error?.response?.data?.msg, 3000)
     return error
   }
 }

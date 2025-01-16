@@ -2,11 +2,7 @@ import { SidebarLink } from '../components'
 import { Cross } from 'lucide-react';
 import { loginPhoto } from '../assets/images'
 
-const Sidebar = ({ links, logoutFunction, data }) => {
-
-  console.log(data);
-  
-
+const Sidebar = ({ links, logoutFunction, data }) => {  
   return (
     <div className='w-[15%] h-full flex flex-col justify-between items-center pt-10 bg-slate-100'>
       <div className='w-full'>

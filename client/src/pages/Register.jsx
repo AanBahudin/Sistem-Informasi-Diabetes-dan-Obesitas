@@ -4,6 +4,7 @@ import { Form, Link, redirect, useNavigation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import customFetch from '../utils/customFetch'
 import { LoaderCircle, AtSign, X, KeyRound, EyeClosed, Cross, Eye, User } from 'lucide-react';
+import { handleToast } from '../utils/constants'
 
 
 export const loader = async() => {
@@ -28,10 +29,10 @@ export const action = async({request}) => {
 
   try {
     await customFetch.post('/auth/register', data);
-    toast.success('Registration Successfull !')
+    handleToast('success', 'Pendaftaran Berhasil', 'Silahkan masuk dengan akun yang baru dibuat', 3000)
     return redirect('/login');
   } catch (error) {
-    toast.error(error?.response?.data?.msg);
+    handleToast('error', 'Terjadi Kesalahan', error?.response?.data?.msg, 3000)
     return error
   }
 }

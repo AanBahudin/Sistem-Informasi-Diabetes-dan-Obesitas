@@ -2,7 +2,7 @@ import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom"
 import { Sidebar } from "../components"
 import { toast } from 'react-toastify'
 import { useContext, createContext } from 'react'
-import { sidebarLink as sidebarLinkUser } from "../utils/constants"
+import { sidebarLink as sidebarLinkUser, handleToast } from "../utils/constants"
 import customFetch from "../utils/customFetch"
 
 
@@ -29,7 +29,7 @@ const DashboardLayout = () => {
 
   const logoutUser = async() => {
     await customFetch.get('/auth/logout')
-    toast.success('logout successfully!')
+    handleToast('success', 'Logout Berhasil', 'Sampai ketemu kembali !', 1000)
     navigate('/')
   }
 
@@ -38,7 +38,7 @@ const DashboardLayout = () => {
 
     await customFetch.patch('/users/delete-profile')
     window.location.reload('/dashboard/profile')
-    toast.success('Foto dihapus!')
+    handleToast('success', 'Foto Profil', 'Foto profil anda berhasil dihapus', 3000)
   }
 
   return (
