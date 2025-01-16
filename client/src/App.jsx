@@ -52,6 +52,7 @@ import { action as allNewsUserAction } from './pages/NewsPage'
 import { action as bookmarkAction } from './pages/BookmarkPage'
 import { action as favoriteAction } from './pages/FavoritePage'
 import { action as singleMessageAction } from './pages/SingleMessage'
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
@@ -181,7 +182,10 @@ function App() {
   ])
 
   return (
+    <>
+    <ToastContainer hideProgressBar={true} closeButton={false} />
     <RouterProvider router={router} />
+    </>
   )
 }
 
