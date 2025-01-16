@@ -3,8 +3,9 @@ import { Search, X, LoaderCircle } from 'lucide-react'
 import customFetch from '../utils/customFetch'
 import { ArticleCardsUser } from '../components'
 import { useLoaderData, useNavigate, useNavigation } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { handleToast } from '../utils/constants'
 import { useDashboardContext } from './DashboardLayout'
+
 
 export const loader = async({ request}) => {
 
@@ -25,11 +26,19 @@ export const loader = async({ request}) => {
 export const action = async({ request }) => {
   const formData = await request.formData()
   const data = Object.fromEntries(formData)
+  console.log(data);
+  
 
-  let submittingType = data.type === 'bookmark' ? 'Artikel disimpan!' : 'Artikel ditambahkan ke daftar suka'  
+  let desc = data.data === 'bookmark' ? 'Cek halaman Tersimpan untuk melihat' : 'Cek halaman Disukai untuk melihat'
+  let title = data.data === 'bookmark' ? 'Disimpan !' : 'Disukai!'
+
   try {
-    await customFetch.post(`/news/${data.data}`, data);
-    return toast.success(submittingType)
+    const response = await customFetch.post(`/news/${data.data}`, data);
+
+    if (data.target === 'tambah') {
+      return handleToast('success', title, desc, 3000)
+    }
+    return response
   } catch (error) {
     console.log(error);
     return toast.error('Terjadi kesalahan')
