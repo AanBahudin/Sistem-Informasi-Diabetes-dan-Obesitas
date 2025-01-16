@@ -24,5 +24,8 @@ export const getSingleMessage = async(req, res) => {
 }
 
 export const deleteMessage = async(req, res) => {
-    res.send('delete message')
+    const {id} = req.params
+    const message = await Message.findOneAndDelete({_id: id})
+
+    return res.status(StatusCodes.OK).json({msg: 'Berhasil dihapus'})
 }
