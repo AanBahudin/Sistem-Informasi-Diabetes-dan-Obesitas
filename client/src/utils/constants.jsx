@@ -46,6 +46,7 @@ export const handleToast = (type, title, deskripsi, closeTime) => {
     return toast(<CustomToast type={type} title={title} description={deskripsi} />, {
         closeButton: false,
         autoClose: closeTime === false ? false : closeTime,
+        position: 'top-center',
         className: `py-1 px-4 w-[400px] ${bg} border-[1px] border-slate-300 rounded-xl`,
         ariaLabel: 'Login Berhasil',
     })
