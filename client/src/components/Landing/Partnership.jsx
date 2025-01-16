@@ -2,7 +2,7 @@ import { whoPhoto, yayasanJantung, kemenkesPhoto, pmiPhoto, BKKBN } from "../../
 
 const Partnership = () => {
   return (
-    <div id="partnership" className='w-[80%] mx-auto px-10 py-1 mt-8 rounded-lg bg-lightGrey flex justify-evenly items-center'>
+    <div id="partnership" className='w-[80%] mx-auto px-10 py-1 mt-8 rounded-lg bg-slate-100 flex justify-evenly items-center'>
         <img className='max-w-36 grayscale hover:grayscale-0 hover:opacity-100 duration-200 ease-in-out' src={kemenkesPhoto} alt="" />
         <img className='max-w-36 grayscale hover:grayscale-0 hover:opacity-100 duration-200 ease-in-out' src={whoPhoto} alt="" />
         <img className='w-20 grayscale opacity-45 hover:grayscale-0 hover:opacity-100 duration-200 ease-in-out' src={yayasanJantung} alt="" />
