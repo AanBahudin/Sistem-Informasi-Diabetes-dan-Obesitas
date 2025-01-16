@@ -23,14 +23,13 @@ const Sidebar = ({ links, logoutFunction, data }) => {
         </section>
       </div>
         
-      <div className='w-full py-2 px-6 flex items-center justify-center gap-x-6 bg-slate-200'>
-          <div className='h-fit'>
-            <img className='w-14 h-14 object-cover border-[2px] border-white   rounded-full' src={data.photo || loginPhoto} alt="" />
-          </div>
+      <div className='w-full py-2 px-4 flex items-center justify-center gap-x-6 bg-slate-200'>
+          <img className='w-10 h-10 overflow-hidden object-cover border-[2px] border-white rounded-full' src={data.photo || loginPhoto} alt="" />
+          
 
           <section className=''>
-            <h1 className='text-sm font-semibold text-slate-700'>{data.nama || 'Administrator'}</h1>
-            <p className='text-xs text-slate-500 truncate'>{data.email}</p>
+            <h1 className='text-xs font-semibold text-slate-700'>{data.nama || 'Administrator'}</h1>
+            <p className='text-[12px] text-slate-500 truncate'>{data.email}</p>
             <button onClick={logoutFunction} className='w-full text-xs mt-2 py-1 rounded-md border-[2px] cursor-default text-slate-700 duration-200 ease-in-out hover:bg-red-300 hover:text-white border-red-300'>keluar</button>
           </section>
       </div>
