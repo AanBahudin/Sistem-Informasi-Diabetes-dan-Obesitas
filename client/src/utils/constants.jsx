@@ -14,6 +14,8 @@ import {
     ThumbsUp,
     Pin} from 'lucide-react'
 
+import { CustomToast } from '../components'
+import { toast } from 'react-toastify'
 
 import { 
     sehatPhoto,
@@ -29,6 +31,25 @@ import {
     pyschologist
  } from '../assets/images'
 
+export const handleToast = (type, title, deskripsi, closeTime) => {
+    let bg = 'bg-blue/80';
+    if (type === 'success') {
+        bg = 'bg-blue/80'
+    } else if (type === 'warning') {
+        bg = 'bg-yellow-400'
+    } else if (type === 'error') {
+        bg = 'bg-red-400'
+    } else {
+        bg = 'bg-blue/80'
+    }
+
+    return toast(<CustomToast type={type} title={title} description={deskripsi} />, {
+        closeButton: false,
+        autoClose: closeTime === false ? false : closeTime,
+        className: `py-1 px-4 w-[400px] ${bg} border-[1px] border-slate-300 rounded-xl`,
+        ariaLabel: 'Login Berhasil',
+    })
+}
 
 export const sidebarLink = [
     {
@@ -74,137 +95,6 @@ export const sidebarLinkAdmin = [
         path: '/admin/dashboard/message',
         name: 'Pesan'
     }
-]
-
-export const articleData = [
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Kadar Gula Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Just now',
-        type: 'Diabetes'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Lemak Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Yesterday',
-        type: 'Obesitas'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Kadar Gula Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Just now',
-        type: 'Diabetes'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Lemak Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Yesterday',
-        type: 'Obesitas'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Kadar Gula Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Just now',
-        type: 'Diabetes'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Lemak Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Yesterday',
-        type: 'Obesitas'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Kadar Gula Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Just now',
-        type: 'Diabetes'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Lemak Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Yesterday',
-        type: 'Obesitas'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Kadar Gula Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Just now',
-        type: 'Diabetes'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Lemak Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Yesterday',
-        type: 'Obesitas'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Kadar Gula Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Just now',
-        type: 'Diabetes'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Lemak Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Yesterday',
-        type: 'Obesitas'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Kadar Gula Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Just now',
-        type: 'Diabetes'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Lemak Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Yesterday',
-        type: 'Obesitas'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Kadar Gula Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Just now',
-        type: 'Diabetes'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Lemak Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Yesterday',
-        type: 'Obesitas'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Kadar Gula Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Just now',
-        type: 'Diabetes'
-    },
-    {
-        photo: {sehatPhoto},
-        title: '5 Tips Kebiasaan yang Dapat Menurunkan Lemak Pada Tubuh',
-        caption: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi modi dolorum sapiente error optio vel?',
-        published: 'Yesterday',
-        type: 'Obesitas'
-    },
-    
-    
 ]
 
 export const testimonial = [

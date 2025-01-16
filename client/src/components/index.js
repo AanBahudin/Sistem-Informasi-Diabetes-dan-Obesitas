@@ -3,6 +3,7 @@ export {default as ArticleCardsAdmin } from './ArticlesCardsAdmin';
 export {default as ArticleCardPublic } from './ArticleCardPublic';
 export {default as ArticleCardsUser } from './ArticleCardsUser';
 export {default as BreadCrumbs } from './BreadCrumbs';
+export {default as CustomToast } from './CustomToast';
 export {default as DataContainer } from './DataContainer';
 export {default as Footer} from './Footer';
 export {default as FormInput} from './FormInput';
