@@ -18,7 +18,6 @@ export const action = async({ request }) => {
   try {
     const data = Object.fromEntries(await request.formData())
     await customFetch.delete(`/news/bookmark/${data.id}`)
-    toast.success('artikel dihapus dari bookmark')
     return redirect('.')
   } catch (error) {
     console.log(error.response.data.msg);

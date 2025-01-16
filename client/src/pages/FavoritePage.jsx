@@ -19,7 +19,6 @@ export const action = async({ request }) => {
   try {
     const data = Object.fromEntries(await request.formData())
     await customFetch.delete(`/news/favorite/${data.id}`)
-    toast.success('Dihapus dari favorite')
     return redirect('.')
   } catch (error) {
     console.log(error.response.data.msg);
