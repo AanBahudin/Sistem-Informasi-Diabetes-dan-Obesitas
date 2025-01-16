@@ -2,7 +2,7 @@ import React from 'react'
 import customFetch from '../utils/customFetch'
 import moment from 'moment'
 import { CalendarRange, Sparkle, Trash } from 'lucide-react'
-import { useLoaderData } from 'react-router-dom'
+import { Form, redirect, useLoaderData } from 'react-router-dom'
 
 export const loader = async({ params }) => {
   try {
@@ -19,8 +19,8 @@ export const action = async({request}) => {
   const data = Object.fromEntries(formData)
 
   try {
-    // await customFetch.post()
-    return 'success'
+    await customFetch.delete(`/message/${data.id}`)
+    return redirect('/admin/dashboard/message')
   } catch (error) {
     console.log(error);
     return error
@@ -62,18 +62,18 @@ const SingleMessage = () => {
           <p className='text-slate-900 text-sm'>{message.message}</p>
         </div>
 
-        <div className='w-full flex mt-4 justify-between'>
+        <Form method='POST' className='w-full flex mt-4 justify-between'>
 
           <div className='flex gap-x-2 items-center cursor-default justify-start bg-[#00bbf9]/30 py-2 px-2 rounded-md duration-200 ease-in-out'>
             <CalendarRange className='w-4 h-4 stroke-slate-900' />
             <h5 className='text-[12px] font-normal text-slate-700'>{ moment(message.createdAt).subtract(10, 'days').calendar() }</h5>
           </div>
 
-          <button className='flex gap-x-2 items-center cursor-default justify-start bg-[#ff6b6b]/60 py-2 px-2 rounded-md hover:bg-[#ff6b6b] duration-200 ease-in-out'>
+          <button type='submit' name='id' value={message._id} className='flex gap-x-2 items-center cursor-default justify-start bg-[#ff6b6b]/60 py-2 px-2 rounded-md hover:bg-[#ff6b6b] duration-200 ease-in-out'>
             <Trash className='w-4 h-4 stroke-slate-900' />
             <span className='text-[12px]'>Hapus pesan</span>
           </button>
-        </div>
+        </Form>
       </section>
     </div>
   )
