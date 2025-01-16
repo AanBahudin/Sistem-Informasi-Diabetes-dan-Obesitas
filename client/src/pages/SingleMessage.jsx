@@ -14,6 +14,19 @@ export const loader = async({ params }) => {
   }
 }
 
+export const action = async({request}) => {
+  const formData = await request.formData()
+  const data = Object.fromEntries(formData)
+
+  try {
+    // await customFetch.post()
+    return 'success'
+  } catch (error) {
+    console.log(error);
+    return error
+  }
+}
+
 const SingleMessage = () => {
 
   const { message } = useLoaderData()

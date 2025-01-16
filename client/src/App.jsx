@@ -51,6 +51,7 @@ import { action as editNewsAction } from './pages/EditNews'
 import { action as allNewsUserAction } from './pages/NewsPage'
 import { action as bookmarkAction } from './pages/BookmarkPage'
 import { action as favoriteAction } from './pages/FavoritePage'
+import { action as singleMessageAction } from './pages/SingleMessage'
 
 function App() {
 
@@ -159,7 +160,8 @@ function App() {
         {
           path: 'message/:id',
           element: <SingleMessagePage />,
-          loader: singleMessageLoader
+          loader: singleMessageLoader,
+          action: singleMessageAction
         },
         {
           path: 'users',
