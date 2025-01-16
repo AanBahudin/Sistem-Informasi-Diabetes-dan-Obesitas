@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, Footer, Loading } from '../components'
+import { Footer, Loading } from '../components'
 import customFetch from '../utils/customFetch'
 import { toast } from 'react-toastify'
 import { About, Contact, Hero, Tagline, Services, Testimonial, Method, Narasumber, Partnership, Article, Dukungan } from '../components/Landing'

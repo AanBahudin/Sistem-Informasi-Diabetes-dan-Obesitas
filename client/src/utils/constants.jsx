@@ -32,15 +32,15 @@ import {
  } from '../assets/images'
 
 export const handleToast = (type, title, deskripsi, closeTime) => {
-    let bg = 'bg-blue/80';
+    let bg = 'bg-blue';
     if (type === 'success') {
-        bg = 'bg-blue/80'
+        bg = 'bg-blue'
     } else if (type === 'warning') {
         bg = 'bg-yellow-400'
     } else if (type === 'error') {
         bg = 'bg-red-400'
     } else {
-        bg = 'bg-blue/80'
+        bg = 'bg-blue'
     }
 
     return toast(<CustomToast type={type} title={title} description={deskripsi} />, {
