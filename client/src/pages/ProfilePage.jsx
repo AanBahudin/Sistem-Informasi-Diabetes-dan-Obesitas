@@ -5,6 +5,7 @@ import { userPhoto } from '../assets/images'
 import { DataContainer, FormInputProfile, FormSelect } from '../components'
 import { NavLink, redirect, useLoaderData, useLocation, Form, useNavigation, replace } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { handleToast } from '../utils/constants'
 import customFetch from '../utils/customFetch'
 import { useDashboardContext } from './DashboardLayout'
 import { useState } from 'react'
@@ -20,14 +21,11 @@ export const action = async({ request }) => {
 
   try {
     await customFetch.patch('/users/edit', formData)
-    toast.success('Berhasil di update !')
-    return redirect('/dashboard/profile')
+    return handleToast('success', 'Profil Diperbaharui', "Profil anda berhasil diperbaharui", 3000)
   } catch (error) {
     const errorArr = error?.response?.data?.msg
-    console.log(error);
-    
-    toast.error(errorArr.join(", "));
-    return error
+    // console.log(error);
+    return handleToast('error', 'Terjadi Kesalahan', errorArr, 3000)
   }
 }
 
