@@ -1,6 +1,5 @@
-import { articleData } from "../../utils/constants"
-import {ArticleCards} from '../../components'
 import { Link } from "react-router-dom"
+import {ArticleCardPublic, ArticleCards} from '../../components'
 
 const Article = ({ data=[] }) => {
 
@@ -14,9 +13,9 @@ const Article = ({ data=[] }) => {
       <p className="text-center mx-auto w-[60%]">Dapatkan wawasan terbaru dan tips praktis seputar kesehatan, gaya hidup, dan pencegahan diabetes serta obesitas. Artikel-artikel kami dirancang untuk membantu Anda membuat keputusan yang lebih sehat setiap hari.</p>
 
       {/* CARDS CONTAINER */}
-      <div className="w-[80%] mt-6 grid grid-cols-3 gap-4 mx-auto">
+      <div className="w-[80%] mt-4 flex items-center justify-center gap-x-6 flex-wrap">
         {data.map((item, index) => {
-          return <ArticleCards url={`/artikel/${item.judulArtikel}`} key={index} {...item} isBgWhite={false} />
+          return <ArticleCardPublic key={index} {...item} />
         })}
       </div>
 

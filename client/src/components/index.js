@@ -1,5 +1,6 @@
 export {default as ArticleCards } from './ArticelCards';
 export {default as ArticleCardsAdmin } from './ArticlesCardsAdmin';
+export {default as ArticleCardPublic } from './ArticleCardPublic';
 export {default as ArticleCardsUser } from './ArticleCardsUser';
 export {default as BreadCrumbs } from './BreadCrumbs';
 export {default as DataContainer } from './DataContainer';
