@@ -1,8 +1,9 @@
-import FormInput from '../FormInput'
+import FormInputProfile from '../FormInputProfile'
 import {hotlineData} from '../../utils/constants'
 import HotlineCard from './HotlineCard'
 import { Instagram, Facebook, Twitter, Linkedin, Youtube } from 'lucide-react'
 import { Form } from 'react-router-dom'
+import TextAreaInput from '../TextAreaInput'
 
 const Contact = () => {
   return (
@@ -17,15 +18,16 @@ const Contact = () => {
             <p className='text-sm mt-2'>Kami ingin mendengar dari Anda! Jika ada yang ingin ditanyakan atau dibicarakan, kirimkan pesan dan kami akan siap membantu dengan solusi terbaik.</p>
 
             {/* form */}
-            <div className='grid grid-cols-2 gap-x-8 gap-y-4 mt-6'>
-             <FormInput name="firstName" labelText="First name" placeholder="John" useBorder={true} />
-             <FormInput name="lastName" labelText="Last name" placeholder="Doe"  useBorder={true}/>
-             <FormInput name="email" labelText="Email" placeholder="johnDoe@gmail.com"  useBorder={true}/>
-             <FormInput name="contact" labelText="Contact Details" placeholder="+62 82345"  useBorder={true} />
+            <div className='grid grid-cols-2 gap-x-8 gap-y-4 mt-6 mb-3'>
+              <FormInputProfile  inputName='firstName'  label='Nama Depan' type='text' placeholder='John'  />
+              <FormInputProfile  inputName='lastName'  label='Nama Belakang' type='text' placeholder='Doe'  />
+              <FormInputProfile  inputName='email'  label='email' type='email' placeholder='johndoe@gmail.com'  />
+              <FormInputProfile  inputName='contact'  label='Kontak' type='text' placeholder='08123348593'  />
             </div>
-
-            <label className='mt-4 text-sm font-semibold' htmlFor="message">Message</label>
-            <textarea name="message" className='block ring-grey ring-1 w-full rounded-lg mt-2 resize-none h-40 px-4 py-[10px] text-sm' id="message" placeholder='Masukan pesan'></textarea>
+            
+            <TextAreaInput name='message' labelText='Pesan' />
+            {/* <label className='mt-4 text-sm font-semibold' htmlFor="message">Message</label>
+            <textarea name="message" className='block ring-grey ring-1 w-full rounded-lg mt-2 resize-none h-40 px-4 py-[10px] text-sm' id="message" placeholder='Masukan pesan'></textarea> */}
             <button className='w-full bg-blue text-sm py-2 rounded-md mt-4 cursor-default'>send message</button>
           </Form>
 
