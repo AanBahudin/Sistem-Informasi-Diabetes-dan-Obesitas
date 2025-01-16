@@ -11,6 +11,8 @@ const FormInputProfile = ({label, type, inputName, defaultValue, isRequired=fals
         required={isRequired}
         placeholder={placeholder}
         defaultValue={type === 'number' ? defaultValue || 0 : defaultValue || ''}
+        autoComplete='off'
+        autoCorrect='off'
         className='w-full border-[2px] py-2 placeholder:text-slate-700/80 text-slate-700 border-slate-400 rounded-lg text-sm outline-none px-4' />
     </article>
   )

@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { Form, useLoaderData, useNavigation, redirect } from 'react-router-dom';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { FormInputProfile, TextAreaInput, FormSelect, Loading } from '../components'
 import { toast } from 'react-toastify'
+import { LoaderCircle } from 'lucide-react';
 import { stateToHTML } from 'draft-js-export-html';
 import customFetch from '../utils/customFetch'
 import { convertToRaw, convertFromRaw } from 'draft-js'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
 export const loader = async({ params }) => {
@@ -45,11 +46,10 @@ const EditNews = () => {
   const [currentTab, setCurrentTab] = useState("first")
   const newsData = data?.editorContent ? convertFromRaw(JSON.parse(data.editorContent)) : null;
   const [editorState, setEditorState] = useState(EditorState.createWithContent(newsData));
-  const [reviewContent, setReviewContent] = useState('');
+  const [reviewContent, setReviewContent] = useState(stateToHTML(newsData));
 
   const navigation = useNavigation()
   const isSubmitting = navigation.state === 'submitting'
-  const isLoading = navigation.state === 'loading'
 
   const onEditorStateChange = (newEditorState) => {
     const rawContent = convertToRaw(newEditorState.getCurrentContent());
