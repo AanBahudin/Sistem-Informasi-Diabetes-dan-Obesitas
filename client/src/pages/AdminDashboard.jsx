@@ -3,6 +3,7 @@ import { sidebarLinkAdmin } from '../utils/constants'
 import { Outlet, useLoaderData, useNavigate,  } from 'react-router-dom'
 import customFetch from '../utils/customFetch'
 import { toast } from 'react-toastify'
+import { handleToast } from '../utils/constants'
 
 export const loader = async() => {
     try {
@@ -24,7 +25,7 @@ const AdminDashboard = () => {
   const data = useLoaderData()
 
   const logoutUser = async() => {
-    toast.success('logout successfully!')
+    handleToast('success', 'Logout Berhasil', 'Sampai ketemu kembali !', 1000)
     await customFetch.get('/auth/logout')
     navigate('/')
   }

@@ -10,16 +10,16 @@ const ArticlesCardsAdmin = ({ _id, judulArtikel, createdAt, deskripsi, jenisArti
 
   return (
     <section className='max-w-[23%] max-h-[50vh] bg-white shadow-md p-2 rounded-xl flex flex-col justify-between cursor-default'>
-        <Link to={`/admin/dashboard/news/${judulArtikel}`} className='w-full'>
-          <img className='w-full overflow-hidden object-fill object-top rounded-xl min-h-32 bg-slate-500' src={thumbnail} alt="" />
+        <Link to={`/admin/dashboard/news/${judulArtikel}`} className='w-[100%]'>
+          <img className='w-full overflow-hidden object-cover object-top rounded-xl max-h-32 bg-slate-500' src={thumbnail} alt="" />
 
           <p className='text-xs text-slate-700 flex items-center justify-start gap-x-4 my-4'>
             <Clock className='w-4 h-4 stroke-slate-400' />
             {formattedTime}
           </p>
 
-          <h1 className='text-slate-800 text-sm font-semibold'>{judulArtikel}</h1>
-          <p className='text-xs text-slate-600 mt-2 flex-grow'>{deskripsi}</p>
+          <h1 className='text-slate-800 text-sm font-semibold truncate'>{judulArtikel}</h1>
+          <p className='text-xs text-slate-600 mt-2 flex-grow min-w-full max-w-full'>{deskripsi}</p>
         </Link>
 
         <div className='w-full mt-4 flex items-center justify-between'>

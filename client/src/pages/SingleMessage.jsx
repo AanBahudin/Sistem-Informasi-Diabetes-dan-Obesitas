@@ -3,6 +3,7 @@ import customFetch from '../utils/customFetch'
 import moment from 'moment'
 import { CalendarRange, Sparkle, Trash } from 'lucide-react'
 import { Form, redirect, useLoaderData } from 'react-router-dom'
+import { handleToast } from '../utils/constants'
 
 export const loader = async({ params }) => {
   try {
@@ -20,9 +21,11 @@ export const action = async({request}) => {
 
   try {
     await customFetch.delete(`/message/${data.id}`)
+    handleToast('success', 'Dihapus', 'Pesan berhasil dihapus', 2000)
     return redirect('/admin/dashboard/message')
   } catch (error) {
     console.log(error);
+    handleToast('error', 'Terjadi Kesalahan', error.response?.data?.msg, 2000)
     return error
   }
 }

@@ -36,7 +36,7 @@ export const handleToast = (type, title, deskripsi, closeTime) => {
     if (type === 'success') {
         bg = 'bg-blue'
     } else if (type === 'warning') {
-        bg = 'bg-yellow-400'
+        bg = 'bg-yellow-300'
     } else if (type === 'error') {
         bg = 'bg-red-400'
     } else {

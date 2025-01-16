@@ -4,6 +4,7 @@ import { ArticleCardsAdmin, Loading } from '../components'
 import customFetch from '../utils/customFetch'
 import { toast } from 'react-toastify'
 import { useLoaderData, useNavigation, Link, useNavigate } from 'react-router-dom'
+import { handleToast } from '../utils/constants'
 
 
 export const loader = async({request}) => {
@@ -28,9 +29,9 @@ export const action = async({ request }) => {
   const data = Object.fromEntries(formData)  
   try {
     await customFetch.delete(`/news/${data.id}`)
-    toast.success('Artikel Dihapus')
+    handleToast('success', 'Dihapus', 'Artikel berhasil dihapus', 2000)
   } catch (error) {
-    toast.error(error.response.data.msg)
+    handleToast('error', 'Terjadi Kesalahan', error.response?.data?.msg, 2000)
     return error
   }
 }

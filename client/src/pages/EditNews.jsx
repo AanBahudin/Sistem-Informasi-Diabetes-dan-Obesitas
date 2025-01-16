@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { LoaderCircle } from 'lucide-react';
 import { stateToHTML } from 'draft-js-export-html';
 import customFetch from '../utils/customFetch'
+import { handleToast } from '../utils/constants';
 import { convertToRaw, convertFromRaw } from 'draft-js'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
@@ -26,17 +27,17 @@ export const action = async({ request, params }) => {
   const formData = await request.formData()
   const file = formData.get('thumbnail');
   if (file && file.size > 500000) {
-    toast.error('Ukuran gambar terlalu berat')
+    handleToast('warning', 'Peringatan', 'Ukuran gambar maksimal 5 MB', 2000)
     return null
   }
 
   try {
     await customFetch.patch(`/news/${params.id}`, formData);
-    toast.success('Berhasil diubah')
+    handleToast('success', 'Diubah', 'Artikel berhasil diperbaharui', 2000)
     return redirect('/admin/dashboard')
   } catch (error) {
     console.log(error.response.data.msg)
-    return toast.error(error.response.data.msg)
+    handleToast('error', 'Terjadi Kesalahan', error.response?.data?.msg, 2000)
   }
 }
 

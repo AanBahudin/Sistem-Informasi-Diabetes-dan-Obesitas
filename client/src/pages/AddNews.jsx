@@ -9,23 +9,24 @@ import customFetch from '../utils/customFetch'
 import { stateToHTML } from 'draft-js-export-html';
 import { convertToRaw } from 'draft-js'
 import { LoaderCircle } from 'lucide-react';
+import { handleToast } from '../utils/constants';
 
 export const action = async({ request }) => {
   const formData = await request.formData()
   
   const file = formData.get('thumbnail');
   if (file && file.size > 500000) {
-    toast.error('Ukuran gambar terlalu berat')
+    handleToast('warning', 'Terjadi Kesalahan', 'Ukuran gambar maksimal 5 MB', 2000)
     return null
   }
 
   try {
     await customFetch.post('/news', formData);
-    toast.success('Artikel ditambahkan!')
+    handleToast('success', 'Artikel Ditambahkan', 'Artikel berhasil ditambahkan. Cek menu artikel untuk melihat', 2000)
     return redirect('/admin/dashboard')
   } catch (error) {
     console.log(error.response.data.msg)
-    return toast.error(error.response.data.msg)
+    return handleToast('error', 'Terjadi Kesalahan', error.response?.data?.msg, 2000)
   }
 } 
 
