@@ -42,7 +42,7 @@ const Landing = () => {
   }
   
   return (
-    <section className=' m-auto flex flex-col items-center my-auto relative '>
+    <section className=' m-auto flex flex-col items-center my-auto relative bg-white'>
       
       <Hero />
       <div className="w-[90vw]">

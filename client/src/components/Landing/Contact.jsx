@@ -9,7 +9,7 @@ const Contact = () => {
     <div id='contacts' className='w-full mx-auto'>
         <h1 className='font-medium text-4xl text-center'>Contact us</h1>
 
-        <section className='flex items-center p-10 rounded-xl bg-lightGrey mt-4 justify-around'>
+        <section className='flex items-center p-10 rounded-xl bg-white mt-4 justify-around'>
 
           {/* form contact */}
           <Form method='POST' className='flex-1 max-w-[50%]'>
