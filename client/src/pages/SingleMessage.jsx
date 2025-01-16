@@ -19,7 +19,7 @@ const SingleMessage = () => {
   const { message } = useLoaderData()
 
   return (
-    <div className='w-full h-full items-center justify-center flex'>
+    <div className='w-full h-full items-center justify-center flex bg-white'>
 
       <section className='w-[60%] h-[80%] bg-transparent border-[2px] border-slate-500/30 rounded-xl p-4 shadow-md'>
         
