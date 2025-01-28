@@ -6,6 +6,12 @@ import * as dotenv from 'dotenv';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary'
+import path from 'path'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // route
 import authRouter from './routes/authRoute.js';
@@ -19,6 +25,9 @@ import errorHandler from './errors/ErrorHandler.js';
 
 // middleware
 import { authenticatedUser } from './middleware/authMiddleware.js'
+import { StatusCodes } from 'http-status-codes';
+
+
 
 const app = express();
 dotenv.config();
@@ -33,11 +42,21 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 })
 
+app.use(express.static(path.resolve(__dirname, './client/dist')));
+
 // using route
 app.use('/api/v1/message', messageRouter);
 app.use('/api/v1/news', newsRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', authenticatedUser, userRouter);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './public', 'index.html'))
+})
+
+app.get('*', (req, res) => {
+    return res.status(StatusCodes.NOT_FOUND).json({msg: 'page you are looking for is not exists'})
+})
 
 app.use(errorHandler);
 
