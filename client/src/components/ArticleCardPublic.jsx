@@ -12,7 +12,7 @@ const ArticleCardPublic = ({ _id, judulArtikel, createdAt, bookmark, favorite, d
     return (
         <section className='max-w-[23%] max-h-[50vh] bg-white shadow-md p-2 rounded-xl flex flex-col justify-between cursor-default'>
             <Link to={`/artikel/${judulArtikel}`} className='w-full cursor-default'>
-                <img className='w-full overflow-hidden object-fill object-top rounded-xl min-h-32 bg-slate-500' src={thumbnail} alt="" />
+                <img className='w-full overflow-hidden object-cover object-top rounded-xl max-h-32 bg-slate-500' src={thumbnail} alt="" />
                 <p className='text-xs text-slate-700 flex items-center justify-start gap-x-4 my-4'>
                     <Clock className='w-4 h-4 stroke-slate-400' />
                     {formattedTime}

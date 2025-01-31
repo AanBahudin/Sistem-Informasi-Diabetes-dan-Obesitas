@@ -19,7 +19,7 @@ const ArticlesCardsAdmin = ({ _id, judulArtikel, createdAt, deskripsi, jenisArti
           </p>
 
           <h1 className='text-slate-800 text-sm font-semibold truncate'>{judulArtikel}</h1>
-          <p className='text-xs text-slate-600 mt-2 flex-grow min-w-full max-w-full'>{deskripsi}</p>
+          <p className='text-xs text-slate-600 mt-2 flex-grow min-w-full max-w-full'>{deskripsi.slice(0, 153)}...</p>
         </Link>
 
         <div className='w-full mt-4 flex items-center justify-between'>

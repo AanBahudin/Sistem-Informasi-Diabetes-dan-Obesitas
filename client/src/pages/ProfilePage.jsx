@@ -172,8 +172,8 @@ const ProfilePage = () => {
                   </div>
 
                   <div className='w-full grid grid-cols-2 gap-x-6 gap-y-4'>
-                    <DataContainer label='jumlah artikel disukai' value={data.bookmark.length + ' Artikel'} />
-                    <DataContainer label='jumlah artikel disimpan' value={data.favorite.length + ' Artikel'}  />
+                    <DataContainer label='jumlah artikel disukai' value={data.favorite.length + ' Artikel'} />
+                    <DataContainer label='jumlah artikel disimpan' value={data.bookmark.length + ' Artikel'}  />
                     <DataContainer label='Bergabung sejak' value={formatDate(data.createdAt)}  />
                     <DataContainer label='Terakhir update' value={formatDate(data.updatedAt)}  />
                   </div>

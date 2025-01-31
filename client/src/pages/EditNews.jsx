@@ -88,7 +88,7 @@ const EditNews = () => {
               <FormInputProfile inputName='tagArtikel' type='text' label='Tag Artikel' isRequired={true} placeholder='Hidup sehat' defaultValue={data.tagArtikel} />
               <FormInputProfile inputName='penyutingArtikel' type='text' label='Penyunting' isRequired={true} placeholder='Dr. Amir Khan'  defaultValue={data.penyutingArtikel}/>
               <FormSelect inputName='jenisArtikel' label='Jenis artikel' list={['Diabetes', 'Obesitas']} defaultValue={data.jenisArtikel} />
-              <FormInputProfile inputName='thumbnail' type='file' label='Gambar' isRequired={true} defaultValue={data.thumbnail} />
+              <FormInputProfile inputName='thumbnail' type='file' label='Gambar' isRequired={false}  />
             </div>
 
             <div className='w-full mt-4 grid grid-cols-3 gap-4'>
