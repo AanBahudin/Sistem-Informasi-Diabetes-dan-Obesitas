@@ -19,9 +19,7 @@ const HomeLayout = () => {
 
   const data = useLoaderData();
   
-  
   return (
-
     <HomelayoutContext.Provider value={{
       data
     }}>
