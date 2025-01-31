@@ -24,7 +24,6 @@ import errorHandler from './errors/ErrorHandler.js';
 
 // middleware
 import { authenticatedUser } from './middleware/authMiddleware.js'
-import { StatusCodes } from 'http-status-codes';
 
 const app = express();
 dotenv.config();
