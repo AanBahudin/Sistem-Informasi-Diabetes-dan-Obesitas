@@ -50,7 +50,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './public', 'index.html'))
 })
 
-app.use(errorHandler);
+app.use(errorHandler)
 
 const start = async() => {
     try {
