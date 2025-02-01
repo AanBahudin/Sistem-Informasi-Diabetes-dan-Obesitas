@@ -41,7 +41,7 @@ export const updateUser = async(req, res) => {
         else if (beratBadanIdeal >= 30 ) {
             req.body.IBMStatus = 'Obesitas'
         } else {
-            req.body.IBMStatus = 'Tidak'
+            req.body.IBMStatus = '-'
         }
     }
 
