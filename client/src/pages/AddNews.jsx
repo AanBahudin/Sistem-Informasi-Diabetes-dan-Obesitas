@@ -4,7 +4,6 @@ import { Editor } from 'react-draft-wysiwyg';
 import { Form, useNavigation, redirect } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { FormInputProfile, FormSelect, TextAreaInput } from '../components';
-import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { stateToHTML } from 'draft-js-export-html';
 import { LoaderCircle } from 'lucide-react';
