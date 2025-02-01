@@ -10,7 +10,7 @@ const ArticleCardPublic = ({ _id, judulArtikel, createdAt, bookmark, favorite, d
     const formattedTime = moment(createdAt).startOf('hour').fromNow(); 
 
     return (
-        <section className='max-w-[23%] max-h-[50vh] bg-white shadow-md p-2 rounded-xl flex flex-col justify-between cursor-default'>
+        <section className='max-w-[23%] min-w-[23%] max-h-[50vh] bg-white shadow-md p-2 rounded-xl flex flex-col justify-between cursor-default self-stretch'>
             <Link to={`/artikel/${judulArtikel}`} className='w-full cursor-default'>
                 <img className='w-full overflow-hidden object-cover object-top rounded-xl max-h-32 bg-slate-500' src={thumbnail} alt="" />
                 <p className='text-xs text-slate-700 flex items-center justify-start gap-x-4 my-4'>

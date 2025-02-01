@@ -10,7 +10,7 @@ const ArticleCardsUser = ({ _id, judulArtikel, createdAt, bookmark, favorite, de
     const formattedTime = moment(createdAt).startOf('hour').fromNow(); 
 
     return (
-      <section className='max-w-[23%] max-h-[50vh] bg-white shadow-md p-2 rounded-xl flex flex-col justify-between cursor-default'>
+      <section className='max-w-[23%] min-w-[23%] max-h-[50vh] bg-white shadow-md p-2 rounded-xl flex flex-col justify-between cursor-default'>
           <Link to={`/dashboard/news/${judulArtikel}`} className='w-full'>
             <img className='w-full overflow-hidden object-cover object-top rounded-xl max-h-32 bg-slate-500' src={thumbnail} alt="" />
 
