@@ -10,15 +10,19 @@ import { Editor } from 'react-draft-wysiwyg'
 export const loader = async({ params }) => {
   try {
     const { data } = await customFetch.get(`/news/${params.id}`)
+    console.log(data);
+    
     return data
   } catch (error) {
-    console.log(error);
+    console.log(error.data.response.msg);
     return error
   }
 }
 
 const SingleNewsPage = () => {
   const { news : data } = useLoaderData()
+  console.log(data);
+  
   const [showReference, setShowReference] = useState(false);
   const newsData = convertFromRaw(JSON.parse(data.editorContent))
   const showNews = EditorState.createWithContent(newsData)

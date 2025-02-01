@@ -9,6 +9,8 @@ import { Editor } from 'react-draft-wysiwyg'
 export const loader = async({params}) => {
     try {
         const {data} = await customFetch.get(`/news/${params.id}`)
+        console.log(data);
+        
         return data;
     } catch (error) {
         toast.error('Terjadi kesalahan!')
@@ -19,7 +21,7 @@ export const loader = async({params}) => {
 const SingleNewsPageAdmin = () => {
 
   const { news : data } = useLoaderData();
-  console.log(data);
+  console.log(data.editorContent);
   
   const newsData = convertFromRaw(JSON.parse(data.editorContent))
   const showNews = EditorState.createWithContent(newsData)

@@ -12,6 +12,9 @@ import { handleToast } from '../utils/constants';
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const file = formData.get('thumbnail');
+
+  console.log(Object.fromEntries(formData));
+  
   
   if (file && file.size > 500000) {
     handleToast('warning', 'Terjadi Kesalahan', 'Ukuran gambar maksimal 5 MB', 2000);
@@ -39,9 +42,10 @@ const AddNews = () => {
   const onEditorStateChange = useCallback((newEditorState) => {
     setEditorState(newEditorState);
     const rawContent = convertToRaw(newEditorState.getCurrentContent());
-    setEditorContent(JSON.stringify(rawContent));
+    setEditorContent(JSON.stringify(rawContent)); // Simpan dalam format string
+    console.log(editorContent)
     setReviewContent(stateToHTML(newEditorState.getCurrentContent()));
-  }, []);
+  }, []);  
 
   return (
     <Form method="POST" encType="multipart/form-data" className="w-full h-full overflow-y-auto p-10 flex items-center justify-center bg-slate-50">
@@ -76,8 +80,7 @@ const AddNews = () => {
             </div>
           </section>
           
-          {currentTab === 'second' && (
-            <div className="w-[95%] mx-auto bg-white h-[70vh] overflow-y-auto rounded-lg border p-6 wysiwyg-container">
+            <div className={`w-[95%] mx-auto bg-white h-[70vh] overflow-y-auto rounded-lg border p-6 wysiwyg-container ${currentTab !== 'second' ? 'hidden' : null}`}>
               <Editor
                 ref={editorRef}
                 placeholder="Mulai mengetik artikel..."
@@ -93,9 +96,8 @@ const AddNews = () => {
               />
               <input type="hidden" name="editorContent" value={editorContent} />
             </div>
-          )}
           {currentTab === 'third' && (
-            <div className="w-[95%] mx-auto bg-white h-[90vh] border rounded-lg p-6 wysiwyg-container overflow-y-scroll">
+            <div className="w-[95%] h-fit mx-auto bg-white  rounded-lg p-6 wysiwyg-container overflow-y-scroll">
               <Editor editorState={editorState} toolbarHidden readOnly />
             </div>
           )}
