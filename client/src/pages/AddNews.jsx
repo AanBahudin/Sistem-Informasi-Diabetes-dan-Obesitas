@@ -95,7 +95,7 @@ const AddNews = () => {
             </div>
           )}
           {currentTab === 'third' && (
-            <div className="w-[95%] mx-auto bg-white h-[50vh] border rounded-lg p-6 wysiwyg-container overflow-y-scroll">
+            <div className="w-[95%] mx-auto bg-white h-[90vh] border rounded-lg p-6 wysiwyg-container overflow-y-scroll">
               <Editor editorState={editorState} toolbarHidden readOnly />
             </div>
           )}
