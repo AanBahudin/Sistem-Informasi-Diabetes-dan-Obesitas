@@ -5,7 +5,7 @@ import moment from 'moment'
 const ArticelCards = ({_id, thumbnail = '', judulArtikel, deskripsi='', createdAt, jenisArtikel, isInPage='landing', url }) => {
 
   const newJudulArtikel = judulArtikel.length >= 70 ? judulArtikel.slice(0, 50) + '...' : judulArtikel
-  deskripsi = deskripsi.length >= 70 ? deskripsi.slice(0, 115) + '...' : deskripsi
+  deskripsi = deskripsi.length >= 70 ? deskripsi.slice(0, 80) + '...' : deskripsi
   const formattedTime = moment(createdAt).startOf('hour').fromNow(); 
 
 

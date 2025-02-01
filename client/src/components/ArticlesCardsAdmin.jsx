@@ -5,7 +5,7 @@ import { Form, Link } from 'react-router-dom'
 
 const ArticlesCardsAdmin = ({ _id, judulArtikel, createdAt, deskripsi, jenisArtikel, thumbnail }) => {
   const newJudulArtikel = judulArtikel.length >= 70 ? judulArtikel.slice(0, 67) + '...' : judulArtikel
-  deskripsi = deskripsi.length >= 70 ? deskripsi.slice(0, 115) + '...' : deskripsi
+  deskripsi = deskripsi.length >= 70 ? deskripsi.slice(0, 100) + '...' : deskripsi
   const formattedTime = moment(createdAt).startOf('hour').fromNow(); 
 
   return (
