@@ -4,7 +4,7 @@ import moment from 'moment'
 
 const ArticelCards = ({_id, thumbnail = '', judulArtikel, deskripsi='', createdAt, jenisArtikel, isInPage='landing', url }) => {
 
-  judulArtikel = judulArtikel.length >= 70 ? judulArtikel.slice(0, 67) + '...' : judulArtikel
+  const newJudulArtikel = judulArtikel.length >= 70 ? judulArtikel.slice(0, 50) + '...' : judulArtikel
   deskripsi = deskripsi.length >= 70 ? deskripsi.slice(0, 115) + '...' : deskripsi
   const formattedTime = moment(createdAt).startOf('hour').fromNow(); 
 
@@ -19,7 +19,7 @@ const ArticelCards = ({_id, thumbnail = '', judulArtikel, deskripsi='', createdA
               {formattedTime}
             </p>
 
-            <h1 className='text-slate-800 text-sm font-semibold'>{judulArtikel}</h1>
+            <h1 className='text-slate-800 text-sm font-semibold'>{newJudulArtikel}</h1>
             <p className='text-xs text-slate-600 mt-2 flex-grow'>{deskripsi}</p>
           </Link>
 

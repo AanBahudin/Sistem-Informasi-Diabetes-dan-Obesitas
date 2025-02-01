@@ -4,7 +4,7 @@ import {ArticleCardPublic, ArticleCards} from '../../components'
 const Article = ({ data=[] }) => {
 
   if (data.length > 6) {
-    data = data.slice(0,6)
+    data = data.slice(0,8)
   }
 
   return (
