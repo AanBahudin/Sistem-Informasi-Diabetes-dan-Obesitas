@@ -83,7 +83,7 @@ const PublicAllNews = () => {
               <h1 className='text-xl font-semibold text-slate-600'>Artikel tidak ada</h1>
             </div>
           ) : (
-            <div className={`mt-10 flex items-center ${data.news.length < 4 ? 'justify-start' : 'justify-between'} gap-4 flex-wrap`}> 
+            <div className={`mt-10 flex items-center ${data.news.length < 4 ? 'justify-start' : 'justify-start'} gap-4 flex-wrap`}> 
               {data.news.map((item, index) => {
                 return <ArticleCardPublic key={index} {...item} />
               })}

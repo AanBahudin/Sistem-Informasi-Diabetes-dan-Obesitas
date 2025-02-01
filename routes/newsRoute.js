@@ -13,7 +13,7 @@ import {
     deleteNews
  } from '../controllers/newsController.js'
 import { authenticatedUser, authorizedAdminPermission } from '../middleware/authMiddleware.js'
-import { validateNews } from '../middleware/validationMiddleware.js'
+import { validateNews, validateGetSingleNews } from '../middleware/validationMiddleware.js'
 import upload from '../middleware/multerMiddleware.js'
 
 const router = express.Router()

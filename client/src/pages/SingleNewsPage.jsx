@@ -10,8 +10,6 @@ import { Editor } from 'react-draft-wysiwyg'
 export const loader = async({ params }) => {
   try {
     const { data } = await customFetch.get(`/news/${params.id}`)
-    console.log(data);
-    
     return data
   } catch (error) {
     console.log(error.data.response.msg);
@@ -21,7 +19,6 @@ export const loader = async({ params }) => {
 
 const SingleNewsPage = () => {
   const { news : data } = useLoaderData()
-  console.log(data);
   
   const [showReference, setShowReference] = useState(false);
   const newsData = convertFromRaw(JSON.parse(data.editorContent))
@@ -44,7 +41,7 @@ const SingleNewsPage = () => {
         <ChevronDown className={`stroke-gray-500/50  ${showReference ? 'rotate-180' : ''} duration-200 ease-in-out`} />
       </p>
 
-      <div className={`w-[80%] border-[1px] border-gray-700/50 rounded-md px-2 py-4 mt-2 text-medium ${ showReference ? 'min-h-[30vh]' : 'hidden text-[0px] h-0'} duration-200 ease-in-out`}>
+      <div className={`w-[80%] border-[1px] border-gray-700/50 rounded-md px-2 py-4 mt-2 text-medium whitespace-pre-line ${ showReference ? 'min-h-[30vh]' : 'hidden text-[0px] h-0'} duration-200 ease-in-out`}>
         {data.referensi}
       </div>
 
@@ -53,7 +50,7 @@ const SingleNewsPage = () => {
 
         <div className='w-full flex flex-wrap gap-x-4 mt-4'>
           {tags.map((item, index) => {
-            return <p key={index} className='text-white bg-blue py-2 px-4 italic rounded-full text-[12px]'>{item}</p>
+            return <p key={index} className='text-white bg-blue py-2 px-4 italic rounded-full text-[12px] whitespace-pre-line'>{item}</p>
           })}
         </div>
       </div> 

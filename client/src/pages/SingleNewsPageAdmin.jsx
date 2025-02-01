@@ -7,21 +7,21 @@ import { convertFromRaw, EditorState } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 
 export const loader = async({params}) => {
-    try {
-        const {data} = await customFetch.get(`/news/${params.id}`)
-        console.log(data);
-        
-        return data;
-    } catch (error) {
-        toast.error('Terjadi kesalahan!')
-        return error
-    }
+  console.log(params);
+  
+  try {
+      const {data} = await customFetch.get(`/news/${params.id}`)
+      return data;
+  } catch (error) {
+      toast.error('Terjadi kesalahan!')
+      console.log(error.response.data.msg);
+      return error
+  }
 }
 
 const SingleNewsPageAdmin = () => {
 
   const { news : data } = useLoaderData();
-  console.log(data.editorContent);
   
   const newsData = convertFromRaw(JSON.parse(data.editorContent))
   const showNews = EditorState.createWithContent(newsData)
@@ -43,7 +43,7 @@ const SingleNewsPageAdmin = () => {
         <ChevronDown className={`stroke-gray-500/50  ${showReference ? 'rotate-180' : ''} duration-200 ease-in-out`} />
       </p>
 
-      <div className={`w-[80%] border-[1px] border-gray-700/50 rounded-md px-2 py-4 mt-2 text-medium ${ showReference ? 'min-h-[30vh]' : 'hidden text-[0px] h-0'} duration-200 ease-in-out`}>
+      <div className={`w-[80%] border-[1px] border-gray-700/50 rounded-md px-2 py-4 mt-2 text-medium whitespace-pre-line ${ showReference ? 'min-h-[30vh]' : 'hidden text-[0px] h-0'} duration-200 ease-in-out`}>
        {data.referensi}
       </div>
 

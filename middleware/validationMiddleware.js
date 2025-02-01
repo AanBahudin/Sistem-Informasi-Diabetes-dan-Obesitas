@@ -1,4 +1,4 @@
-import { body, validationResult } from "express-validator";
+import { body, validationResult, param } from "express-validator";
 import { UnathorizedError, BadRequestError } from '../middleware/ErrorHandlerMiddleware.js'
 import User from "../models/UserModel.js";
 
@@ -149,13 +149,22 @@ export const validateUpdateUser = withValidationErrors([
         .withMessage('tanggal lahir tidak valid'),
     ])
     
+
+
     
+// ============================        GET SINGLE BERITA         ============================================
+export const validateGetSingleNews = withValidationErrors([
+    param('id')
+        .trim()
+])
+
 // ============================        UPDATE BERITA         ============================================
 
 export const validateNews = withValidationErrors([
     body('judulArtikel')
         .notEmpty()
         .withMessage('judul tidak boleh kosong')
+        .trim()
         .isLength({ min: 10 })
         .withMessage('judul terlalu pendek'),
     body('tagArtikel')
