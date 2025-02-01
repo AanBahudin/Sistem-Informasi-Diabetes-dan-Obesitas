@@ -36,26 +36,26 @@ const BookmarkPage = () => {
         <h1 className='text-3xl text-slate-800 font-semibold'>Artikel Tersimpan Anda</h1>
         <p className='text-slate-600 w-[80%] mt-2'>Semua artikel yang Anda simpan ada di sini. Temukan kembali informasi berharga dengan mudah kapan saja.</p>
 
-        <article className={`w-full mt-10 flex flex-wrap items-stretch ${bookmarked.length < 4 ? 'justify-start' : 'justify-between'} gap-6`}>
-        { isLoading ? (
-            <div className='w-full flex-1 flex items-center justify-center gap-x-4'>
-              <LoaderCircle className='w-6 h-6 stroke-slate-800 animate-spin' />
-              <h1 className='text-center text-xl font-medium text-slate-700'>Sedang memuat artikel</h1>
-            </div>
-
-          ) : (
-
-            bookmarked.length === 0 ? (
-              <div className='w-full'>
-                <h1 className='text-slate-700 font-medium'>Belum Ada Artikel yang Disimpan</h1>
-                <p className='text-sm text-slate-500 '>Simpan artikel yang Anda anggap penting, dan temukan semuanya di sini untuk dibaca kapan saja.</p>
+        <article className={`w-full mt-10 flex flex-wrap items-stretch ${bookmarked.length < 4 ? 'justify-start' : 'justify-start'} gap-6`}>
+          { isLoading ? (
+              <div className='w-full flex-1 flex items-center justify-center gap-x-4'>
+                <LoaderCircle className='w-6 h-6 stroke-slate-800 animate-spin' />
+                <h1 className='text-center text-xl font-medium text-slate-700'>Sedang memuat artikel</h1>
               </div>
+
             ) : (
-              bookmarked.map((item, index) => {
-                  return <ArticleCards {...item} key={index} isInPage='bookmark'/>
-                })
-            ) 
-          )}
+
+              bookmarked.length === 0 ? (
+                <div className='w-full'>
+                  <h1 className='text-slate-700 font-medium'>Belum Ada Artikel yang Disimpan</h1>
+                  <p className='text-sm text-slate-500 '>Simpan artikel yang Anda anggap penting, dan temukan semuanya di sini untuk dibaca kapan saja.</p>
+                </div>
+              ) : (
+                bookmarked.map((item, index) => {
+                    return <ArticleCards {...item} key={index} isInPage='bookmark'/>
+                  })
+              ) 
+            )}
         </article>
       </section>  
     </section>
