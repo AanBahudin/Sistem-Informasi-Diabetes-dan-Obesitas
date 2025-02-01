@@ -19,13 +19,15 @@ export const updateUser = async(req, res) => {
     const [day, month, year] = tanggalUser.split('/');
     const parsedDate = new Date(`${year}-${month}-${day}`);
 
+    
     // set BMI
     const newBerat = Number(req.body.beratBadan)
     const newTinggi = Number(req.body.tinggiBadan)/100
-
+    
     if ( newTinggi > 0 && newBerat > 0) {
         req.body.IBM = (newBerat / (Math.pow(newTinggi, 2))).toFixed(2);
-        const beratBadanIdeal = newBerat / (Math.pow(newTinggi, 2));
+        const beratBadanIdeal = newBerat / (Math.pow(newTinggi, 2)).toFixed(1);
+        console.log(beratBadanIdeal)
 
         if (beratBadanIdeal >= 18.5 && beratBadanIdeal <= 24.9) {
             req.body.IBMStatus = 'Sehat'

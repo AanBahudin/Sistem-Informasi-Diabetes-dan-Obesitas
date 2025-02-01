@@ -25,7 +25,6 @@ export const loader = async() => {
     return data
   } catch (error) {
     console.log(error.response.data.msg);
-    toast.error('Terjadi kesalahan')
     return error
   }
 }
