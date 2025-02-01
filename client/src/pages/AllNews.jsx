@@ -91,7 +91,7 @@ const AllNews = () => {
           </select>
         </article>
 
-        <article className={`w-full mt-10 flex flex-wrap items-stretch justify-start gap-6`}>
+        <article className={`w-full mt-10 flex flex-row flex-wrap items-stretch justify-start gap-6`}>
 
           { isLoading ? (
             <div className='w-full flex-1 flex items-center justify-center gap-x-4'>

@@ -16,7 +16,7 @@ export const action = async ({ request }) => {
   console.log(Object.fromEntries(formData));
   
   
-  if (file && file.size > 500000) {
+  if (file && file.size > 5000000) {
     handleToast('warning', 'Terjadi Kesalahan', 'Ukuran gambar maksimal 5 MB', 2000);
     return null;
   }
