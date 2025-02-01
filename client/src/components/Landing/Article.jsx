@@ -13,7 +13,7 @@ const Article = ({ data=[] }) => {
       <p className="text-center mx-auto w-[60%] text-slate-700">Dapatkan wawasan terbaru dan tips praktis seputar kesehatan, gaya hidup, dan pencegahan diabetes serta obesitas. Artikel-artikel kami dirancang untuk membantu Anda membuat keputusan yang lebih sehat setiap hari.</p>
 
       {/* CARDS CONTAINER */}
-      <div className="w-[80%] mt-4 flex items-center justify-z gap-x-6 flex-wrap">
+      <div className="w-[80%] mt-4 flex items-center justify-z gap-6 flex-wrap">
         {data.map((item, index) => {
           return <ArticleCardPublic key={index} {...item} />
         })}
