@@ -13,10 +13,9 @@ export const action = async ({ request }) => {
   const formData = await request.formData();
   const file = formData.get('thumbnail');
 
-  console.log(Object.fromEntries(formData));
-  
   
   if (file && file.size > 5000000) {
+    console.log(`Ukuran file : ${file.size / (1024 * 1024)}`);
     handleToast('warning', 'Terjadi Kesalahan', 'Ukuran gambar maksimal 5 MB', 2000);
     return null;
   }
@@ -25,6 +24,7 @@ export const action = async ({ request }) => {
     await customFetch.post('/news', formData);
     handleToast('success', 'Artikel Ditambahkan', 'Artikel berhasil ditambahkan', 2000);
     return redirect('/admin/dashboard');
+    // return '.'
   } catch (error) {
     return handleToast('error', 'Terjadi Kesalahan', error.response?.data?.msg, 2000);
   }

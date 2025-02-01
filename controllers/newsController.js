@@ -25,7 +25,7 @@ export const getAllNews = async(req, res) => {
     let news = []
 
     if (!judul) {
-        news = await News.find(); 
+        news = await News.find().sort({'createdAt': -1});
     } else {
         news = await News.find({
             judulArtikel: { $regex: judul, $options: 'i' }
